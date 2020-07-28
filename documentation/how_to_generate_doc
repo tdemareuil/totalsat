@@ -1,0 +1,4 @@
+Lines to generate documentation:
+
+cd emp-demeter/demeter
+pdoc --html --output-dir totalsat/documentation totalsat

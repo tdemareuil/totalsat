@@ -1,0 +1,3998 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.3" />
+<title>totalsat.sat_download API documentation</title>
+<meta name="description" content="This module contains functions to download satellite images (Landsat
+5-7-8 and Sentinel 2) from the Google Earth Engine python API
+and to merge …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>totalsat.sat_download</code></h1>
+</header>
+<section id="section-intro">
+<p>This module contains functions to download satellite images (Landsat
+5-7-8 and Sentinel 2) from the Google Earth Engine python API
+and to merge duplicates using GDAL.</p>
+<p>Original author: Kilian Vos, Water Research Laboratory,
+University of New South Wales, 2018
+<a href="https://github.com/kvos/CoastSat">https://github.com/kvos/CoastSat</a>
+Modifications and additions: Thomas de Mareuil, Total E-LAB, 2020</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+This module contains functions to download satellite images (Landsat 
+5-7-8 and Sentinel 2) from the Google Earth Engine python API
+and to merge duplicates using GDAL.
+
+Original author: Kilian Vos, Water Research Laboratory,
+                 University of New South Wales, 2018
+                 https://github.com/kvos/CoastSat
+Modifications and additions: Thomas de Mareuil, Total E-LAB, 2020
+&#34;&#34;&#34;
+
+# load earth engine-related modules
+import ee
+from urllib.request import urlretrieve
+import zipfile
+import copy
+
+# image processing modules
+from skimage import morphology, transform
+from scipy import ndimage
+import numpy as np
+import matplotlib.pyplot as plt
+from shapely.geometry import Polygon
+import geopandas as gpd
+import folium
+
+# additional modules
+import os
+import pdb
+from datetime import datetime, timedelta
+import pytz
+import pickle
+import math
+import osmnx
+from shapely.ops import transform, cascaded_union
+import pyproj
+
+# other totalsat modules
+from totalsat import sat_preprocess, sat_tools
+
+np.seterr(all=&#39;ignore&#39;) # raise/ignore divisions by 0 and nans
+
+
+###################################################################################################
+# DOWNLOAD IMAGES
+###################################################################################################
+
+def check_images_available(inputs):
+    &#34;&#34;&#34;
+    Check image availity from GEE for each specified satellite mission,
+    with chosen parameters to filter images.
+      
+    Arguments:
+    -----------
+    inputs: dict with the following keys
+        &#39;sitename&#39;: str, optional (default: current date)
+            name of the site of study
+        &#39;polygon&#39;: list
+            list containing the pairs of lon/lat coordinates of the polygon area to be 
+            extracted, longitudes in the 1st column and latitudes in the 2nd column.
+            Max area size is 100x100 km, and format should be as below:
+            ```
+            polygon = [[[151.3, -33.7],[151.4, -33.7],[151.4, -33.8],[151.3, -33.8]]]
+            ```
+        &#39;polygons_list&#39;: list of lists, optional (default: None)
+            list of polygons as coordinates list (to search for several polygon areas at once)
+        &#39;point&#39;: list
+            latitude and longitude of the point at the center of the area to be 
+            extracted - user should input either polygon or point + radius, in format:
+            ```
+            point = [lon, lat]
+            ```
+        &#39;radius&#39;: float, optional (default: 20)
+            radius of the area to be extracted around the point coordinates, in km (max:50)
+        &#39;dates&#39;: list of str, optional (default: last image available)
+            either &#39;last&#39; or a list that contains 2 strings, with the initial and final
+            dates in format &#39;yyyy-mm-dd&#39; (the final date can also be &#39;today&#39;):
+            ```
+            dates = [&#39;1987-01-01&#39;, &#39;2018-01-01&#39;]
+            ```
+        &#39;sat_list&#39;: list of str
+            list that contains the names of the satellite missions to include:
+            ```
+            sat_list = [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;, &#39;S2&#39;, &#39;S2_RGB&#39;]
+            ```
+            S2_RGB is the collection with the least images (starting in April 2017), but the
+            advantage is that it provides directly true color RGB images (no preprocessing needed!)
+        &#39;include_T2&#39;: bool, optional (default: False)
+            include Landsat T2 collections in image search
+        &#39;filepath&#39;: str
+            filepath to the directory where the images will be downloaded
+        &#39;max_could_cover&#39;: int, optional (default: 20)
+            maximum cloud cover percentage to be passed to the remove_cloudy_images
+            filtering function
+        &#39;max_size&#39;: int, optional (default: None)
+            maximum image size (width), in pixels - if the area of interest is too large,
+            it will be split in several images of max_size
+        &#39;merge&#39;: bool, optional (default: True)
+            set to False if you don&#39;t want to merge images taken at the same date (for ex
+            if you download several images from the same S2 tile, taken the same day - 
+            therefore automatically set to true if inputs include polygons_list)
+    
+    Returns:
+    -----------
+    im_dict_T1: dict
+        list of images in Landsat Tier 1 and Sentinel-2 Level-1C / Level 2-A
+    im_dict_T2: dict
+        list of images in Tier 2 (Landsat only)
+    # TODO - add pre-computed 8-day composite images:
+    # im_dict_composites: dict
+    #     list of pre-computed composite Landsat images
+    &#34;&#34;&#34;
+    
+    # initializations
+    ee.Initialize()
+    collection_names = {&#39;L5&#39;:&#39;LANDSAT/LT05/C01/T1_TOA&#39;,
+                        &#39;L7&#39;:&#39;LANDSAT/LE07/C01/T1_TOA&#39;,
+                        &#39;L8&#39;:&#39;LANDSAT/LC08/C01/T1_TOA&#39;,
+                        &#39;S2&#39;:&#39;COPERNICUS/S2&#39;,
+                        &#39;S2_RGB&#39;:&#39;COPERNICUS/S2_SR&#39;#,
+                        #TODO - add pre-computed 8-day composite images:
+                        #&#39;L8_BAI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_BAI&#39;,
+                        #&#39;L8_EVI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_EVI&#39;,
+                        #&#39;L8_NDVI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_NDVI&#39;,
+                        #&#39;L8_NBRT&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_NBRT&#39;,
+                        #&#39;L8_NDSI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_NDSI&#39;,
+                        #&#39;L8_NDWI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_NDWI&#39;
+                        }
+    
+    # check if dates were provided - if not, set to &#39;last&#39;
+    if (&#39;dates&#39; not in inputs) or (inputs[&#39;dates&#39;] == &#39;last&#39;):
+        last = True
+        now = datetime.now()
+        last_month = now - timedelta(weeks=6)
+        inputs[&#39;dates&#39;] = [last_month.strftime(&#39;%Y-%m-%d&#39;), now.strftime(&#39;%Y-%m-%d&#39;)]
+        print(&#39;Looking for the last available data...&#39;)
+    else:
+        last = False  
+    # if &#39;today&#39; was provided, replace with current date
+    if &#39;dates&#39; in inputs and &#39;today&#39; in inputs[&#39;dates&#39;]: 
+        inputs[&#39;dates&#39;][1] = datetime.now().strftime(&#39;%Y-%m-%d&#39;)
+
+    # check if polygon area was provided - if not, define polygon area around point
+    if (not &#39;polygon&#39; in inputs) and (not &#39;polygons_list&#39; in inputs): # sanity check
+        assert &#39;point&#39; in inputs, &#39;Please provide a point or polygon coordinates to search for images.&#39;
+    if &#39;point&#39; in inputs:
+        if not &#39;radius&#39; in inputs: # default radius
+            inputs[&#39;radius&#39;] = 20
+        
+        # Compute the polygon AOI and split it if requested (i.e. radius too large compared to max_size)
+        inputs[&#39;polygon&#39;] = sat_tools.bbox_from_point(inputs[&#39;point&#39;], inputs[&#39;radius&#39;])
+        pixel_width = inputs[&#39;radius&#39;]*2*1000 / 10
+        if &#39;max_size&#39; in inputs and pixel_width &gt; inputs[&#39;max_size&#39;]:
+            inputs[&#39;polygons_list&#39;] = sat_tools.split_area(inputs[&#39;polygon&#39;], pixel_width, inputs[&#39;max_size&#39;])
+            print(&#39;Your area of interest will be split into smaller image areas to fit max_size&#39; +\
+                  &#39; requirements.\n\nSearching for images on the GEE server...\n&#39;)
+
+    # set maximum cloud cover filter if passed as input
+    if &#39;max_cloud_cover&#39; in inputs:
+        prc_cloud_cover = inputs[&#39;max_cloud_cover&#39;]
+    else:
+        prc_cloud_cover = 20
+
+    # check how many images are available in Landsat Tier 1 and Sentinel Level-1C
+    col_names_T1 = {new_key: collection_names[new_key] for new_key in [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;, &#39;S2&#39;, &#39;S2_RGB&#39;]}
+    print(&#39;- In Landsat Tier 1 &amp; Sentinel-2 Level-1C / Level 2-A:&#39;)
+    im_dict_T1 = dict([])
+    im_dict_T2 = dict([])
+    sum_img_T1 = 0
+    sum_img_T2 = 0
+    for satname in inputs[&#39;sat_list&#39;]:
+
+        # if AOI was split into smaller areas, loop over all polygons to get list of images
+        if &#39;polygons_list&#39; in inputs:
+            im_dict_T1[satname] = []
+            counter = 0
+            for i, polygon_i in enumerate(inputs[&#39;polygons_list&#39;]):
+                # get list of images in GEE collection
+                while True:
+                    try:
+                        ee_col = ee.ImageCollection(col_names_T1[satname])
+                        col = ee_col.filterBounds(ee.Geometry.Polygon(polygon_i))\
+                                    .filterDate(inputs[&#39;dates&#39;][0],inputs[&#39;dates&#39;][1])
+                        im_list = col.getInfo().get(&#39;features&#39;)
+                        break
+                    except:
+                        continue
+                # remove images above a chosen cloud percentage
+                im_list_upt = remove_cloudy_images(im_list, satname, prc_cloud_cover)
+                # remove UTM duplicates in S2 collections (they provide several projections for same images)
+                if satname == &#39;S2&#39; and len(im_list_upt)&gt;1: 
+                    im_list_upt = filter_S2_collection(im_list_upt)
+                # if requested, select only the last image
+                if last == True:
+                    im_list_upt = [im_list_upt[-1]]
+                # add polygon index to each image&#39;s metadata
+                for k in range(len(im_list_upt)):
+                    im_list_upt[k][&#39;polygon_index&#39;] = i
+                # add image metadata to list of images and augment counter
+                im_dict_T1[satname].extend(im_list_upt)
+                if last == True:
+                    sum_img_T1 += 1
+                    counter += 1
+                else:
+                    sum_img_T1 += len(im_list_upt)
+                    counter += len(im_list_upt)
+            print(&#39;  %s: %d image(s)&#39;%(satname, counter))
+
+        # else, just get list of images in GEE collection
+        else:
+            while True:
+                try:
+                    ee_col = ee.ImageCollection(col_names_T1[satname])
+                    col = ee_col.filterBounds(ee.Geometry.Polygon(inputs[&#39;polygon&#39;]))\
+                                .filterDate(inputs[&#39;dates&#39;][0],inputs[&#39;dates&#39;][1])
+                    im_list = col.getInfo().get(&#39;features&#39;)
+                    break
+                except:
+                    continue
+            # remove images above a chosen cloud percentage
+            im_list_upt = remove_cloudy_images(im_list, satname, prc_cloud_cover)
+            # remove UTM duplicates in S2 collections (they provide several projections for same images)
+            if satname == &#39;S2&#39; and len(im_list_upt)&gt;1: 
+                im_list_upt = filter_S2_collection(im_list_upt)
+            # if requested, select only the last image
+            if last == True:
+                im_list_upt = [im_list_upt[-1]]
+            sum_img_T1 += len(im_list_upt)
+            print(&#39;  %s: %d image(s)&#39;%(satname, len(im_list_upt)))
+            im_dict_T1[satname] = im_list_upt
+    
+    # if requested, also check Landsat Tier 2 collections
+    # TODO: rewrite this section with similar structure as section above (polygons_split, etc.)
+    if (&#39;include_T2&#39; in inputs) and (inputs[&#39;include_T2&#39;] == True):
+        col_names_T2 = {new_key: collection_names[new_key] for new_key in [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;]}
+        print(&#39;- In Landsat Tier 2:&#39;, end=&#39;\n&#39;)
+        for satname in inputs[&#39;sat_list&#39;]:
+            if satname == &#39;S2&#39;: continue
+            # get list of images in GEE collection
+            while True:
+                try:
+                    ee_col = ee.ImageCollection(col_names_T2[satname])
+                    col = ee_col.filterBounds(ee.Geometry.Polygon(inputs[&#39;polygon&#39;]))\
+                                .filterDate(inputs[&#39;dates&#39;][0],inputs[&#39;dates&#39;][1])
+                    if last == True:
+                        col = col.limit(1, &#39;system:time_start&#39;, False)
+                    im_list = col.getInfo().get(&#39;features&#39;)
+                    break
+                except:
+                    continue
+            # remove cloudy images
+            im_list_upt = remove_cloudy_images(im_list, satname, prc_cloud_cover)
+            # if requested, select only the last image
+            if last == True:
+                im_list_upt = [im_list_upt[-1]]
+            sum_img_T2 += len(im_list_upt)
+            print(&#39;  %s: %d image(s)&#39;%(satname,len(im_list_upt)))
+            im_dict_T2[satname] = im_list_upt
+
+    # display total
+    if last == True:
+        inputs[&#39;dates&#39;] = &#39;last&#39; # set dates back to &#39;last&#39;
+        print(&#39;  Total: %d image(s) selected.&#39;%(sum_img_T1+sum_img_T2))
+    elif last == True and (sum_img_T1+sum_img_T2) == 0:
+        inputs[&#39;dates&#39;] = &#39;last&#39; # set dates back to &#39;last&#39;
+        print(&#39;No images found in the past 6 weeks with these criteria&#39; +
+              &#39; - to get the last image available, either allow more clouds&#39; +
+              &#39; or search for a longer period explicitly.&#39;)
+    else:
+        print(&#39;  Total: %d image(s) selected.&#39;%(sum_img_T1+sum_img_T2))
+
+    return im_dict_T1, im_dict_T2
+
+
+def plot_requested_area(inputs):
+    &#34;&#34;&#34;
+    Plots the requested areas to download on an interactive folium map, for 
+    visualization.
+
+    Arguments:
+    -----------
+    inputs: dict 
+        inputs dictionary with parameters for images to select - see 
+        detailed list of possible keys in function check_images_available
+    
+    Returns:
+    -----------
+        folium map with polygon area(s) as map overlay(s).
+    &#34;&#34;&#34;
+
+    # Compute polygon area(s) if not provided explicitly or computed before
+    if (&#39;point&#39; in inputs) and (&#39;polygon&#39; not in inputs):
+        if not &#39;radius&#39; in inputs:
+            inputs[&#39;radius&#39;] = 20
+        
+        inputs[&#39;polygon&#39;] = sat_tools.bbox_from_point(inputs[&#39;point&#39;], inputs[&#39;radius&#39;])
+        pixel_width = inputs[&#39;radius&#39;]*2*1000 / 10
+        
+        if &#39;max_size&#39; in inputs and pixel_width &gt; inputs[&#39;max_size&#39;]:
+            inputs[&#39;polygons_list&#39;] = sat_tools.split_area(inputs[&#39;polygon&#39;], pixel_width, inputs[&#39;max_size&#39;])
+
+    # Convert large and small polygon to geodataframe for plotting
+    crs = {&#39;init&#39;: &#39;epsg:4326&#39;}
+    polygon_shp_large = Polygon(inputs[&#39;polygon&#39;])
+    polygon_df_large = gpd.GeoDataFrame(index=[0], crs=crs, geometry=[polygon_shp_large])
+
+    if &#39;polygons_list&#39; in inputs:
+        polygons_shp = [Polygon(coords) for coords in inputs[&#39;polygons_list&#39;]]
+        polygons_df = gpd.GeoDataFrame(crs=crs)
+        polygons_df[&#39;geometry&#39;] = None
+        for i in range(len(polygons_shp)):
+            polygons_df.loc[i, &#39;geometry&#39;] = polygons_shp[i]             
+
+    # Plot polygon area(s) on an interactive map
+    m = folium.Map([inputs[&#39;polygon&#39;][0][1], inputs[&#39;polygon&#39;][0][0]], zoom_start=9)
+    folium.GeoJson(polygon_df_large, name=&#39;requested area&#39;).add_to(m) # plot large area
+    if &#39;polygons_list&#39; in inputs:
+        folium.GeoJson(polygons_df, name=&#39;split area&#39;,
+                   style_function=lambda x: {&#39;color&#39;:&#39;#228B22&#39;}).add_to(m) # plot split areas
+
+    # Add satellite layer
+    tile = folium.TileLayer(
+        tiles = &#39;https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}&#39;,
+        attr = &#39;Esri&#39;,
+        name = &#39;Esri Satellite&#39;,
+        overlay = False,
+        control = True
+       ).add_to(m)
+
+    # Add layer control and lat/lng popups
+    folium.LatLngPopup().add_to(m)
+    folium.LayerControl().add_to(m)
+    
+    display(m)
+
+
+def retrieve_images(inputs, im_dict_T1=None):
+    &#34;&#34;&#34;
+    Downloads all images from Landsat 5, Landsat 7, Landsat 8 and Sentinel-2
+    covering the area of interest, acquired between the specified dates and with
+    the specified maximum cloud cover.
+
+    The downloaded images are in .tif format and organised in subfolders, divided
+    by satellite mission and subdivided by pixel resolution.
+
+    For each image, several bands are downloaded and stored in a single file (for
+    S2-10m the R/G/B/NIR bands, for S2-20m the SWIR band, for S2-60m the Quality
+    Assessment band, and for Landsat 7 &amp; 8 the same + the Coastal Aerosols band,
+    and the panchromatic band which is stored separately). GDAL&#39;s `GetRasterBand` 
+    method then splits the various bands for computations during preprocessing.
+
+    Arguments:
+    -----------
+    inputs: dict 
+        inputs dictionary with parameters for images to select - see 
+        detailed list of possible keys in function check_images_available
+    im_dict_T1: dict, optional (default: None)
+        you can pass as argument the output of check_images_available(), in order
+        to avoid re-checking available images online
+
+    Returns:
+    -----------
+    metadata: dict
+        contains the information about the satellite images that were downloaded:
+        date, filename, georeferencing accuracy and image coordinate reference system
+    &#34;&#34;&#34;
+    
+    # initialise connection with GEE server
+    ee.Initialize()
+    
+    # check image availabiliy and retrieve list of images
+    try:
+        test = len(im_dict_T1)
+    except:
+        im_dict_T1, im_dict_T2 = check_images_available(inputs)
+    
+    # if user also wants to download T2 images, merge both lists
+    if (&#39;include_T2&#39; in inputs.keys()) and (inputs[&#39;include_T2&#39;] == True):
+        for key in inputs[&#39;sat_list&#39;]:
+            if key == &#39;S2&#39;: continue
+            else: im_dict_T1[key] += im_dict_T2[key]
+        
+    # create a new directory name for this site of study
+    if not &#39;sitename&#39; in inputs:
+        inputs[&#39;sitename&#39;] = &#39;Data-{}&#39;.format(datetime.now().strftime(&#39;%Y-%m-%d&#39;))
+    im_folder = os.path.join(inputs[&#39;filepath&#39;],inputs[&#39;sitename&#39;])
+    if not os.path.exists(im_folder): os.makedirs(im_folder)    
+
+    # Download images listed in im_dict_T1, with polygon clipping
+    print(&#39;\nDownloading images:&#39;)
+    suffix = &#39;.tif&#39;
+    delete_counter = 0 # counter for incorrect S2_RGB
+    for satname in im_dict_T1.keys():
+        print(&#39;\n%s: %d image(s)&#39;%(satname,len(im_dict_T1[satname])))
+        
+        # create subfolder structure to store the different bands
+        filepaths = create_folder_structure(im_folder, satname)
+        
+        # initialise variables and loop through images
+        georef_accs = []; filenames = []; all_names = []; im_epsg = []
+        for i in range(len(im_dict_T1[satname])):
+
+            #======================================================================#
+            # Metadata: we need first to get info from each image&#39;s metadata
+            im_meta = im_dict_T1[satname][i]
+            
+            # get time of acquisition (UNIX time) and convert to datetime
+            t = im_meta[&#39;properties&#39;][&#39;system:time_start&#39;]
+            im_timestamp = datetime.fromtimestamp(t/1000, tz=pytz.utc)
+            im_date = im_timestamp.strftime(&#39;%Y-%m-%d-%H-%M-%S&#39;)
+
+            # get epsg code
+            im_epsg.append(int(im_meta[&#39;bands&#39;][0][&#39;crs&#39;][5:]))
+            
+            # get geometric accuracy
+            if satname in [&#39;L5&#39;,&#39;L7&#39;,&#39;L8&#39;]:
+                if &#39;GEOMETRIC_RMSE_MODEL&#39; in im_meta[&#39;properties&#39;].keys():
+                    acc_georef = im_meta[&#39;properties&#39;][&#39;GEOMETRIC_RMSE_MODEL&#39;]
+                else:
+                    acc_georef = 12 # default value of accuracy (RMSE = 12m)
+            elif satname in [&#39;S2&#39;, &#39;S2_RGB&#39;]:
+                # Sentinel-2 products don&#39;t provide a georeferencing accuracy (RMSE as in Landsat)
+                # but they have a flag indicating if the geometric quality control was passed or failed
+                # if passed a value of 1 is stored if failed a value of -1 is stored in the metadata
+                skip_geo_check = False
+                if &#39;GEOMETRIC_QUALITY_FLAG&#39; in im_meta[&#39;properties&#39;].keys(): 
+                    key = &#39;GEOMETRIC_QUALITY_FLAG&#39;
+                elif &#39;quality_check&#39; in im_meta[&#39;properties&#39;].keys():
+                    key = &#39;quality_check&#39;
+                else:
+                    acc_georef = -1
+                    skip_geo_check = True
+                if not skip_geo_check:
+                    if im_meta[&#39;properties&#39;][key] == &#39;PASSED&#39;: acc_georef = 1
+                    else: acc_georef = -1 
+            georef_accs.append(acc_georef)
+            
+            # get band information
+            bands = dict([])
+            im_fn = dict([])
+            # delete dimensions key from dict, otherwise the entire image is extracted (don&#39;t know why)
+            im_bands = im_meta[&#39;bands&#39;]
+            for j in range(len(im_bands)): del im_bands[j][&#39;dimensions&#39;]
+
+            # get polygon index if needed (for multiple areas download below)
+            if &#39;polygons_list&#39; in inputs:
+                polygon_index = im_meta[&#39;polygon_index&#39;]
+
+            #======================================================================#
+            # Landsat 5 download
+            if satname == &#39;L5&#39;:
+                bands[&#39;&#39;] = [im_bands[0], im_bands[1], im_bands[2], im_bands[3],
+                             im_bands[4], im_bands[7]] 
+                im_fn[&#39;&#39;] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                            datetime.now().strftime(&#39;%H-%M-%S&#39;) + suffix 
+                # if two images taken at the same date add &#39;dup&#39; to the name (duplicate)
+                if any(im_fn[&#39;&#39;] in _ for _ in all_names):
+                    im_fn[&#39;&#39;] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_dup&#39; + suffix
+                all_names.append(im_fn[&#39;&#39;])
+                filenames.append(im_fn[&#39;&#39;])
+                # download .tif from GEE
+                while True:
+                    try:
+                        im_ee = ee.Image(im_meta[&#39;id&#39;])
+                        if &#39;polygons_list&#39; in inputs:
+                            local_data = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;&#39;], filepaths[1])
+                        else:
+                            local_data = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;&#39;], filepaths[1])
+                        break
+                    except:
+                        continue
+                # rename the file as the image is downloaded as &#39;data.tif&#39;
+                try:
+                    os.rename(local_data, os.path.join(filepaths[1], im_fn[&#39;&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[1], im_fn[&#39;&#39;]))
+                    os.rename(local_data, os.path.join(filepaths[1], im_fn[&#39;&#39;]))
+                # metadata for .txt file
+                filename_txt = im_fn[&#39;&#39;].replace(&#39;.tif&#39;,&#39;&#39;)
+                metadict = {&#39;filename&#39;:im_fn[&#39;&#39;],&#39;acc_georef&#39;:georef_accs[i],
+                            &#39;epsg&#39;:im_epsg[i]}
+
+            #======================================================================#                  
+            # Landsat 7 and 8 download                
+            elif satname in [&#39;L7&#39;, &#39;L8&#39;]:
+                if satname == &#39;L7&#39;:
+                    bands[&#39;pan&#39;] = [im_bands[8]] # panchromatic band
+                    bands[&#39;ms&#39;] = [im_bands[0], im_bands[1], im_bands[2], im_bands[3],
+                                   im_bands[4], im_bands[9]] # multispectral bands
+                else:
+                    bands[&#39;pan&#39;] = [im_bands[7]] # panchromatic band
+                    bands[&#39;ms&#39;] = [im_bands[1], im_bands[2], im_bands[3], im_bands[4],
+                                   im_bands[5], im_bands[11]] # multispectral bands
+                for key in bands.keys():
+                    im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                 key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + suffix
+                # if two images taken at the same date add &#39;dup&#39; to the name (duplicate)
+                if any(im_fn[&#39;pan&#39;] in _ for _ in all_names):
+                    for key in bands.keys():
+                        im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                     key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_dup&#39; + suffix                    
+                all_names.append(im_fn[&#39;pan&#39;])
+                filenames.append(im_fn[&#39;pan&#39;])           
+                # download .tif from GEE (panchromatic band and multispectral bands)
+                while True:
+                    try:
+                        im_ee = ee.Image(im_meta[&#39;id&#39;])
+                        if &#39;polygons_list&#39; in inputs:
+                            local_data_pan = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;pan&#39;], filepaths[1])
+                            local_data_ms = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;ms&#39;], filepaths[2])
+                        else:
+                            local_data_pan = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;pan&#39;], filepaths[1])
+                            local_data_ms = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;ms&#39;], filepaths[2])
+                        break
+                    except:
+                        continue
+                # rename the files as the image is downloaded as &#39;data.tif&#39;
+                try: # panchromatic
+                    os.rename(local_data_pan, os.path.join(filepaths[1], im_fn[&#39;pan&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[1], im_fn[&#39;pan&#39;]))
+                    os.rename(local_data_pan, os.path.join(filepaths[1], im_fn[&#39;pan&#39;])) 
+                try: # multispectral
+                    os.rename(local_data_ms, os.path.join(filepaths[2], im_fn[&#39;ms&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[2], im_fn[&#39;ms&#39;]))
+                    os.rename(local_data_ms, os.path.join(filepaths[2], im_fn[&#39;ms&#39;]))   
+                # metadata for .txt file
+                filename_txt = im_fn[&#39;pan&#39;].replace(&#39;_pan&#39;,&#39;&#39;).replace(&#39;.tif&#39;,&#39;&#39;)
+                metadict = {&#39;filename&#39;:im_fn[&#39;pan&#39;],&#39;acc_georef&#39;:georef_accs[i],
+                            &#39;epsg&#39;:im_epsg[i]}
+                 
+            #======================================================================#
+            # Sentinel-2 Level 1-C download
+
+            # TODO: add RE2 band extraction (im_bands[5], 20m resolution)
+
+            elif satname in [&#39;S2&#39;]:
+                bands[&#39;10m&#39;] = [im_bands[1], im_bands[2], im_bands[3], im_bands[7]] # multispectral bands
+                bands[&#39;20m&#39;] = [im_bands[11]] # SWIR2 band
+                bands[&#39;60m&#39;] = [im_bands[15]] # QA band
+                for key in bands.keys():
+                    im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                 key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + suffix
+                # if two images taken at the same date add &#39;dup&#39; to the name (duplicate)
+                if any(im_fn[&#39;10m&#39;] in _ for _ in all_names):
+                    for key in bands.keys():
+                        im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                     key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_dup&#39; + suffix 
+                    # also check for triplicates (only on S2 imagery) and add &#39;tri&#39; to the name
+                    if im_fn[&#39;10m&#39;] in all_names:
+                        for key in bands.keys():
+                            im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                         key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_tri&#39; + suffix    
+                all_names.append(im_fn[&#39;10m&#39;])
+                filenames.append(im_fn[&#39;10m&#39;]) 
+                # download .tif from GEE (multispectral bands at 3 different resolutions)
+                while True:
+                    try:
+                        im_ee = ee.Image(im_meta[&#39;id&#39;])
+                        if &#39;polygons_list&#39; in inputs:
+                            local_data_10m = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;10m&#39;], filepaths[1])
+                            local_data_20m = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;20m&#39;], filepaths[2])
+                            local_data_60m = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;60m&#39;], filepaths[3])
+                        else:
+                            local_data_10m = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;10m&#39;], filepaths[1])
+                            local_data_20m = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;20m&#39;], filepaths[2])
+                            local_data_60m = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;60m&#39;], filepaths[3])
+                        break
+                    except:
+                        continue
+                # rename the files as the image is downloaded as &#39;data.tif&#39;
+                try: # 10m
+                    os.rename(local_data_10m, os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                    os.rename(local_data_10m, os.path.join(filepaths[1], im_fn[&#39;10m&#39;])) 
+                try: # 20m
+                    os.rename(local_data_20m, os.path.join(filepaths[2], im_fn[&#39;20m&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[2], im_fn[&#39;20m&#39;]))
+                    os.rename(local_data_20m, os.path.join(filepaths[2], im_fn[&#39;20m&#39;])) 
+                try: # 60m
+                    os.rename(local_data_60m, os.path.join(filepaths[3], im_fn[&#39;60m&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[3], im_fn[&#39;60m&#39;]))
+                    os.rename(local_data_60m, os.path.join(filepaths[3], im_fn[&#39;60m&#39;]))
+                # metadata for .txt file
+                filename_txt = im_fn[&#39;10m&#39;].replace(&#39;_10m&#39;,&#39;&#39;).replace(&#39;.tif&#39;,&#39;&#39;)
+                metadict = {&#39;filename&#39;:im_fn[&#39;10m&#39;],&#39;acc_georef&#39;:georef_accs[i],
+                            &#39;epsg&#39;:im_epsg[i]}
+
+            #======================================================================#
+            # Sentinel-2 Level 2-A download
+            elif satname in [&#39;S2_RGB&#39;]:
+                bands[&#39;10m&#39;] = [im_bands[15], im_bands[16], im_bands[17]] # True Color RGB bands
+                for key in bands.keys():
+                    im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                 key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + suffix
+                # if two images taken at the same date add &#39;dup&#39; to the name (duplicate)
+                if any(im_fn[&#39;10m&#39;] in _ for _ in all_names):
+                    for key in bands.keys():
+                        im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                     key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_dup&#39; + suffix 
+                    # also check for triplicates (only on S2 imagery) and add &#39;tri&#39; to the name
+                    if im_fn[&#39;10m&#39;] in all_names:
+                        for key in bands.keys():
+                            im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                         key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_tri&#39; + suffix    
+                all_names.append(im_fn[&#39;10m&#39;])
+                filenames.append(im_fn[&#39;10m&#39;]) 
+                # download .tif from GEE
+                while True:
+                    try:
+                        im_ee = ee.Image(im_meta[&#39;id&#39;])
+                        if &#39;polygons_list&#39; in inputs:
+                            local_data_10m = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;10m&#39;], filepaths[1])
+                        else:
+                            local_data_10m = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;10m&#39;], filepaths[1])
+                        break
+                    except:
+                        continue
+                # delete image and go to next one if it has too many black or white pixels (i.e.) area 
+                # on the limit of a satellite route, recalibrating errors, duplicates, open sea, etc.)
+                # TODO: try to download a valid older image instead of just continuing
+                if plt.imread(os.path.join(filepaths[1],&#39;data.tif&#39;)).mean() &lt; 50 or\
+                   plt.imread(os.path.join(filepaths[1],&#39;data.tif&#39;)).mean() &gt; 150:
+                    os.remove(os.path.join(filepaths[1], &#39;data.tif&#39;))
+                    print(&#39;\r%d%%&#39; %int((i+1)/len(im_dict_T1[satname])*100), end=&#39;&#39;)
+                    delete_counter += 1
+                    continue
+                # rename the files as images are downloaded as &#39;data.tif&#39;
+                try: # 10m
+                    os.rename(local_data_10m, os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                    os.rename(local_data_10m, os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                # metadata for .txt file
+                filename_txt = im_fn[&#39;10m&#39;].replace(&#39;_10m&#39;,&#39;&#39;).replace(&#39;.tif&#39;,&#39;&#39;)
+                metadict = {&#39;filename&#39;:im_fn[&#39;10m&#39;],&#39;acc_georef&#39;:georef_accs[i],
+                            &#39;epsg&#39;:im_epsg[i]}
+
+            # write metadata
+            with open(os.path.join(filepaths[0],filename_txt + &#39;.txt&#39;), &#39;w&#39;) as f:
+                for key in metadict.keys():
+                    f.write(&#39;%s\t%s\n&#39;%(key,metadict[key]))  
+
+            # print percentage completion for user
+            print(&#39;\r%d%%&#39; %int((i+1)/len(im_dict_T1[satname])*100), end=&#39;&#39;)
+    
+    # print the nb of incorrect S2_RGB that were deleted
+    if delete_counter &gt; 0:
+                print(&#39;\n\n{} images in the list have not been downloaded&#39;.format(delete_counter) +\
+                      &#39; due to too many missing pixels (area on\nthe edge of a satellite route,&#39; +\
+                      &#39; recalibrating errors, duplicates, open sea, etc.).&#39;)
+
+    # once all images have been downloaded, load metadata from .txt files
+    metadata = get_metadata(inputs)
+          
+    # merge overlapping images (if the polygon is at the boundary of an image)
+    # and images with the exact same date (i.e. set to False if you download 
+    # several chunks from the same S2 tile at the same date)
+    if (not &#39;merge&#39; in inputs) and (not &#39;polygons_list&#39; in inputs):
+        inputs[&#39;merge&#39;] = True
+    elif &#39;polygons_list&#39; in inputs:
+        inputs[&#39;merge&#39;] = False
+
+    if (&#39;S2&#39; in metadata.keys()) and (inputs[&#39;merge&#39;] == True):
+        try:
+            metadata = merge_overlapping_images(metadata,inputs)
+        except:
+            print(&#39;WARNING: there was an error while merging overlapping S2 images.&#39;)
+
+    # save metadata dict
+    with open(os.path.join(im_folder, inputs[&#39;sitename&#39;] + &#39;_metadata&#39; + &#39;.pkl&#39;), &#39;wb&#39;) as f:
+        pickle.dump(metadata, f)
+
+    return metadata
+
+
+def create_folder_structure(im_folder, satname):
+    &#34;&#34;&#34;
+    Create the structure of subfolders on disk for each satellite mission
+    before downloading the images.
+
+    Arguments:
+    -----------
+    im_folder: str 
+        folder where the images are to be downloaded
+    satname:
+        name of the satellite mission
+    
+    Returns:
+    -----------
+    filepaths: list of str
+        filepaths of the folders that were created
+    &#34;&#34;&#34; 
+    
+    # one folder for the metadata (common to all satellites)
+    filepaths = [os.path.join(im_folder, satname, &#39;meta&#39;)]
+    # subfolders depending on satellite mission
+    if satname == &#39;L5&#39;:
+        filepaths.append(os.path.join(im_folder, satname, &#39;30m&#39;))
+    elif satname in [&#39;L7&#39;,&#39;L8&#39;]:
+        filepaths.append(os.path.join(im_folder, satname, &#39;pan&#39;))
+        filepaths.append(os.path.join(im_folder, satname, &#39;ms&#39;))
+    elif satname in [&#39;S2&#39;]: 
+        filepaths.append(os.path.join(im_folder, satname, &#39;10m&#39;))
+        filepaths.append(os.path.join(im_folder, satname, &#39;20m&#39;))
+        filepaths.append(os.path.join(im_folder, satname, &#39;60m&#39;))
+    elif satname in [&#39;S2_RGB&#39;]: 
+        filepaths.append(os.path.join(im_folder, satname, &#39;10m&#39;))
+    # create the subfolders if they don&#39;t exist already
+    for fp in filepaths: 
+        if not os.path.exists(fp): os.makedirs(fp)
+    
+    return filepaths        
+
+
+def download_tif(image, polygon, bandsId, filepath):
+    &#34;&#34;&#34;
+    Downloads a .tif image from the GEE server and stores it in a temp file.
+
+    Arguments:
+    -----------
+    image: ee.Image
+        Image object to be downloaded
+    polygon: list
+        polygon containing the lon/lat coordinates to be extracted
+        longitudes in the first column and latitudes in the second column
+    bandsId: list of dict
+        list of bands to be downloaded
+    filepath: location where the temporary file should be saved
+    
+    Returns:
+    -----------
+    Downloads an image in a file named data.tif     
+      
+    &#34;&#34;&#34;
+           
+    # for the old version of ee only
+    if int(ee.__version__[-3:]) &lt;= 201:
+        url = ee.data.makeDownloadUrl(ee.data.getDownloadId({
+            &#39;image&#39;: image.serialize(),
+            &#39;region&#39;: polygon,
+            &#39;bands&#39;: bandsId,
+            &#39;filePerBand&#39;: &#39;false&#39;,
+            &#39;name&#39;: &#39;data&#39;,
+            }))
+        local_zip, headers = urlretrieve(url)
+        with zipfile.ZipFile(local_zip) as local_zipfile:
+            return local_zipfile.extract(&#39;data.tif&#39;, filepath)
+    
+    # for the newer versions of ee
+    else:
+        # crop image on the server and create url to download
+        url = ee.data.makeDownloadUrl(ee.data.getDownloadId({
+            &#39;image&#39;: image,
+            &#39;region&#39;: polygon,
+            &#39;bands&#39;: bandsId,
+            &#39;filePerBand&#39;: &#39;false&#39;,
+            &#39;name&#39;: &#39;data&#39;,
+            }))
+        # download zipfile with the cropped bands
+        local_zip, headers = urlretrieve(url)
+        # move zipfile from temp folder to data folder
+        dest_file = os.path.join(filepath, &#39;imagezip&#39;)
+        shutil.move(local_zip,dest_file)
+        # unzip file 
+        with zipfile.ZipFile(dest_file) as local_zipfile:
+            for fn in local_zipfile.namelist():
+                local_zipfile.extract(fn, filepath)
+            # filepath + filename to single bands
+            fn_tifs = [os.path.join(filepath,_) for _ in local_zipfile.namelist()]
+        # stack bands into single .tif
+        outds = gdal.BuildVRT(os.path.join(filepath,&#39;stacked.vrt&#39;), fn_tifs, separate=True)
+        outds = gdal.Translate(os.path.join(filepath,&#39;data.tif&#39;), outds)
+        # delete single-band files
+        for fn in fn_tifs: os.remove(fn)
+        # delete .vrt file
+        os.remove(os.path.join(filepath,&#39;stacked.vrt&#39;))
+        # delete zipfile
+        os.remove(dest_file)
+        # delete data.tif.aux (not sure why this is created)
+        if os.path.exists(os.path.join(filepath,&#39;data.tif.aux&#39;)):
+            os.remove(os.path.join(filepath,&#39;data.tif.aux&#39;))
+        # return filepath to stacked file called data.tif
+        return os.path.join(filepath,&#39;data.tif&#39;)
+
+
+def remove_cloudy_images(im_list, satname, prc_cloud_cover=75):
+    &#34;&#34;&#34;
+    Removes very cloudy images from the GEE collection to be downloaded.
+   
+    Arguments:
+    -----------
+    im_list: list 
+        list of images in the collection
+    satname:
+        name of the satellite mission
+    prc_cloud_cover: int
+        percentage of cloud cover acceptable on the images
+    
+    Returns:
+    -----------
+    im_list_upt: list
+        updated list of images
+    &#34;&#34;&#34;
+    
+    # remove very cloudy images from the collection
+    if satname in [&#39;L5&#39;,&#39;L7&#39;,&#39;L8&#39;]:
+        cloud_property = &#39;CLOUD_COVER&#39;
+    elif satname in [&#39;S2&#39;, &#39;S2_RGB&#39;]:
+        cloud_property = &#39;CLOUDY_PIXEL_PERCENTAGE&#39;
+    cloud_cover = [_[&#39;properties&#39;][cloud_property] for _ in im_list]
+    if np.any([_ &gt; prc_cloud_cover for _ in cloud_cover]):
+        idx_delete = np.where([_ &gt; prc_cloud_cover for _ in cloud_cover])[0]
+        im_list_upt = [x for k,x in enumerate(im_list) if k not in idx_delete]
+    else:
+        im_list_upt = im_list
+        
+    return im_list_upt
+
+
+def filter_S2_collection(im_list):
+    &#34;&#34;&#34;
+    Removes duplicates from the GEE collection of Sentinel-2 images (many duplicates)
+    Finds the images that were acquired at the same time but have different utm zones.
+    
+    Arguments:
+    -----------
+    im_list: list 
+        list of images in the collection
+    
+    Returns:
+    -----------
+    im_list_flt: list
+        filtered list of images
+    &#34;&#34;&#34;
+
+    # get datetimes
+    timestamps = [datetime.fromtimestamp(_[&#39;properties&#39;][&#39;system:time_start&#39;]/1000,
+                                         tz=pytz.utc) for _ in im_list]
+    # get utm zone projections
+    utm_zones = np.array([int(_[&#39;bands&#39;][0][&#39;crs&#39;][5:]) for _ in im_list])
+    if len(np.unique(utm_zones)) == 1: 
+        return im_list
+    else:
+        utm_zone_selected =  np.max(np.unique(utm_zones))
+        # find the images that were acquired at the same time but have different utm zones
+        idx_all = np.arange(0,len(im_list),1)
+        idx_covered = np.ones(len(im_list)).astype(bool)
+        idx_delete = []
+        i = 0
+        while 1:
+            same_time = np.abs([(timestamps[i]-_).total_seconds() for _ in timestamps]) &lt; 60*60*24
+            idx_same_time = np.where(same_time)[0]
+            same_utm = utm_zones == utm_zone_selected
+            # get indices that have the same time (less than 24h apart) but not the same utm zone
+            idx_temp = np.where([same_time[j] == True and same_utm[j] == False for j in idx_all])[0]
+            idx_keep = idx_same_time[[_ not in idx_temp for _ in idx_same_time]]
+            # if more than 2 images with same date and same utm, drop the last ones
+            if len(idx_keep) &gt; 2:
+               idx_temp = np.append(idx_temp,idx_keep[-(len(idx_keep)-2):])
+            for j in idx_temp:
+                idx_delete.append(j)
+            idx_covered[idx_same_time] = False
+            if np.any(idx_covered):
+                i = np.where(idx_covered)[0][0]
+            else:
+                break
+        # update the collection by deleting all those images that have same timestamp 
+        # and different utm projection
+        im_list_flt = [x for k,x in enumerate(im_list) if k not in idx_delete]
+    
+    #print(&#39;\nSentinel-2 duplicates removed - {} images kept for download.&#39;.format(len(im_list_flt)))
+
+    return im_list_flt
+
+
+def get_metadata(inputs):
+    &#34;&#34;&#34;
+    Gets the metadata from previously downloaded images by parsing .txt files located 
+    in the \meta subfolders.
+            
+    Arguments:
+    -----------
+    inputs: dict with the following fields
+        &#39;sitename&#39;: str
+            name of the site of study
+        &#39;filepath&#39;: str
+            filepath to the directory where the images are downloaded
+    
+    Returns:
+    -----------
+    metadata: dict
+        contains the information about the satellite images that were downloaded:
+        date, filename, georeferencing accuracy and image coordinate reference system       
+    &#34;&#34;&#34;
+
+    # directory containing the images
+    if not &#39;sitename&#39; in inputs:
+        inputs[&#39;sitename&#39;] = &#39;Data-{}&#39;.format(datetime.now().strftime(&#39;%Y-%m-%d&#39;))
+    filepath = os.path.join(inputs[&#39;filepath&#39;], inputs[&#39;sitename&#39;])
+    # initialize metadata dict
+    metadata = dict([])
+    # loop through the satellite missions
+    for satname in [&#39;L5&#39;,&#39;L7&#39;,&#39;L8&#39;,&#39;S2&#39;]:
+        # if a folder has been created for the given satellite mission
+        if satname in os.listdir(filepath):
+            # update the metadata dict
+            metadata[satname] = {&#39;filenames&#39;:[], &#39;acc_georef&#39;:[], &#39;epsg&#39;:[], &#39;dates&#39;:[]}
+            # directory where the metadata .txt files are stored
+            filepath_meta = os.path.join(filepath, satname, &#39;meta&#39;)
+            # get the list of filenames and sort it chronologically
+            filenames_meta = os.listdir(filepath_meta)
+            filenames_meta.sort()
+            # loop through the .txt files
+            for im_meta in filenames_meta:
+                # read them and extract the metadata info: filename, georeferencing accuracy
+                # epsg code and date
+                with open(os.path.join(filepath_meta, im_meta), &#39;r&#39;) as f:
+                    filename = f.readline().split(&#39;\t&#39;)[1].replace(&#39;\n&#39;,&#39;&#39;)
+                    acc_georef = float(f.readline().split(&#39;\t&#39;)[1].replace(&#39;\n&#39;,&#39;&#39;))
+                    epsg = int(f.readline().split(&#39;\t&#39;)[1].replace(&#39;\n&#39;,&#39;&#39;))
+                date_str = filename[0:19]
+                date = pytz.utc.localize(datetime(int(date_str[:4]),int(date_str[5:7]),
+                                                  int(date_str[8:10]),int(date_str[11:13]),
+                                                  int(date_str[14:16]),int(date_str[17:19])))
+                # store the information in the metadata dict
+                metadata[satname][&#39;filenames&#39;].append(filename)
+                metadata[satname][&#39;acc_georef&#39;].append(acc_georef)
+                metadata[satname][&#39;epsg&#39;].append(epsg)
+                metadata[satname][&#39;dates&#39;].append(date)
+                
+    # save a .pkl file containing the metadata dict
+    with open(os.path.join(filepath, inputs[&#39;sitename&#39;] + &#39;_metadata&#39; + &#39;.pkl&#39;), &#39;wb&#39;) as f:
+        pickle.dump(metadata, f)
+    
+    return metadata
+
+
+###################################################################################################
+# MERGE IMAGES
+###################################################################################################
+
+def merge_overlapping_images(metadata,inputs):
+    &#34;&#34;&#34;
+    Merges simultaneous overlapping images that cover the area of interest (e.g.
+    when the area of interest is located at the boundary between 2 images, where 
+    there is overlap, this function merges the 2 images so that the AOI is covered
+    by only 1 image.
+
+    It also merges images with the exact same date, i.e. if you want to download 
+    several chunks from the same S2 tile at the same date, you should specify
+    inputs[&#39;merge&#39;]=False.
+            
+    Arguments:
+    -----------
+    metadata: dict
+        contains all the information about the satellite images that were downloaded
+    inputs: dict with the following keys
+        &#39;sitename&#39;: str
+            name of the site of study
+        &#39;polygon&#39;: list
+            polygon containing the lon/lat coordinates to be extracted,
+            longitudes in the first column and latitudes in the second column,
+            there are 5 pairs of lat/lon with the fifth point equal to the first point:
+            ```
+            polygon = [[[151.3, -33.7],[151.4, -33.7],[151.4, -33.8],[151.3, -33.8],
+            [151.3, -33.7]]]
+            ```
+        &#39;dates&#39;: list of str
+            list that contains 2 strings with the initial and final dates in 
+            format &#39;yyyy-mm-dd&#39;:
+            ```
+            dates = [&#39;1987-01-01&#39;, &#39;2018-01-01&#39;]
+            ```
+        &#39;sat_list&#39;: list of str
+            list that contains the names of the satellite missions to include: 
+            ```
+            sat_list = [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;, &#39;S2&#39;]
+            ```
+        &#39;filepath&#39;: str
+            filepath to the directory where the images are downloaded
+        
+    Returns:
+    -----------
+    metadata_updated: dict
+        updated metadata     
+    &#34;&#34;&#34;
+    
+    # only for Sentinel-2 at this stage (not sure if this is needed for Landsat images)    
+    sat = &#39;S2&#39;
+    filepath = os.path.join(inputs[&#39;filepath&#39;], inputs[&#39;sitename&#39;])
+    filenames = metadata[sat][&#39;filenames&#39;]
+    # find the pairs of images that are within 5 minutes of each other
+    time_delta = 5*60 # 5 minutes in seconds
+    dates = metadata[sat][&#39;dates&#39;].copy()
+    pairs = []
+    for i,date in enumerate(metadata[sat][&#39;dates&#39;]):
+        # dummy value so it does not match it again
+        dates[i] = pytz.utc.localize(datetime(1,1,1) + timedelta(days=i+1))
+        # calculate time difference
+        time_diff = np.array([np.abs((date - _).total_seconds()) for _ in dates])
+        # find the matching times and add to pairs list
+        boolvec = time_diff &lt;= time_delta
+        if np.sum(boolvec) == 0:
+            continue
+        else:
+            idx_dup = np.where(boolvec)[0][0]
+            pairs.append([i,idx_dup])
+    # because they could be triplicates in S2 images, adjust the  for consecutive merges
+    for i in range(1,len(pairs)): 
+        if pairs[i-1][1] == pairs[i][0]: 
+            pairs[i][0] = pairs[i-1][0]
+    
+    # for each pair of image, create a mask and add no_data into the .tif file (this is 
+    # needed before merging .tif files)
+    for i,pair in enumerate(pairs):
+        fn_im = []
+        for index in range(len(pair)): 
+            # get filenames of all the files corresponding to the each image in the pair
+            fn_im.append([os.path.join(filepath, &#39;S2&#39;, &#39;10m&#39;, filenames[pair[index]]),
+                  os.path.join(filepath, &#39;S2&#39;, &#39;20m&#39;,  filenames[pair[index]].replace(&#39;10m&#39;,&#39;20m&#39;)),
+                  os.path.join(filepath, &#39;S2&#39;, &#39;60m&#39;,  filenames[pair[index]].replace(&#39;10m&#39;,&#39;60m&#39;)),
+                  os.path.join(filepath, &#39;S2&#39;, &#39;meta&#39;, filenames[pair[index]].replace(&#39;_10m&#39;,&#39;&#39;).replace(&#39;.tif&#39;,&#39;.txt&#39;))])
+            # read that image
+            im_ms, georef, cloud_mask, im_extra, im_QA, im_nodata = \
+                                    sat_preprocess.preprocess_single(fn_im[index], sat, False) 
+            # im_RGB = sat_preprocess.rescale_image_intensity(im_ms[:,:,[2,1,0]], cloud_mask, 99.9) 
+            
+            # in Sentinel2 images close to the edge of the image there are some artefacts, 
+            # that are squares with constant pixel intensities. They need to be masked in the 
+            # raster (GEOTIFF). It can be done using the image standard deviation, which 
+            # indicates values close to 0 for the artefacts.  
+            if len(im_ms) &gt; 0:
+                # calculate image std for the first 10m band
+                im_std = sat_tools.image_std(im_ms[:,:,0],1)
+                # convert to binary
+                im_binary = np.logical_or(im_std &lt; 1e-6, np.isnan(im_std))
+                # dilate to fill the edges (which have high std)
+                mask10 = morphology.dilation(im_binary, morphology.square(3))
+                # mask all 10m bands
+                for k in range(im_ms.shape[2]):
+                    im_ms[mask10,k] = np.nan
+                # mask the 10m .tif file (add no_data where mask is True)
+                sat_tools.mask_raster(fn_im[index][0], mask10)
+                # create another mask for the 20m band (SWIR1)
+                im_std = sat_tools.image_std(im_extra,1)
+                im_binary = np.logical_or(im_std &lt; 1e-6, np.isnan(im_std))
+                mask20 = morphology.dilation(im_binary, morphology.square(3))     
+                im_extra[mask20] = np.nan
+                # mask the 20m .tif file (im_extra)
+                sat_tools.mask_raster(fn_im[index][1], mask20) 
+                # use the 20m mask to create a mask for the 60m QA band (by resampling)
+                mask60 = ndimage.zoom(mask20,zoom=1/3,order=0)
+                mask60 = transform.resize(mask60, im_QA.shape, mode=&#39;constant&#39;, order=0,
+                                          preserve_range=True)
+                mask60 = mask60.astype(bool)
+                # mask the 60m .tif file (im_QA)
+                sat_tools.mask_raster(fn_im[index][2], mask60)    
+            else:
+                continue
+            
+            # make a figure for quality control
+            # fig,ax= plt.subplots(2,2,tight_layout=True)
+            # ax[0,0].imshow(im_RGB)
+            # ax[0,0].set_title(&#39;RGB original&#39;)
+            # ax[1,0].imshow(mask10)
+            # ax[1,0].set_title(&#39;Mask 10m&#39;)
+            # ax[0,1].imshow(mask20)  
+            # ax[0,1].set_title(&#39;Mask 20m&#39;)
+            # ax[1,1].imshow(mask60)
+            # ax[1,1].set_title(&#39;Mask 60 m&#39;)
+        
+        # once all the pairs of .tif files have been masked with no_data, merge them using gdal_merge
+        fn_merged = os.path.join(filepath, &#39;merged.tif&#39;)
+        
+        # merge masked 10m bands and remove duplicate file
+        gdal_merge_main([&#39;&#39;, &#39;-o&#39;, fn_merged, &#39;-n&#39;, &#39;0&#39;, fn_im[0][0], fn_im[1][0]])
+        os.chmod(fn_im[0][0], 0o777)
+        os.remove(fn_im[0][0])
+        os.chmod(fn_im[1][0], 0o777)
+        os.remove(fn_im[1][0])
+        os.chmod(fn_merged, 0o777)
+        os.rename(fn_merged, fn_im[0][0])
+        
+        # merge masked 20m band (SWIR band)
+        gdal_merge_main([&#39;&#39;, &#39;-o&#39;, fn_merged, &#39;-n&#39;, &#39;0&#39;, fn_im[0][1], fn_im[1][1]])
+        os.chmod(fn_im[0][1], 0o777)
+        os.remove(fn_im[0][1])
+        os.chmod(fn_im[1][1], 0o777)
+        os.remove(fn_im[1][1])
+        os.chmod(fn_merged, 0o777)
+        os.rename(fn_merged, fn_im[0][1])
+    
+        # merge QA band (60m band)
+        gdal_merge_main([&#39;&#39;, &#39;-o&#39;, fn_merged, &#39;-n&#39;, &#39;0&#39;, fn_im[0][2], fn_im[1][2]])
+        os.chmod(fn_im[0][2], 0o777)
+        os.remove(fn_im[0][2])
+        os.chmod(fn_im[1][2], 0o777)
+        os.remove(fn_im[1][2])
+        os.chmod(fn_merged, 0o777)
+        os.rename(fn_merged, fn_im[0][2])
+        
+        # remove the metadata .txt file of the duplicate image
+        os.chmod(fn_im[1][3], 0o777)
+        os.remove(fn_im[1][3])
+        
+    print(&#39;%d overlapping Sentinel-2 images have been merged.&#39; % len(pairs))
+    
+    # update the metadata dict
+    metadata_updated = copy.deepcopy(metadata)
+    idx_removed = []
+    idx_kept = []
+    for pair in pairs: idx_removed.append(pair[1])
+    for idx in np.arange(0,len(metadata[sat][&#39;dates&#39;])):
+        if not idx in idx_removed: idx_kept.append(idx)
+    for key in metadata_updated[sat].keys():
+        metadata_updated[sat][key] = [metadata_updated[sat][key][_] for _ in idx_kept]
+        
+    return metadata_updated  
+
+
+&#34;&#34;&#34;
+Sub-module: gdal_merge
+
+Project:  InSAR Peppers
+Purpose:  Module to extract data from many rasters into one output.
+Author:   Frank Warmerdam, warmerdam@pobox.com
+
+Copyright (c) 2000, Atlantis Scientific Inc. (www.atlsci.com)
+Copyright (c) 2009-2011, Even Rouault &lt;even dot rouault at mines-paris dot org&gt;
+Changes 29Apr2011, anssi.pekkarinen@fao.org
+&#34;&#34;&#34;
+
+import math
+import sys
+import time
+
+from osgeo import gdal
+
+try:
+    progress = gdal.TermProgress_nocb
+except:
+    progress = gdal.TermProgress
+
+verbose = 0
+quiet = 0
+
+
+def raster_copy( s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+                 t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+                 nodata=None ):
+
+    if verbose != 0:
+        print(&#39;Copy %d,%d,%d,%d to %d,%d,%d,%d.&#39;
+              % (s_xoff, s_yoff, s_xsize, s_ysize,
+             t_xoff, t_yoff, t_xsize, t_ysize ))
+
+    if nodata is not None:
+        return raster_copy_with_nodata(
+            s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+            t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+            nodata )
+
+    s_band = s_fh.GetRasterBand( s_band_n )
+    m_band = None
+    # Works only in binary mode and doesn&#39;t take into account
+    # intermediate transparency values for compositing.
+    if s_band.GetMaskFlags() != gdal.GMF_ALL_VALID:
+        m_band = s_band.GetMaskBand()
+    elif s_band.GetColorInterpretation() == gdal.GCI_AlphaBand:
+        m_band = s_band
+    if m_band is not None:
+        return raster_copy_with_mask(
+            s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+            t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+            m_band )
+
+    s_band = s_fh.GetRasterBand( s_band_n )
+    t_band = t_fh.GetRasterBand( t_band_n )
+
+    data = s_band.ReadRaster( s_xoff, s_yoff, s_xsize, s_ysize,
+                             t_xsize, t_ysize, t_band.DataType )
+    t_band.WriteRaster( t_xoff, t_yoff, t_xsize, t_ysize,
+                        data, t_xsize, t_ysize, t_band.DataType )
+
+    return 0
+
+
+def raster_copy_with_nodata( s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+                             t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+                             nodata ):
+    try:
+        import numpy as Numeric
+    except ImportError:
+        import Numeric
+
+    s_band = s_fh.GetRasterBand( s_band_n )
+    t_band = t_fh.GetRasterBand( t_band_n )
+
+    data_src = s_band.ReadAsArray( s_xoff, s_yoff, s_xsize, s_ysize,
+                                   t_xsize, t_ysize )
+    data_dst = t_band.ReadAsArray( t_xoff, t_yoff, t_xsize, t_ysize )
+
+    nodata_test = Numeric.equal(data_src,nodata)
+    to_write = Numeric.choose( nodata_test, (data_src, data_dst) )
+
+    t_band.WriteArray( to_write, t_xoff, t_yoff )
+
+    return 0
+
+
+def raster_copy_with_mask( s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+                           t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+                           m_band ):
+    try:
+        import numpy as Numeric
+    except ImportError:
+        import Numeric
+
+    s_band = s_fh.GetRasterBand( s_band_n )
+    t_band = t_fh.GetRasterBand( t_band_n )
+
+    data_src = s_band.ReadAsArray( s_xoff, s_yoff, s_xsize, s_ysize,
+                                   t_xsize, t_ysize )
+    data_mask = m_band.ReadAsArray( s_xoff, s_yoff, s_xsize, s_ysize,
+                                    t_xsize, t_ysize )
+    data_dst = t_band.ReadAsArray( t_xoff, t_yoff, t_xsize, t_ysize )
+
+    mask_test = Numeric.equal(data_mask, 0)
+    to_write = Numeric.choose( mask_test, (data_src, data_dst) )
+
+    t_band.WriteArray( to_write, t_xoff, t_yoff )
+
+    return 0
+
+
+def names_to_fileinfos( names ):
+    &#34;&#34;&#34;
+    Translate a list of GDAL filenames, into file_info objects.
+
+    names -- list of valid GDAL dataset names.
+
+    Returns a list of file_info objects.  There may be less file_info objects
+    than names if some of the names could not be opened as GDAL files.
+    &#34;&#34;&#34;
+
+    file_infos = []
+    for name in names:
+        fi = file_info()
+        if fi.init_from_name( name ) == 1:
+            file_infos.append( fi )
+
+    return file_infos
+
+
+class file_info:
+    &#34;&#34;&#34;A class holding information about a GDAL file.&#34;&#34;&#34;
+
+    def init_from_name(self, filename):
+        &#34;&#34;&#34;
+        Initialize file_info from filename
+
+        filename -- Name of file to read.
+
+        Returns 1 on success or 0 if the file can&#39;t be opened.
+        &#34;&#34;&#34;
+        fh = gdal.Open( filename )
+        if fh is None:
+            return 0
+
+        self.filename = filename
+        self.bands = fh.RasterCount
+        self.xsize = fh.RasterXSize
+        self.ysize = fh.RasterYSize
+        self.band_type = fh.GetRasterBand(1).DataType
+        self.projection = fh.GetProjection()
+        self.geotransform = fh.GetGeoTransform()
+        self.ulx = self.geotransform[0]
+        self.uly = self.geotransform[3]
+        self.lrx = self.ulx + self.geotransform[1] * self.xsize
+        self.lry = self.uly + self.geotransform[5] * self.ysize
+
+        ct = fh.GetRasterBand(1).GetRasterColorTable()
+        if ct is not None:
+            self.ct = ct.Clone()
+        else:
+            self.ct = None
+
+        return 1
+
+    def report( self ):
+        print(&#39;Filename: &#39;+ self.filename)
+        print(&#39;File Size: %dx%dx%d&#39;
+              % (self.xsize, self.ysize, self.bands))
+        print(&#39;Pixel Size: %f x %f&#39;
+              % (self.geotransform[1],self.geotransform[5]))
+        print(&#39;UL:(%f,%f)   LR:(%f,%f)&#39;
+              % (self.ulx,self.uly,self.lrx,self.lry))
+
+    def copy_into( self, t_fh, s_band = 1, t_band = 1, nodata_arg=None ):
+        &#34;&#34;&#34;
+        Copy this files image into target file.
+
+        This method will compute the overlap area of the file_info objects
+        file, and the target gdal.Dataset object, and copy the image data
+        for the common window area.  It is assumed that the files are in
+        a compatible projection ... no checking or warping is done.  However,
+        if the destination file is a different resolution, or different
+        image pixel type, the appropriate resampling and conversions will
+        be done (using normal GDAL promotion/demotion rules).
+
+        t_fh -- gdal.Dataset object for the file into which some or all
+        of this file may be copied.
+
+        Returns 1 on success (or if nothing needs to be copied), and zero one
+        failure.
+        &#34;&#34;&#34;
+        t_geotransform = t_fh.GetGeoTransform()
+        t_ulx = t_geotransform[0]
+        t_uly = t_geotransform[3]
+        t_lrx = t_geotransform[0] + t_fh.RasterXSize * t_geotransform[1]
+        t_lry = t_geotransform[3] + t_fh.RasterYSize * t_geotransform[5]
+
+        # figure out intersection region
+        tgw_ulx = max(t_ulx,self.ulx)
+        tgw_lrx = min(t_lrx,self.lrx)
+        if t_geotransform[5] &lt; 0:
+            tgw_uly = min(t_uly,self.uly)
+            tgw_lry = max(t_lry,self.lry)
+        else:
+            tgw_uly = max(t_uly,self.uly)
+            tgw_lry = min(t_lry,self.lry)
+
+        # do they even intersect?
+        if tgw_ulx &gt;= tgw_lrx:
+            return 1
+        if t_geotransform[5] &lt; 0 and tgw_uly &lt;= tgw_lry:
+            return 1
+        if t_geotransform[5] &gt; 0 and tgw_uly &gt;= tgw_lry:
+            return 1
+
+        # compute target window in pixel coordinates.
+        tw_xoff = int((tgw_ulx - t_geotransform[0]) / t_geotransform[1] + 0.1)
+        tw_yoff = int((tgw_uly - t_geotransform[3]) / t_geotransform[5] + 0.1)
+        tw_xsize = int((tgw_lrx - t_geotransform[0])/t_geotransform[1] + 0.5) \
+                   - tw_xoff
+        tw_ysize = int((tgw_lry - t_geotransform[3])/t_geotransform[5] + 0.5) \
+                   - tw_yoff
+
+        if tw_xsize &lt; 1 or tw_ysize &lt; 1:
+            return 1
+
+        # Compute source window in pixel coordinates.
+        sw_xoff = int((tgw_ulx - self.geotransform[0]) / self.geotransform[1])
+        sw_yoff = int((tgw_uly - self.geotransform[3]) / self.geotransform[5])
+        sw_xsize = int((tgw_lrx - self.geotransform[0]) \
+                       / self.geotransform[1] + 0.5) - sw_xoff
+        sw_ysize = int((tgw_lry - self.geotransform[3]) \
+                       / self.geotransform[5] + 0.5) - sw_yoff
+
+        if sw_xsize &lt; 1 or sw_ysize &lt; 1:
+            return 1
+
+        # Open the source file, and copy the selected region.
+        s_fh = gdal.Open( self.filename )
+
+        return raster_copy( s_fh, sw_xoff, sw_yoff, sw_xsize, sw_ysize, s_band,
+                            t_fh, tw_xoff, tw_yoff, tw_xsize, tw_ysize, t_band,
+                            nodata_arg )
+
+
+def Usage():
+    print(&#39;Usage: gdal_merge.py [-o out_filename] [-of out_format] [-co NAME=VALUE]*&#39;)
+    print(&#39;                     [-ps pixelsize_x pixelsize_y] [-tap] [-separate] [-q] [-v] [-pct]&#39;)
+    print(&#39;                     [-ul_lr ulx uly lrx lry] [-init &#34;value [value...]&#34;]&#39;)
+    print(&#39;                     [-n nodata_value] [-a_nodata output_nodata_value]&#39;)
+    print(&#39;                     [-ot datatype] [-createonly] input_files&#39;)
+    print(&#39;                     [--help-general]&#39;)
+    print(&#39;&#39;)
+
+
+# =============================================================================
+# Program mainline
+
+def gdal_merge_main( argv=None ):
+
+    global verbose, quiet
+    verbose = 0
+    quiet = 0
+    names = []
+    format = &#39;GTiff&#39;
+    out_file = &#39;out.tif&#39;
+
+    ulx = None
+    psize_x = None
+    separate = 0
+    copy_pct = 0
+    nodata = None
+    a_nodata = None
+    create_options = []
+    pre_init = []
+    band_type = None
+    createonly = 0
+    bTargetAlignedPixels = False
+    start_time = time.time()
+
+    gdal.AllRegister()
+    if argv is None:
+        argv = sys.argv
+    argv = gdal.GeneralCmdLineProcessor( argv )
+    if argv is None:
+        sys.exit( 0 )
+
+    # Parse command line arguments.
+    i = 1
+    while i &lt; len(argv):
+        arg = argv[i]
+
+        if arg == &#39;-o&#39;:
+            i = i + 1
+            out_file = argv[i]
+
+        elif arg == &#39;-v&#39;:
+            verbose = 1
+
+        elif arg == &#39;-q&#39; or arg == &#39;-quiet&#39;:
+            quiet = 1
+
+        elif arg == &#39;-createonly&#39;:
+            createonly = 1
+
+        elif arg == &#39;-separate&#39;:
+            separate = 1
+
+        elif arg == &#39;-seperate&#39;:
+            separate = 1
+
+        elif arg == &#39;-pct&#39;:
+            copy_pct = 1
+
+        elif arg == &#39;-ot&#39;:
+            i = i + 1
+            band_type = gdal.GetDataTypeByName( argv[i] )
+            if band_type == gdal.GDT_Unknown:
+                print(&#39;Unknown GDAL data type: %s&#39; % argv[i])
+                sys.exit( 1 )
+
+        elif arg == &#39;-init&#39;:
+            i = i + 1
+            str_pre_init = argv[i].split()
+            for x in str_pre_init:
+                pre_init.append(float(x))
+
+        elif arg == &#39;-n&#39;:
+            i = i + 1
+            nodata = float(argv[i])
+
+        elif arg == &#39;-a_nodata&#39;:
+            i = i + 1
+            a_nodata = float(argv[i])
+
+        elif arg == &#39;-f&#39;:
+            # for backward compatibility.
+            i = i + 1
+            format = argv[i]
+
+        elif arg == &#39;-of&#39;:
+            i = i + 1
+            format = argv[i]
+
+        elif arg == &#39;-co&#39;:
+            i = i + 1
+            create_options.append( argv[i] )
+
+        elif arg == &#39;-ps&#39;:
+            psize_x = float(argv[i+1])
+            psize_y = -1 * abs(float(argv[i+2]))
+            i = i + 2
+
+        elif arg == &#39;-tap&#39;:
+            bTargetAlignedPixels = True
+
+        elif arg == &#39;-ul_lr&#39;:
+            ulx = float(argv[i+1])
+            uly = float(argv[i+2])
+            lrx = float(argv[i+3])
+            lry = float(argv[i+4])
+            i = i + 4
+
+        elif arg[:1] == &#39;-&#39;:
+            print(&#39;Unrecognized command option: %s&#39; % arg)
+            Usage()
+            sys.exit( 1 )
+
+        else:
+            names.append(arg)
+
+        i = i + 1
+
+    if len(names) == 0:
+        print(&#39;No input files selected.&#39;)
+        Usage()
+        sys.exit( 1 )
+
+    Driver = gdal.GetDriverByName(format)
+    if Driver is None:
+        print(&#39;Format driver %s not found, pick a supported driver.&#39; % format)
+        sys.exit( 1 )
+
+    DriverMD = Driver.GetMetadata()
+    if &#39;DCAP_CREATE&#39; not in DriverMD:
+        print(&#39;Format driver %s does not support creation and piecewise writing.&#39; % format,
+            &#39;\nPlease select a format that does, such as GTiff (the default) or HFA (Erdas Imagine).&#39; )
+        sys.exit( 1 )
+
+    # Collect information on all the source files.
+    file_infos = names_to_fileinfos( names )
+
+    if ulx is None:
+        ulx = file_infos[0].ulx
+        uly = file_infos[0].uly
+        lrx = file_infos[0].lrx
+        lry = file_infos[0].lry
+
+        for fi in file_infos:
+            ulx = min(ulx, fi.ulx)
+            uly = max(uly, fi.uly)
+            lrx = max(lrx, fi.lrx)
+            lry = min(lry, fi.lry)
+
+    if psize_x is None:
+        psize_x = file_infos[0].geotransform[1]
+        psize_y = file_infos[0].geotransform[5]
+
+    if band_type is None:
+        band_type = file_infos[0].band_type
+
+    # Try opening as an existing file.
+    gdal.PushErrorHandler( &#39;CPLQuietErrorHandler&#39; )
+    t_fh = gdal.Open( out_file, gdal.GA_Update )
+    gdal.PopErrorHandler()
+
+    # Create output file if it does not already exist.
+    if t_fh is None:
+
+        if bTargetAlignedPixels:
+            ulx = math.floor(ulx / psize_x) * psize_x
+            lrx = math.ceil(lrx / psize_x) * psize_x
+            lry = math.floor(lry / -psize_y) * -psize_y
+            uly = math.ceil(uly / -psize_y) * -psize_y
+
+        geotransform = [ulx, psize_x, 0, uly, 0, psize_y]
+
+        xsize = int((lrx - ulx) / geotransform[1] + 0.5)
+        ysize = int((lry - uly) / geotransform[5] + 0.5)
+
+
+        if separate != 0:
+            bands=0
+
+            for fi in file_infos:
+                bands=bands + fi.bands
+        else:
+            bands = file_infos[0].bands
+
+
+        t_fh = Driver.Create( out_file, xsize, ysize, bands,
+                              band_type, create_options )
+        if t_fh is None:
+            print(&#39;Creation failed, terminating gdal_merge.&#39;)
+            sys.exit( 1 )
+
+        t_fh.SetGeoTransform( geotransform )
+        t_fh.SetProjection( file_infos[0].projection )
+
+        if copy_pct:
+            t_fh.GetRasterBand(1).SetRasterColorTable(file_infos[0].ct)
+    else:
+        if separate != 0:
+            bands=0
+            for fi in file_infos:
+                bands=bands + fi.bands
+            if t_fh.RasterCount &lt; bands :
+                print(&#39;Existing output file has less bands than the input files.&#39;,
+                    &#39;You should delete it before. Terminating gdal_merge.&#39;)
+                sys.exit( 1 )
+        else:
+            bands = min(file_infos[0].bands,t_fh.RasterCount)
+
+    # Do we need to set nodata value ?
+    if a_nodata is not None:
+        for i in range(t_fh.RasterCount):
+            t_fh.GetRasterBand(i+1).SetNoDataValue(a_nodata)
+
+    # Do we need to pre-initialize the whole mosaic file to some value?
+    if pre_init is not None:
+        if t_fh.RasterCount &lt;= len(pre_init):
+            for i in range(t_fh.RasterCount):
+                t_fh.GetRasterBand(i+1).Fill( pre_init[i] )
+        elif len(pre_init) == 1:
+            for i in range(t_fh.RasterCount):
+                t_fh.GetRasterBand(i+1).Fill( pre_init[0] )
+
+    # Copy data from source files into output file.
+    t_band = 1
+
+    if quiet == 0 and verbose == 0:
+        progress( 0.0 )
+    fi_processed = 0
+
+    for fi in file_infos:
+        if createonly != 0:
+            continue
+
+        if verbose != 0:
+            print(&#34;&#34;)
+            print(&#34;Processing file %5d of %5d, %6.3f%% completed in %d minutes.&#34;
+                  % (fi_processed+1,len(file_infos),
+                     fi_processed * 100.0 / len(file_infos),
+                     int(round((time.time() - start_time)/60.0)) ))
+            fi.report()
+
+        if separate == 0 :
+            for band in range(1, bands+1):
+                fi.copy_into( t_fh, band, band, nodata )
+        else:
+            for band in range(1, fi.bands+1):
+                fi.copy_into( t_fh, band, t_band, nodata )
+                t_band = t_band+1
+
+        fi_processed = fi_processed+1
+        if quiet == 0 and verbose == 0:
+            progress( fi_processed / float(len(file_infos))  )
+
+    # Force file to be closed.
+    t_fh = None
+
+# if __name__ == &#39;__main__&#39;:
+#     sys.exit(gdal_merge_main())
+
+
+###################################################################################################
+# DOWNLOAD OSM DATA
+###################################################################################################
+
+def download_footprints(tag, network_type=&#39;all_private&#39;, buff=None,
+                        place=None, polygon=None, address=None, point=None, radius=1000, 
+                        save=False, output_path=os.getcwd()):
+    &#34;&#34;&#34;
+    To download OSM data, you can use several tools: the overpass-turbo website, direct Overpass
+    URL requests,or other third-party libraries, most notably `osmnx`. The function below is a 
+    higher-level function to simplify `osmnx` usage.
+
+    Arguments:
+    -----------
+    tag: str
+        OSM tag key (e.g. &#39;building&#39;,&#39;landuse&#39;, &#39;place&#39;, etc.) to be downloaded. More specific 
+        queries (&#39;landuse=industrial&#39;) and multiple queries aren&#39;t supported - for complex queries
+        please use the overpass-turbo online API (or filter the function output afterwards!)
+    network_type: str, optional (default: &#39;all_private&#39;)
+        if `tag` is set to &#39;roads&#39;, what type of street network to get - one of &#39;walk&#39;, &#39;bike&#39;,
+        &#39;drive&#39;, &#39;drive_service&#39;, &#39;all&#39;, or &#39;all_private&#39; (i.e. including private roads).
+    buff: int, optional (default: None)
+        if not None, buffer the output geometries with the specified distance (in m)
+    place: str
+        to get data within some place boundaries. Can be a city, a country, or anything that is 
+        geocodable and for which OSM has polygon boundaries. If OSM does not have a polygon for
+         this place, you can instead us the `address`, `polygon` or `point` arguments
+    polygon: shapely.geometry.Polygon or shapely.geometry.MultiPolygon
+        the shape to get data within, with coordinates in epsg:4326
+    address: str
+        the address for which to get polygons (to be used with `radius` argument) 
+    point: tuple
+        a lat-lng point, with coordinates in epsg:4326
+    radius: int, optional (default: 1000)
+        distance (in m) from point or address for which to search for footprints
+    save: bool, optional (deault: False)
+        save output as a geojson
+    output_path: str, optional (default: current working directory)
+        folder to save the output in
+
+    Returns:
+    -----------
+    footprints: geodataframe
+        footprints as a geodataframe, or as a multipolygon if `buff` is not &#39;None&#39;
+    &#34;&#34;&#34;
+    
+    # download roads
+    if tag==&#39;roads&#39;:
+        if place is not None:
+            footprints = osmnx.graph_from_place(place, network_type=network_type)      
+        elif polygon is not None:
+            footprints = osmnx.graph_from_polygon(polygon, network_type=network_type)
+        elif address is not None:
+            footprints = osmnx.graph_from_address(address, network_type=network_type, dist=radius)
+        elif point is not None:
+            footprints = osmnx.graph_from_point(point, network_type=network_type, dist=radius)
+        
+        footprints = osmnx.graph_to_gdfs(footprints, nodes=False) # get geodataframe with road linestrings  
+    
+    # download other footprints
+    else:
+        if place is not None:
+            footprints = osmnx.footprints.footprints_from_place(place, footprint_type=tag)
+        elif polygon is not None:
+            footprints = osmnx.footprints.footprints_from_polygon(polygon, footprint_type=tag)
+        elif address is not None:
+            footprints = osmnx.footprints.footprints_from_address(address, footprint_type=tag, dist=radius)
+        elif point is not None:
+            footprints = osmnx.footprints.footprints_from_point(point, footprint_type=tag, dist=radius)
+    
+    if save:
+        #footprints = footprints.to_crs(&#39;epsg:4326&#39;)
+        footprints.to_file(os.path.join(output_path, &#39;footprints.geojson&#39;), driver=&#39;GeoJSON&#39;)
+
+    if buff is not None:
+
+        # set up projection transformers
+        project = pyproj.Transformer.from_proj(
+        pyproj.Proj(&#39;epsg:4326&#39;), # source coordinate system
+        pyproj.Proj(&#39;epsg:2154&#39;)) # destination coordinate system
+
+        project_back = pyproj.Transformer.from_proj(
+        pyproj.Proj(&#39;epsg:2154&#39;), # source coordinate system
+        pyproj.Proj(&#39;epsg:4326&#39;)) # destination coordinate system
+
+        # regroup geometries and compute buffers
+        footprints = cascaded_union(list(footprints[&#39;geometry&#39;])) # create multigeometry
+        footprints = transform(project.transform, footprints) # project roads multilinestring to cartesian epsg:2154
+        footprints = footprints.buffer(buff) # compute buffer (results in a multipolygon)
+        footprints = transform(project_back.transform, footprints) # project back to epsg:4326
+
+    return footprints</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="totalsat.sat_download.Usage"><code class="name flex">
+<span>def <span class="ident">Usage</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Usage():
+    print(&#39;Usage: gdal_merge.py [-o out_filename] [-of out_format] [-co NAME=VALUE]*&#39;)
+    print(&#39;                     [-ps pixelsize_x pixelsize_y] [-tap] [-separate] [-q] [-v] [-pct]&#39;)
+    print(&#39;                     [-ul_lr ulx uly lrx lry] [-init &#34;value [value...]&#34;]&#39;)
+    print(&#39;                     [-n nodata_value] [-a_nodata output_nodata_value]&#39;)
+    print(&#39;                     [-ot datatype] [-createonly] input_files&#39;)
+    print(&#39;                     [--help-general]&#39;)
+    print(&#39;&#39;)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.check_images_available"><code class="name flex">
+<span>def <span class="ident">check_images_available</span></span>(<span>inputs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check image availity from GEE for each specified satellite mission,
+with chosen parameters to filter images.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>inputs: dict with the following keys
+'sitename': str, optional (default: current date)
+name of the site of study
+'polygon': list
+list containing the pairs of lon/lat coordinates of the polygon area to be
+extracted, longitudes in the 1st column and latitudes in the 2nd column.
+Max area size is 100x100 km, and format should be as below:
+<code>polygon = [[[151.3, -33.7],[151.4, -33.7],[151.4, -33.8],[151.3, -33.8]]]</code>
+'polygons_list': list of lists, optional (default: None)
+list of polygons as coordinates list (to search for several polygon areas at once)
+'point': list
+latitude and longitude of the point at the center of the area to be
+extracted - user should input either polygon or point + radius, in format:
+<code>point = [lon, lat]</code>
+'radius': float, optional (default: 20)
+radius of the area to be extracted around the point coordinates, in km (max:50)
+'dates': list of str, optional (default: last image available)
+either 'last' or a list that contains 2 strings, with the initial and final
+dates in format 'yyyy-mm-dd' (the final date can also be 'today'):
+<code>dates = ['1987-01-01', '2018-01-01']</code>
+'sat_list': list of str
+list that contains the names of the satellite missions to include:
+<code>sat_list = ['L5', 'L7', 'L8', 'S2', 'S2_RGB']</code>
+S2_RGB is the collection with the least images (starting in April 2017), but the
+advantage is that it provides directly true color RGB images (no preprocessing needed!)
+'include_T2': bool, optional (default: False)
+include Landsat T2 collections in image search
+'filepath': str
+filepath to the directory where the images will be downloaded
+'max_could_cover': int, optional (default: 20)
+maximum cloud cover percentage to be passed to the remove_cloudy_images
+filtering function
+'max_size': int, optional (default: None)
+maximum image size (width), in pixels - if the area of interest is too large,
+it will be split in several images of max_size
+'merge': bool, optional (default: True)
+set to False if you don't want to merge images taken at the same date (for ex
+if you download several images from the same S2 tile, taken the same day -
+therefore automatically set to true if inputs include polygons_list)</p>
+<h2 id="returns">Returns:</h2>
+<p>im_dict_T1: dict
+list of images in Landsat Tier 1 and Sentinel-2 Level-1C / Level 2-A
+im_dict_T2: dict
+list of images in Tier 2 (Landsat only)</p>
+<h1 id="todo-add-pre-computed-8-day-composite-images">TODO - add pre-computed 8-day composite images:</h1>
+<h1 id="im_dict_composites-dict">im_dict_composites: dict</h1>
+<h1 id="list-of-pre-computed-composite-landsat-images">list of pre-computed composite Landsat images</h1></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_images_available(inputs):
+    &#34;&#34;&#34;
+    Check image availity from GEE for each specified satellite mission,
+    with chosen parameters to filter images.
+      
+    Arguments:
+    -----------
+    inputs: dict with the following keys
+        &#39;sitename&#39;: str, optional (default: current date)
+            name of the site of study
+        &#39;polygon&#39;: list
+            list containing the pairs of lon/lat coordinates of the polygon area to be 
+            extracted, longitudes in the 1st column and latitudes in the 2nd column.
+            Max area size is 100x100 km, and format should be as below:
+            ```
+            polygon = [[[151.3, -33.7],[151.4, -33.7],[151.4, -33.8],[151.3, -33.8]]]
+            ```
+        &#39;polygons_list&#39;: list of lists, optional (default: None)
+            list of polygons as coordinates list (to search for several polygon areas at once)
+        &#39;point&#39;: list
+            latitude and longitude of the point at the center of the area to be 
+            extracted - user should input either polygon or point + radius, in format:
+            ```
+            point = [lon, lat]
+            ```
+        &#39;radius&#39;: float, optional (default: 20)
+            radius of the area to be extracted around the point coordinates, in km (max:50)
+        &#39;dates&#39;: list of str, optional (default: last image available)
+            either &#39;last&#39; or a list that contains 2 strings, with the initial and final
+            dates in format &#39;yyyy-mm-dd&#39; (the final date can also be &#39;today&#39;):
+            ```
+            dates = [&#39;1987-01-01&#39;, &#39;2018-01-01&#39;]
+            ```
+        &#39;sat_list&#39;: list of str
+            list that contains the names of the satellite missions to include:
+            ```
+            sat_list = [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;, &#39;S2&#39;, &#39;S2_RGB&#39;]
+            ```
+            S2_RGB is the collection with the least images (starting in April 2017), but the
+            advantage is that it provides directly true color RGB images (no preprocessing needed!)
+        &#39;include_T2&#39;: bool, optional (default: False)
+            include Landsat T2 collections in image search
+        &#39;filepath&#39;: str
+            filepath to the directory where the images will be downloaded
+        &#39;max_could_cover&#39;: int, optional (default: 20)
+            maximum cloud cover percentage to be passed to the remove_cloudy_images
+            filtering function
+        &#39;max_size&#39;: int, optional (default: None)
+            maximum image size (width), in pixels - if the area of interest is too large,
+            it will be split in several images of max_size
+        &#39;merge&#39;: bool, optional (default: True)
+            set to False if you don&#39;t want to merge images taken at the same date (for ex
+            if you download several images from the same S2 tile, taken the same day - 
+            therefore automatically set to true if inputs include polygons_list)
+    
+    Returns:
+    -----------
+    im_dict_T1: dict
+        list of images in Landsat Tier 1 and Sentinel-2 Level-1C / Level 2-A
+    im_dict_T2: dict
+        list of images in Tier 2 (Landsat only)
+    # TODO - add pre-computed 8-day composite images:
+    # im_dict_composites: dict
+    #     list of pre-computed composite Landsat images
+    &#34;&#34;&#34;
+    
+    # initializations
+    ee.Initialize()
+    collection_names = {&#39;L5&#39;:&#39;LANDSAT/LT05/C01/T1_TOA&#39;,
+                        &#39;L7&#39;:&#39;LANDSAT/LE07/C01/T1_TOA&#39;,
+                        &#39;L8&#39;:&#39;LANDSAT/LC08/C01/T1_TOA&#39;,
+                        &#39;S2&#39;:&#39;COPERNICUS/S2&#39;,
+                        &#39;S2_RGB&#39;:&#39;COPERNICUS/S2_SR&#39;#,
+                        #TODO - add pre-computed 8-day composite images:
+                        #&#39;L8_BAI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_BAI&#39;,
+                        #&#39;L8_EVI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_EVI&#39;,
+                        #&#39;L8_NDVI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_NDVI&#39;,
+                        #&#39;L8_NBRT&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_NBRT&#39;,
+                        #&#39;L8_NDSI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_NDSI&#39;,
+                        #&#39;L8_NDWI&#39;: &#39;LANDSAT/LC08/C01/T1_8DAY_NDWI&#39;
+                        }
+    
+    # check if dates were provided - if not, set to &#39;last&#39;
+    if (&#39;dates&#39; not in inputs) or (inputs[&#39;dates&#39;] == &#39;last&#39;):
+        last = True
+        now = datetime.now()
+        last_month = now - timedelta(weeks=6)
+        inputs[&#39;dates&#39;] = [last_month.strftime(&#39;%Y-%m-%d&#39;), now.strftime(&#39;%Y-%m-%d&#39;)]
+        print(&#39;Looking for the last available data...&#39;)
+    else:
+        last = False  
+    # if &#39;today&#39; was provided, replace with current date
+    if &#39;dates&#39; in inputs and &#39;today&#39; in inputs[&#39;dates&#39;]: 
+        inputs[&#39;dates&#39;][1] = datetime.now().strftime(&#39;%Y-%m-%d&#39;)
+
+    # check if polygon area was provided - if not, define polygon area around point
+    if (not &#39;polygon&#39; in inputs) and (not &#39;polygons_list&#39; in inputs): # sanity check
+        assert &#39;point&#39; in inputs, &#39;Please provide a point or polygon coordinates to search for images.&#39;
+    if &#39;point&#39; in inputs:
+        if not &#39;radius&#39; in inputs: # default radius
+            inputs[&#39;radius&#39;] = 20
+        
+        # Compute the polygon AOI and split it if requested (i.e. radius too large compared to max_size)
+        inputs[&#39;polygon&#39;] = sat_tools.bbox_from_point(inputs[&#39;point&#39;], inputs[&#39;radius&#39;])
+        pixel_width = inputs[&#39;radius&#39;]*2*1000 / 10
+        if &#39;max_size&#39; in inputs and pixel_width &gt; inputs[&#39;max_size&#39;]:
+            inputs[&#39;polygons_list&#39;] = sat_tools.split_area(inputs[&#39;polygon&#39;], pixel_width, inputs[&#39;max_size&#39;])
+            print(&#39;Your area of interest will be split into smaller image areas to fit max_size&#39; +\
+                  &#39; requirements.\n\nSearching for images on the GEE server...\n&#39;)
+
+    # set maximum cloud cover filter if passed as input
+    if &#39;max_cloud_cover&#39; in inputs:
+        prc_cloud_cover = inputs[&#39;max_cloud_cover&#39;]
+    else:
+        prc_cloud_cover = 20
+
+    # check how many images are available in Landsat Tier 1 and Sentinel Level-1C
+    col_names_T1 = {new_key: collection_names[new_key] for new_key in [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;, &#39;S2&#39;, &#39;S2_RGB&#39;]}
+    print(&#39;- In Landsat Tier 1 &amp; Sentinel-2 Level-1C / Level 2-A:&#39;)
+    im_dict_T1 = dict([])
+    im_dict_T2 = dict([])
+    sum_img_T1 = 0
+    sum_img_T2 = 0
+    for satname in inputs[&#39;sat_list&#39;]:
+
+        # if AOI was split into smaller areas, loop over all polygons to get list of images
+        if &#39;polygons_list&#39; in inputs:
+            im_dict_T1[satname] = []
+            counter = 0
+            for i, polygon_i in enumerate(inputs[&#39;polygons_list&#39;]):
+                # get list of images in GEE collection
+                while True:
+                    try:
+                        ee_col = ee.ImageCollection(col_names_T1[satname])
+                        col = ee_col.filterBounds(ee.Geometry.Polygon(polygon_i))\
+                                    .filterDate(inputs[&#39;dates&#39;][0],inputs[&#39;dates&#39;][1])
+                        im_list = col.getInfo().get(&#39;features&#39;)
+                        break
+                    except:
+                        continue
+                # remove images above a chosen cloud percentage
+                im_list_upt = remove_cloudy_images(im_list, satname, prc_cloud_cover)
+                # remove UTM duplicates in S2 collections (they provide several projections for same images)
+                if satname == &#39;S2&#39; and len(im_list_upt)&gt;1: 
+                    im_list_upt = filter_S2_collection(im_list_upt)
+                # if requested, select only the last image
+                if last == True:
+                    im_list_upt = [im_list_upt[-1]]
+                # add polygon index to each image&#39;s metadata
+                for k in range(len(im_list_upt)):
+                    im_list_upt[k][&#39;polygon_index&#39;] = i
+                # add image metadata to list of images and augment counter
+                im_dict_T1[satname].extend(im_list_upt)
+                if last == True:
+                    sum_img_T1 += 1
+                    counter += 1
+                else:
+                    sum_img_T1 += len(im_list_upt)
+                    counter += len(im_list_upt)
+            print(&#39;  %s: %d image(s)&#39;%(satname, counter))
+
+        # else, just get list of images in GEE collection
+        else:
+            while True:
+                try:
+                    ee_col = ee.ImageCollection(col_names_T1[satname])
+                    col = ee_col.filterBounds(ee.Geometry.Polygon(inputs[&#39;polygon&#39;]))\
+                                .filterDate(inputs[&#39;dates&#39;][0],inputs[&#39;dates&#39;][1])
+                    im_list = col.getInfo().get(&#39;features&#39;)
+                    break
+                except:
+                    continue
+            # remove images above a chosen cloud percentage
+            im_list_upt = remove_cloudy_images(im_list, satname, prc_cloud_cover)
+            # remove UTM duplicates in S2 collections (they provide several projections for same images)
+            if satname == &#39;S2&#39; and len(im_list_upt)&gt;1: 
+                im_list_upt = filter_S2_collection(im_list_upt)
+            # if requested, select only the last image
+            if last == True:
+                im_list_upt = [im_list_upt[-1]]
+            sum_img_T1 += len(im_list_upt)
+            print(&#39;  %s: %d image(s)&#39;%(satname, len(im_list_upt)))
+            im_dict_T1[satname] = im_list_upt
+    
+    # if requested, also check Landsat Tier 2 collections
+    # TODO: rewrite this section with similar structure as section above (polygons_split, etc.)
+    if (&#39;include_T2&#39; in inputs) and (inputs[&#39;include_T2&#39;] == True):
+        col_names_T2 = {new_key: collection_names[new_key] for new_key in [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;]}
+        print(&#39;- In Landsat Tier 2:&#39;, end=&#39;\n&#39;)
+        for satname in inputs[&#39;sat_list&#39;]:
+            if satname == &#39;S2&#39;: continue
+            # get list of images in GEE collection
+            while True:
+                try:
+                    ee_col = ee.ImageCollection(col_names_T2[satname])
+                    col = ee_col.filterBounds(ee.Geometry.Polygon(inputs[&#39;polygon&#39;]))\
+                                .filterDate(inputs[&#39;dates&#39;][0],inputs[&#39;dates&#39;][1])
+                    if last == True:
+                        col = col.limit(1, &#39;system:time_start&#39;, False)
+                    im_list = col.getInfo().get(&#39;features&#39;)
+                    break
+                except:
+                    continue
+            # remove cloudy images
+            im_list_upt = remove_cloudy_images(im_list, satname, prc_cloud_cover)
+            # if requested, select only the last image
+            if last == True:
+                im_list_upt = [im_list_upt[-1]]
+            sum_img_T2 += len(im_list_upt)
+            print(&#39;  %s: %d image(s)&#39;%(satname,len(im_list_upt)))
+            im_dict_T2[satname] = im_list_upt
+
+    # display total
+    if last == True:
+        inputs[&#39;dates&#39;] = &#39;last&#39; # set dates back to &#39;last&#39;
+        print(&#39;  Total: %d image(s) selected.&#39;%(sum_img_T1+sum_img_T2))
+    elif last == True and (sum_img_T1+sum_img_T2) == 0:
+        inputs[&#39;dates&#39;] = &#39;last&#39; # set dates back to &#39;last&#39;
+        print(&#39;No images found in the past 6 weeks with these criteria&#39; +
+              &#39; - to get the last image available, either allow more clouds&#39; +
+              &#39; or search for a longer period explicitly.&#39;)
+    else:
+        print(&#39;  Total: %d image(s) selected.&#39;%(sum_img_T1+sum_img_T2))
+
+    return im_dict_T1, im_dict_T2</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.create_folder_structure"><code class="name flex">
+<span>def <span class="ident">create_folder_structure</span></span>(<span>im_folder, satname)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create the structure of subfolders on disk for each satellite mission
+before downloading the images.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>im_folder: str
+folder where the images are to be downloaded
+satname:
+name of the satellite mission</p>
+<h2 id="returns">Returns:</h2>
+<p>filepaths: list of str
+filepaths of the folders that were created</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_folder_structure(im_folder, satname):
+    &#34;&#34;&#34;
+    Create the structure of subfolders on disk for each satellite mission
+    before downloading the images.
+
+    Arguments:
+    -----------
+    im_folder: str 
+        folder where the images are to be downloaded
+    satname:
+        name of the satellite mission
+    
+    Returns:
+    -----------
+    filepaths: list of str
+        filepaths of the folders that were created
+    &#34;&#34;&#34; 
+    
+    # one folder for the metadata (common to all satellites)
+    filepaths = [os.path.join(im_folder, satname, &#39;meta&#39;)]
+    # subfolders depending on satellite mission
+    if satname == &#39;L5&#39;:
+        filepaths.append(os.path.join(im_folder, satname, &#39;30m&#39;))
+    elif satname in [&#39;L7&#39;,&#39;L8&#39;]:
+        filepaths.append(os.path.join(im_folder, satname, &#39;pan&#39;))
+        filepaths.append(os.path.join(im_folder, satname, &#39;ms&#39;))
+    elif satname in [&#39;S2&#39;]: 
+        filepaths.append(os.path.join(im_folder, satname, &#39;10m&#39;))
+        filepaths.append(os.path.join(im_folder, satname, &#39;20m&#39;))
+        filepaths.append(os.path.join(im_folder, satname, &#39;60m&#39;))
+    elif satname in [&#39;S2_RGB&#39;]: 
+        filepaths.append(os.path.join(im_folder, satname, &#39;10m&#39;))
+    # create the subfolders if they don&#39;t exist already
+    for fp in filepaths: 
+        if not os.path.exists(fp): os.makedirs(fp)
+    
+    return filepaths        </code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.download_footprints"><code class="name flex">
+<span>def <span class="ident">download_footprints</span></span>(<span>tag, network_type='all_private', buff=None, place=None, polygon=None, address=None, point=None, radius=1000, save=False, output_path='/Users/Thomas/emp-demeter/demeter')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>To download OSM data, you can use several tools: the overpass-turbo website, direct Overpass
+URL requests,or other third-party libraries, most notably <code>osmnx</code>. The function below is a
+higher-level function to simplify <code>osmnx</code> usage.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>tag: str
+OSM tag key (e.g. 'building','landuse', 'place', etc.) to be downloaded. More specific
+queries ('landuse=industrial') and multiple queries aren't supported - for complex queries
+please use the overpass-turbo online API (or filter the function output afterwards!)
+network_type: str, optional (default: 'all_private')
+if <code>tag</code> is set to 'roads', what type of street network to get - one of 'walk', 'bike',
+'drive', 'drive_service', 'all', or 'all_private' (i.e. including private roads).
+buff: int, optional (default: None)
+if not None, buffer the output geometries with the specified distance (in m)
+place: str
+to get data within some place boundaries. Can be a city, a country, or anything that is
+geocodable and for which OSM has polygon boundaries. If OSM does not have a polygon for
+this place, you can instead us the <code>address</code>, <code>polygon</code> or <code>point</code> arguments
+polygon: shapely.geometry.Polygon or shapely.geometry.MultiPolygon
+the shape to get data within, with coordinates in epsg:4326
+address: str
+the address for which to get polygons (to be used with <code>radius</code> argument)
+point: tuple
+a lat-lng point, with coordinates in epsg:4326
+radius: int, optional (default: 1000)
+distance (in m) from point or address for which to search for footprints
+save: bool, optional (deault: False)
+save output as a geojson
+output_path: str, optional (default: current working directory)
+folder to save the output in</p>
+<h2 id="returns">Returns:</h2>
+<p>footprints: geodataframe
+footprints as a geodataframe, or as a multipolygon if <code>buff</code> is not 'None'</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def download_footprints(tag, network_type=&#39;all_private&#39;, buff=None,
+                        place=None, polygon=None, address=None, point=None, radius=1000, 
+                        save=False, output_path=os.getcwd()):
+    &#34;&#34;&#34;
+    To download OSM data, you can use several tools: the overpass-turbo website, direct Overpass
+    URL requests,or other third-party libraries, most notably `osmnx`. The function below is a 
+    higher-level function to simplify `osmnx` usage.
+
+    Arguments:
+    -----------
+    tag: str
+        OSM tag key (e.g. &#39;building&#39;,&#39;landuse&#39;, &#39;place&#39;, etc.) to be downloaded. More specific 
+        queries (&#39;landuse=industrial&#39;) and multiple queries aren&#39;t supported - for complex queries
+        please use the overpass-turbo online API (or filter the function output afterwards!)
+    network_type: str, optional (default: &#39;all_private&#39;)
+        if `tag` is set to &#39;roads&#39;, what type of street network to get - one of &#39;walk&#39;, &#39;bike&#39;,
+        &#39;drive&#39;, &#39;drive_service&#39;, &#39;all&#39;, or &#39;all_private&#39; (i.e. including private roads).
+    buff: int, optional (default: None)
+        if not None, buffer the output geometries with the specified distance (in m)
+    place: str
+        to get data within some place boundaries. Can be a city, a country, or anything that is 
+        geocodable and for which OSM has polygon boundaries. If OSM does not have a polygon for
+         this place, you can instead us the `address`, `polygon` or `point` arguments
+    polygon: shapely.geometry.Polygon or shapely.geometry.MultiPolygon
+        the shape to get data within, with coordinates in epsg:4326
+    address: str
+        the address for which to get polygons (to be used with `radius` argument) 
+    point: tuple
+        a lat-lng point, with coordinates in epsg:4326
+    radius: int, optional (default: 1000)
+        distance (in m) from point or address for which to search for footprints
+    save: bool, optional (deault: False)
+        save output as a geojson
+    output_path: str, optional (default: current working directory)
+        folder to save the output in
+
+    Returns:
+    -----------
+    footprints: geodataframe
+        footprints as a geodataframe, or as a multipolygon if `buff` is not &#39;None&#39;
+    &#34;&#34;&#34;
+    
+    # download roads
+    if tag==&#39;roads&#39;:
+        if place is not None:
+            footprints = osmnx.graph_from_place(place, network_type=network_type)      
+        elif polygon is not None:
+            footprints = osmnx.graph_from_polygon(polygon, network_type=network_type)
+        elif address is not None:
+            footprints = osmnx.graph_from_address(address, network_type=network_type, dist=radius)
+        elif point is not None:
+            footprints = osmnx.graph_from_point(point, network_type=network_type, dist=radius)
+        
+        footprints = osmnx.graph_to_gdfs(footprints, nodes=False) # get geodataframe with road linestrings  
+    
+    # download other footprints
+    else:
+        if place is not None:
+            footprints = osmnx.footprints.footprints_from_place(place, footprint_type=tag)
+        elif polygon is not None:
+            footprints = osmnx.footprints.footprints_from_polygon(polygon, footprint_type=tag)
+        elif address is not None:
+            footprints = osmnx.footprints.footprints_from_address(address, footprint_type=tag, dist=radius)
+        elif point is not None:
+            footprints = osmnx.footprints.footprints_from_point(point, footprint_type=tag, dist=radius)
+    
+    if save:
+        #footprints = footprints.to_crs(&#39;epsg:4326&#39;)
+        footprints.to_file(os.path.join(output_path, &#39;footprints.geojson&#39;), driver=&#39;GeoJSON&#39;)
+
+    if buff is not None:
+
+        # set up projection transformers
+        project = pyproj.Transformer.from_proj(
+        pyproj.Proj(&#39;epsg:4326&#39;), # source coordinate system
+        pyproj.Proj(&#39;epsg:2154&#39;)) # destination coordinate system
+
+        project_back = pyproj.Transformer.from_proj(
+        pyproj.Proj(&#39;epsg:2154&#39;), # source coordinate system
+        pyproj.Proj(&#39;epsg:4326&#39;)) # destination coordinate system
+
+        # regroup geometries and compute buffers
+        footprints = cascaded_union(list(footprints[&#39;geometry&#39;])) # create multigeometry
+        footprints = transform(project.transform, footprints) # project roads multilinestring to cartesian epsg:2154
+        footprints = footprints.buffer(buff) # compute buffer (results in a multipolygon)
+        footprints = transform(project_back.transform, footprints) # project back to epsg:4326
+
+    return footprints</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.download_tif"><code class="name flex">
+<span>def <span class="ident">download_tif</span></span>(<span>image, polygon, bandsId, filepath)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Downloads a .tif image from the GEE server and stores it in a temp file.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>image: ee.Image
+Image object to be downloaded
+polygon: list
+polygon containing the lon/lat coordinates to be extracted
+longitudes in the first column and latitudes in the second column
+bandsId: list of dict
+list of bands to be downloaded
+filepath: location where the temporary file should be saved</p>
+<h2 id="returns">Returns:</h2>
+<p>Downloads an image in a file named data.tif</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def download_tif(image, polygon, bandsId, filepath):
+    &#34;&#34;&#34;
+    Downloads a .tif image from the GEE server and stores it in a temp file.
+
+    Arguments:
+    -----------
+    image: ee.Image
+        Image object to be downloaded
+    polygon: list
+        polygon containing the lon/lat coordinates to be extracted
+        longitudes in the first column and latitudes in the second column
+    bandsId: list of dict
+        list of bands to be downloaded
+    filepath: location where the temporary file should be saved
+    
+    Returns:
+    -----------
+    Downloads an image in a file named data.tif     
+      
+    &#34;&#34;&#34;
+           
+    # for the old version of ee only
+    if int(ee.__version__[-3:]) &lt;= 201:
+        url = ee.data.makeDownloadUrl(ee.data.getDownloadId({
+            &#39;image&#39;: image.serialize(),
+            &#39;region&#39;: polygon,
+            &#39;bands&#39;: bandsId,
+            &#39;filePerBand&#39;: &#39;false&#39;,
+            &#39;name&#39;: &#39;data&#39;,
+            }))
+        local_zip, headers = urlretrieve(url)
+        with zipfile.ZipFile(local_zip) as local_zipfile:
+            return local_zipfile.extract(&#39;data.tif&#39;, filepath)
+    
+    # for the newer versions of ee
+    else:
+        # crop image on the server and create url to download
+        url = ee.data.makeDownloadUrl(ee.data.getDownloadId({
+            &#39;image&#39;: image,
+            &#39;region&#39;: polygon,
+            &#39;bands&#39;: bandsId,
+            &#39;filePerBand&#39;: &#39;false&#39;,
+            &#39;name&#39;: &#39;data&#39;,
+            }))
+        # download zipfile with the cropped bands
+        local_zip, headers = urlretrieve(url)
+        # move zipfile from temp folder to data folder
+        dest_file = os.path.join(filepath, &#39;imagezip&#39;)
+        shutil.move(local_zip,dest_file)
+        # unzip file 
+        with zipfile.ZipFile(dest_file) as local_zipfile:
+            for fn in local_zipfile.namelist():
+                local_zipfile.extract(fn, filepath)
+            # filepath + filename to single bands
+            fn_tifs = [os.path.join(filepath,_) for _ in local_zipfile.namelist()]
+        # stack bands into single .tif
+        outds = gdal.BuildVRT(os.path.join(filepath,&#39;stacked.vrt&#39;), fn_tifs, separate=True)
+        outds = gdal.Translate(os.path.join(filepath,&#39;data.tif&#39;), outds)
+        # delete single-band files
+        for fn in fn_tifs: os.remove(fn)
+        # delete .vrt file
+        os.remove(os.path.join(filepath,&#39;stacked.vrt&#39;))
+        # delete zipfile
+        os.remove(dest_file)
+        # delete data.tif.aux (not sure why this is created)
+        if os.path.exists(os.path.join(filepath,&#39;data.tif.aux&#39;)):
+            os.remove(os.path.join(filepath,&#39;data.tif.aux&#39;))
+        # return filepath to stacked file called data.tif
+        return os.path.join(filepath,&#39;data.tif&#39;)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.filter_S2_collection"><code class="name flex">
+<span>def <span class="ident">filter_S2_collection</span></span>(<span>im_list)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Removes duplicates from the GEE collection of Sentinel-2 images (many duplicates)
+Finds the images that were acquired at the same time but have different utm zones.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>im_list: list
+list of images in the collection</p>
+<h2 id="returns">Returns:</h2>
+<p>im_list_flt: list
+filtered list of images</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def filter_S2_collection(im_list):
+    &#34;&#34;&#34;
+    Removes duplicates from the GEE collection of Sentinel-2 images (many duplicates)
+    Finds the images that were acquired at the same time but have different utm zones.
+    
+    Arguments:
+    -----------
+    im_list: list 
+        list of images in the collection
+    
+    Returns:
+    -----------
+    im_list_flt: list
+        filtered list of images
+    &#34;&#34;&#34;
+
+    # get datetimes
+    timestamps = [datetime.fromtimestamp(_[&#39;properties&#39;][&#39;system:time_start&#39;]/1000,
+                                         tz=pytz.utc) for _ in im_list]
+    # get utm zone projections
+    utm_zones = np.array([int(_[&#39;bands&#39;][0][&#39;crs&#39;][5:]) for _ in im_list])
+    if len(np.unique(utm_zones)) == 1: 
+        return im_list
+    else:
+        utm_zone_selected =  np.max(np.unique(utm_zones))
+        # find the images that were acquired at the same time but have different utm zones
+        idx_all = np.arange(0,len(im_list),1)
+        idx_covered = np.ones(len(im_list)).astype(bool)
+        idx_delete = []
+        i = 0
+        while 1:
+            same_time = np.abs([(timestamps[i]-_).total_seconds() for _ in timestamps]) &lt; 60*60*24
+            idx_same_time = np.where(same_time)[0]
+            same_utm = utm_zones == utm_zone_selected
+            # get indices that have the same time (less than 24h apart) but not the same utm zone
+            idx_temp = np.where([same_time[j] == True and same_utm[j] == False for j in idx_all])[0]
+            idx_keep = idx_same_time[[_ not in idx_temp for _ in idx_same_time]]
+            # if more than 2 images with same date and same utm, drop the last ones
+            if len(idx_keep) &gt; 2:
+               idx_temp = np.append(idx_temp,idx_keep[-(len(idx_keep)-2):])
+            for j in idx_temp:
+                idx_delete.append(j)
+            idx_covered[idx_same_time] = False
+            if np.any(idx_covered):
+                i = np.where(idx_covered)[0][0]
+            else:
+                break
+        # update the collection by deleting all those images that have same timestamp 
+        # and different utm projection
+        im_list_flt = [x for k,x in enumerate(im_list) if k not in idx_delete]
+    
+    #print(&#39;\nSentinel-2 duplicates removed - {} images kept for download.&#39;.format(len(im_list_flt)))
+
+    return im_list_flt</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.gdal_merge_main"><code class="name flex">
+<span>def <span class="ident">gdal_merge_main</span></span>(<span>argv=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gdal_merge_main( argv=None ):
+
+    global verbose, quiet
+    verbose = 0
+    quiet = 0
+    names = []
+    format = &#39;GTiff&#39;
+    out_file = &#39;out.tif&#39;
+
+    ulx = None
+    psize_x = None
+    separate = 0
+    copy_pct = 0
+    nodata = None
+    a_nodata = None
+    create_options = []
+    pre_init = []
+    band_type = None
+    createonly = 0
+    bTargetAlignedPixels = False
+    start_time = time.time()
+
+    gdal.AllRegister()
+    if argv is None:
+        argv = sys.argv
+    argv = gdal.GeneralCmdLineProcessor( argv )
+    if argv is None:
+        sys.exit( 0 )
+
+    # Parse command line arguments.
+    i = 1
+    while i &lt; len(argv):
+        arg = argv[i]
+
+        if arg == &#39;-o&#39;:
+            i = i + 1
+            out_file = argv[i]
+
+        elif arg == &#39;-v&#39;:
+            verbose = 1
+
+        elif arg == &#39;-q&#39; or arg == &#39;-quiet&#39;:
+            quiet = 1
+
+        elif arg == &#39;-createonly&#39;:
+            createonly = 1
+
+        elif arg == &#39;-separate&#39;:
+            separate = 1
+
+        elif arg == &#39;-seperate&#39;:
+            separate = 1
+
+        elif arg == &#39;-pct&#39;:
+            copy_pct = 1
+
+        elif arg == &#39;-ot&#39;:
+            i = i + 1
+            band_type = gdal.GetDataTypeByName( argv[i] )
+            if band_type == gdal.GDT_Unknown:
+                print(&#39;Unknown GDAL data type: %s&#39; % argv[i])
+                sys.exit( 1 )
+
+        elif arg == &#39;-init&#39;:
+            i = i + 1
+            str_pre_init = argv[i].split()
+            for x in str_pre_init:
+                pre_init.append(float(x))
+
+        elif arg == &#39;-n&#39;:
+            i = i + 1
+            nodata = float(argv[i])
+
+        elif arg == &#39;-a_nodata&#39;:
+            i = i + 1
+            a_nodata = float(argv[i])
+
+        elif arg == &#39;-f&#39;:
+            # for backward compatibility.
+            i = i + 1
+            format = argv[i]
+
+        elif arg == &#39;-of&#39;:
+            i = i + 1
+            format = argv[i]
+
+        elif arg == &#39;-co&#39;:
+            i = i + 1
+            create_options.append( argv[i] )
+
+        elif arg == &#39;-ps&#39;:
+            psize_x = float(argv[i+1])
+            psize_y = -1 * abs(float(argv[i+2]))
+            i = i + 2
+
+        elif arg == &#39;-tap&#39;:
+            bTargetAlignedPixels = True
+
+        elif arg == &#39;-ul_lr&#39;:
+            ulx = float(argv[i+1])
+            uly = float(argv[i+2])
+            lrx = float(argv[i+3])
+            lry = float(argv[i+4])
+            i = i + 4
+
+        elif arg[:1] == &#39;-&#39;:
+            print(&#39;Unrecognized command option: %s&#39; % arg)
+            Usage()
+            sys.exit( 1 )
+
+        else:
+            names.append(arg)
+
+        i = i + 1
+
+    if len(names) == 0:
+        print(&#39;No input files selected.&#39;)
+        Usage()
+        sys.exit( 1 )
+
+    Driver = gdal.GetDriverByName(format)
+    if Driver is None:
+        print(&#39;Format driver %s not found, pick a supported driver.&#39; % format)
+        sys.exit( 1 )
+
+    DriverMD = Driver.GetMetadata()
+    if &#39;DCAP_CREATE&#39; not in DriverMD:
+        print(&#39;Format driver %s does not support creation and piecewise writing.&#39; % format,
+            &#39;\nPlease select a format that does, such as GTiff (the default) or HFA (Erdas Imagine).&#39; )
+        sys.exit( 1 )
+
+    # Collect information on all the source files.
+    file_infos = names_to_fileinfos( names )
+
+    if ulx is None:
+        ulx = file_infos[0].ulx
+        uly = file_infos[0].uly
+        lrx = file_infos[0].lrx
+        lry = file_infos[0].lry
+
+        for fi in file_infos:
+            ulx = min(ulx, fi.ulx)
+            uly = max(uly, fi.uly)
+            lrx = max(lrx, fi.lrx)
+            lry = min(lry, fi.lry)
+
+    if psize_x is None:
+        psize_x = file_infos[0].geotransform[1]
+        psize_y = file_infos[0].geotransform[5]
+
+    if band_type is None:
+        band_type = file_infos[0].band_type
+
+    # Try opening as an existing file.
+    gdal.PushErrorHandler( &#39;CPLQuietErrorHandler&#39; )
+    t_fh = gdal.Open( out_file, gdal.GA_Update )
+    gdal.PopErrorHandler()
+
+    # Create output file if it does not already exist.
+    if t_fh is None:
+
+        if bTargetAlignedPixels:
+            ulx = math.floor(ulx / psize_x) * psize_x
+            lrx = math.ceil(lrx / psize_x) * psize_x
+            lry = math.floor(lry / -psize_y) * -psize_y
+            uly = math.ceil(uly / -psize_y) * -psize_y
+
+        geotransform = [ulx, psize_x, 0, uly, 0, psize_y]
+
+        xsize = int((lrx - ulx) / geotransform[1] + 0.5)
+        ysize = int((lry - uly) / geotransform[5] + 0.5)
+
+
+        if separate != 0:
+            bands=0
+
+            for fi in file_infos:
+                bands=bands + fi.bands
+        else:
+            bands = file_infos[0].bands
+
+
+        t_fh = Driver.Create( out_file, xsize, ysize, bands,
+                              band_type, create_options )
+        if t_fh is None:
+            print(&#39;Creation failed, terminating gdal_merge.&#39;)
+            sys.exit( 1 )
+
+        t_fh.SetGeoTransform( geotransform )
+        t_fh.SetProjection( file_infos[0].projection )
+
+        if copy_pct:
+            t_fh.GetRasterBand(1).SetRasterColorTable(file_infos[0].ct)
+    else:
+        if separate != 0:
+            bands=0
+            for fi in file_infos:
+                bands=bands + fi.bands
+            if t_fh.RasterCount &lt; bands :
+                print(&#39;Existing output file has less bands than the input files.&#39;,
+                    &#39;You should delete it before. Terminating gdal_merge.&#39;)
+                sys.exit( 1 )
+        else:
+            bands = min(file_infos[0].bands,t_fh.RasterCount)
+
+    # Do we need to set nodata value ?
+    if a_nodata is not None:
+        for i in range(t_fh.RasterCount):
+            t_fh.GetRasterBand(i+1).SetNoDataValue(a_nodata)
+
+    # Do we need to pre-initialize the whole mosaic file to some value?
+    if pre_init is not None:
+        if t_fh.RasterCount &lt;= len(pre_init):
+            for i in range(t_fh.RasterCount):
+                t_fh.GetRasterBand(i+1).Fill( pre_init[i] )
+        elif len(pre_init) == 1:
+            for i in range(t_fh.RasterCount):
+                t_fh.GetRasterBand(i+1).Fill( pre_init[0] )
+
+    # Copy data from source files into output file.
+    t_band = 1
+
+    if quiet == 0 and verbose == 0:
+        progress( 0.0 )
+    fi_processed = 0
+
+    for fi in file_infos:
+        if createonly != 0:
+            continue
+
+        if verbose != 0:
+            print(&#34;&#34;)
+            print(&#34;Processing file %5d of %5d, %6.3f%% completed in %d minutes.&#34;
+                  % (fi_processed+1,len(file_infos),
+                     fi_processed * 100.0 / len(file_infos),
+                     int(round((time.time() - start_time)/60.0)) ))
+            fi.report()
+
+        if separate == 0 :
+            for band in range(1, bands+1):
+                fi.copy_into( t_fh, band, band, nodata )
+        else:
+            for band in range(1, fi.bands+1):
+                fi.copy_into( t_fh, band, t_band, nodata )
+                t_band = t_band+1
+
+        fi_processed = fi_processed+1
+        if quiet == 0 and verbose == 0:
+            progress( fi_processed / float(len(file_infos))  )
+
+    # Force file to be closed.
+    t_fh = None</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.get_metadata"><code class="name flex">
+<span>def <span class="ident">get_metadata</span></span>(<span>inputs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the metadata from previously downloaded images by parsing .txt files located
+in the \meta subfolders.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>inputs: dict with the following fields
+'sitename': str
+name of the site of study
+'filepath': str
+filepath to the directory where the images are downloaded</p>
+<h2 id="returns">Returns:</h2>
+<p>metadata: dict
+contains the information about the satellite images that were downloaded:
+date, filename, georeferencing accuracy and image coordinate reference system</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_metadata(inputs):
+    &#34;&#34;&#34;
+    Gets the metadata from previously downloaded images by parsing .txt files located 
+    in the \meta subfolders.
+            
+    Arguments:
+    -----------
+    inputs: dict with the following fields
+        &#39;sitename&#39;: str
+            name of the site of study
+        &#39;filepath&#39;: str
+            filepath to the directory where the images are downloaded
+    
+    Returns:
+    -----------
+    metadata: dict
+        contains the information about the satellite images that were downloaded:
+        date, filename, georeferencing accuracy and image coordinate reference system       
+    &#34;&#34;&#34;
+
+    # directory containing the images
+    if not &#39;sitename&#39; in inputs:
+        inputs[&#39;sitename&#39;] = &#39;Data-{}&#39;.format(datetime.now().strftime(&#39;%Y-%m-%d&#39;))
+    filepath = os.path.join(inputs[&#39;filepath&#39;], inputs[&#39;sitename&#39;])
+    # initialize metadata dict
+    metadata = dict([])
+    # loop through the satellite missions
+    for satname in [&#39;L5&#39;,&#39;L7&#39;,&#39;L8&#39;,&#39;S2&#39;]:
+        # if a folder has been created for the given satellite mission
+        if satname in os.listdir(filepath):
+            # update the metadata dict
+            metadata[satname] = {&#39;filenames&#39;:[], &#39;acc_georef&#39;:[], &#39;epsg&#39;:[], &#39;dates&#39;:[]}
+            # directory where the metadata .txt files are stored
+            filepath_meta = os.path.join(filepath, satname, &#39;meta&#39;)
+            # get the list of filenames and sort it chronologically
+            filenames_meta = os.listdir(filepath_meta)
+            filenames_meta.sort()
+            # loop through the .txt files
+            for im_meta in filenames_meta:
+                # read them and extract the metadata info: filename, georeferencing accuracy
+                # epsg code and date
+                with open(os.path.join(filepath_meta, im_meta), &#39;r&#39;) as f:
+                    filename = f.readline().split(&#39;\t&#39;)[1].replace(&#39;\n&#39;,&#39;&#39;)
+                    acc_georef = float(f.readline().split(&#39;\t&#39;)[1].replace(&#39;\n&#39;,&#39;&#39;))
+                    epsg = int(f.readline().split(&#39;\t&#39;)[1].replace(&#39;\n&#39;,&#39;&#39;))
+                date_str = filename[0:19]
+                date = pytz.utc.localize(datetime(int(date_str[:4]),int(date_str[5:7]),
+                                                  int(date_str[8:10]),int(date_str[11:13]),
+                                                  int(date_str[14:16]),int(date_str[17:19])))
+                # store the information in the metadata dict
+                metadata[satname][&#39;filenames&#39;].append(filename)
+                metadata[satname][&#39;acc_georef&#39;].append(acc_georef)
+                metadata[satname][&#39;epsg&#39;].append(epsg)
+                metadata[satname][&#39;dates&#39;].append(date)
+                
+    # save a .pkl file containing the metadata dict
+    with open(os.path.join(filepath, inputs[&#39;sitename&#39;] + &#39;_metadata&#39; + &#39;.pkl&#39;), &#39;wb&#39;) as f:
+        pickle.dump(metadata, f)
+    
+    return metadata</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.merge_overlapping_images"><code class="name flex">
+<span>def <span class="ident">merge_overlapping_images</span></span>(<span>metadata, inputs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Merges simultaneous overlapping images that cover the area of interest (e.g.
+when the area of interest is located at the boundary between 2 images, where
+there is overlap, this function merges the 2 images so that the AOI is covered
+by only 1 image.</p>
+<p>It also merges images with the exact same date, i.e. if you want to download
+several chunks from the same S2 tile at the same date, you should specify
+inputs['merge']=False.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>metadata: dict
+contains all the information about the satellite images that were downloaded
+inputs: dict with the following keys
+'sitename': str
+name of the site of study
+'polygon': list
+polygon containing the lon/lat coordinates to be extracted,
+longitudes in the first column and latitudes in the second column,
+there are 5 pairs of lat/lon with the fifth point equal to the first point:
+<code>polygon = [[[151.3, -33.7],[151.4, -33.7],[151.4, -33.8],[151.3, -33.8],
+[151.3, -33.7]]]</code>
+'dates': list of str
+list that contains 2 strings with the initial and final dates in
+format 'yyyy-mm-dd':
+<code>dates = ['1987-01-01', '2018-01-01']</code>
+'sat_list': list of str
+list that contains the names of the satellite missions to include:
+<code>sat_list = ['L5', 'L7', 'L8', 'S2']</code>
+'filepath': str
+filepath to the directory where the images are downloaded</p>
+<h2 id="returns">Returns:</h2>
+<p>metadata_updated: dict
+updated metadata</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def merge_overlapping_images(metadata,inputs):
+    &#34;&#34;&#34;
+    Merges simultaneous overlapping images that cover the area of interest (e.g.
+    when the area of interest is located at the boundary between 2 images, where 
+    there is overlap, this function merges the 2 images so that the AOI is covered
+    by only 1 image.
+
+    It also merges images with the exact same date, i.e. if you want to download 
+    several chunks from the same S2 tile at the same date, you should specify
+    inputs[&#39;merge&#39;]=False.
+            
+    Arguments:
+    -----------
+    metadata: dict
+        contains all the information about the satellite images that were downloaded
+    inputs: dict with the following keys
+        &#39;sitename&#39;: str
+            name of the site of study
+        &#39;polygon&#39;: list
+            polygon containing the lon/lat coordinates to be extracted,
+            longitudes in the first column and latitudes in the second column,
+            there are 5 pairs of lat/lon with the fifth point equal to the first point:
+            ```
+            polygon = [[[151.3, -33.7],[151.4, -33.7],[151.4, -33.8],[151.3, -33.8],
+            [151.3, -33.7]]]
+            ```
+        &#39;dates&#39;: list of str
+            list that contains 2 strings with the initial and final dates in 
+            format &#39;yyyy-mm-dd&#39;:
+            ```
+            dates = [&#39;1987-01-01&#39;, &#39;2018-01-01&#39;]
+            ```
+        &#39;sat_list&#39;: list of str
+            list that contains the names of the satellite missions to include: 
+            ```
+            sat_list = [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;, &#39;S2&#39;]
+            ```
+        &#39;filepath&#39;: str
+            filepath to the directory where the images are downloaded
+        
+    Returns:
+    -----------
+    metadata_updated: dict
+        updated metadata     
+    &#34;&#34;&#34;
+    
+    # only for Sentinel-2 at this stage (not sure if this is needed for Landsat images)    
+    sat = &#39;S2&#39;
+    filepath = os.path.join(inputs[&#39;filepath&#39;], inputs[&#39;sitename&#39;])
+    filenames = metadata[sat][&#39;filenames&#39;]
+    # find the pairs of images that are within 5 minutes of each other
+    time_delta = 5*60 # 5 minutes in seconds
+    dates = metadata[sat][&#39;dates&#39;].copy()
+    pairs = []
+    for i,date in enumerate(metadata[sat][&#39;dates&#39;]):
+        # dummy value so it does not match it again
+        dates[i] = pytz.utc.localize(datetime(1,1,1) + timedelta(days=i+1))
+        # calculate time difference
+        time_diff = np.array([np.abs((date - _).total_seconds()) for _ in dates])
+        # find the matching times and add to pairs list
+        boolvec = time_diff &lt;= time_delta
+        if np.sum(boolvec) == 0:
+            continue
+        else:
+            idx_dup = np.where(boolvec)[0][0]
+            pairs.append([i,idx_dup])
+    # because they could be triplicates in S2 images, adjust the  for consecutive merges
+    for i in range(1,len(pairs)): 
+        if pairs[i-1][1] == pairs[i][0]: 
+            pairs[i][0] = pairs[i-1][0]
+    
+    # for each pair of image, create a mask and add no_data into the .tif file (this is 
+    # needed before merging .tif files)
+    for i,pair in enumerate(pairs):
+        fn_im = []
+        for index in range(len(pair)): 
+            # get filenames of all the files corresponding to the each image in the pair
+            fn_im.append([os.path.join(filepath, &#39;S2&#39;, &#39;10m&#39;, filenames[pair[index]]),
+                  os.path.join(filepath, &#39;S2&#39;, &#39;20m&#39;,  filenames[pair[index]].replace(&#39;10m&#39;,&#39;20m&#39;)),
+                  os.path.join(filepath, &#39;S2&#39;, &#39;60m&#39;,  filenames[pair[index]].replace(&#39;10m&#39;,&#39;60m&#39;)),
+                  os.path.join(filepath, &#39;S2&#39;, &#39;meta&#39;, filenames[pair[index]].replace(&#39;_10m&#39;,&#39;&#39;).replace(&#39;.tif&#39;,&#39;.txt&#39;))])
+            # read that image
+            im_ms, georef, cloud_mask, im_extra, im_QA, im_nodata = \
+                                    sat_preprocess.preprocess_single(fn_im[index], sat, False) 
+            # im_RGB = sat_preprocess.rescale_image_intensity(im_ms[:,:,[2,1,0]], cloud_mask, 99.9) 
+            
+            # in Sentinel2 images close to the edge of the image there are some artefacts, 
+            # that are squares with constant pixel intensities. They need to be masked in the 
+            # raster (GEOTIFF). It can be done using the image standard deviation, which 
+            # indicates values close to 0 for the artefacts.  
+            if len(im_ms) &gt; 0:
+                # calculate image std for the first 10m band
+                im_std = sat_tools.image_std(im_ms[:,:,0],1)
+                # convert to binary
+                im_binary = np.logical_or(im_std &lt; 1e-6, np.isnan(im_std))
+                # dilate to fill the edges (which have high std)
+                mask10 = morphology.dilation(im_binary, morphology.square(3))
+                # mask all 10m bands
+                for k in range(im_ms.shape[2]):
+                    im_ms[mask10,k] = np.nan
+                # mask the 10m .tif file (add no_data where mask is True)
+                sat_tools.mask_raster(fn_im[index][0], mask10)
+                # create another mask for the 20m band (SWIR1)
+                im_std = sat_tools.image_std(im_extra,1)
+                im_binary = np.logical_or(im_std &lt; 1e-6, np.isnan(im_std))
+                mask20 = morphology.dilation(im_binary, morphology.square(3))     
+                im_extra[mask20] = np.nan
+                # mask the 20m .tif file (im_extra)
+                sat_tools.mask_raster(fn_im[index][1], mask20) 
+                # use the 20m mask to create a mask for the 60m QA band (by resampling)
+                mask60 = ndimage.zoom(mask20,zoom=1/3,order=0)
+                mask60 = transform.resize(mask60, im_QA.shape, mode=&#39;constant&#39;, order=0,
+                                          preserve_range=True)
+                mask60 = mask60.astype(bool)
+                # mask the 60m .tif file (im_QA)
+                sat_tools.mask_raster(fn_im[index][2], mask60)    
+            else:
+                continue
+            
+            # make a figure for quality control
+            # fig,ax= plt.subplots(2,2,tight_layout=True)
+            # ax[0,0].imshow(im_RGB)
+            # ax[0,0].set_title(&#39;RGB original&#39;)
+            # ax[1,0].imshow(mask10)
+            # ax[1,0].set_title(&#39;Mask 10m&#39;)
+            # ax[0,1].imshow(mask20)  
+            # ax[0,1].set_title(&#39;Mask 20m&#39;)
+            # ax[1,1].imshow(mask60)
+            # ax[1,1].set_title(&#39;Mask 60 m&#39;)
+        
+        # once all the pairs of .tif files have been masked with no_data, merge them using gdal_merge
+        fn_merged = os.path.join(filepath, &#39;merged.tif&#39;)
+        
+        # merge masked 10m bands and remove duplicate file
+        gdal_merge_main([&#39;&#39;, &#39;-o&#39;, fn_merged, &#39;-n&#39;, &#39;0&#39;, fn_im[0][0], fn_im[1][0]])
+        os.chmod(fn_im[0][0], 0o777)
+        os.remove(fn_im[0][0])
+        os.chmod(fn_im[1][0], 0o777)
+        os.remove(fn_im[1][0])
+        os.chmod(fn_merged, 0o777)
+        os.rename(fn_merged, fn_im[0][0])
+        
+        # merge masked 20m band (SWIR band)
+        gdal_merge_main([&#39;&#39;, &#39;-o&#39;, fn_merged, &#39;-n&#39;, &#39;0&#39;, fn_im[0][1], fn_im[1][1]])
+        os.chmod(fn_im[0][1], 0o777)
+        os.remove(fn_im[0][1])
+        os.chmod(fn_im[1][1], 0o777)
+        os.remove(fn_im[1][1])
+        os.chmod(fn_merged, 0o777)
+        os.rename(fn_merged, fn_im[0][1])
+    
+        # merge QA band (60m band)
+        gdal_merge_main([&#39;&#39;, &#39;-o&#39;, fn_merged, &#39;-n&#39;, &#39;0&#39;, fn_im[0][2], fn_im[1][2]])
+        os.chmod(fn_im[0][2], 0o777)
+        os.remove(fn_im[0][2])
+        os.chmod(fn_im[1][2], 0o777)
+        os.remove(fn_im[1][2])
+        os.chmod(fn_merged, 0o777)
+        os.rename(fn_merged, fn_im[0][2])
+        
+        # remove the metadata .txt file of the duplicate image
+        os.chmod(fn_im[1][3], 0o777)
+        os.remove(fn_im[1][3])
+        
+    print(&#39;%d overlapping Sentinel-2 images have been merged.&#39; % len(pairs))
+    
+    # update the metadata dict
+    metadata_updated = copy.deepcopy(metadata)
+    idx_removed = []
+    idx_kept = []
+    for pair in pairs: idx_removed.append(pair[1])
+    for idx in np.arange(0,len(metadata[sat][&#39;dates&#39;])):
+        if not idx in idx_removed: idx_kept.append(idx)
+    for key in metadata_updated[sat].keys():
+        metadata_updated[sat][key] = [metadata_updated[sat][key][_] for _ in idx_kept]
+        
+    return metadata_updated  </code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.names_to_fileinfos"><code class="name flex">
+<span>def <span class="ident">names_to_fileinfos</span></span>(<span>names)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Translate a list of GDAL filenames, into file_info objects.</p>
+<p>names &ndash; list of valid GDAL dataset names.</p>
+<p>Returns a list of file_info objects.
+There may be less file_info objects
+than names if some of the names could not be opened as GDAL files.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def names_to_fileinfos( names ):
+    &#34;&#34;&#34;
+    Translate a list of GDAL filenames, into file_info objects.
+
+    names -- list of valid GDAL dataset names.
+
+    Returns a list of file_info objects.  There may be less file_info objects
+    than names if some of the names could not be opened as GDAL files.
+    &#34;&#34;&#34;
+
+    file_infos = []
+    for name in names:
+        fi = file_info()
+        if fi.init_from_name( name ) == 1:
+            file_infos.append( fi )
+
+    return file_infos</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.plot_requested_area"><code class="name flex">
+<span>def <span class="ident">plot_requested_area</span></span>(<span>inputs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plots the requested areas to download on an interactive folium map, for
+visualization.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>inputs: dict
+inputs dictionary with parameters for images to select - see
+detailed list of possible keys in function check_images_available</p>
+<h2 id="returns">Returns:</h2>
+<pre><code>folium map with polygon area(s) as map overlay(s).
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_requested_area(inputs):
+    &#34;&#34;&#34;
+    Plots the requested areas to download on an interactive folium map, for 
+    visualization.
+
+    Arguments:
+    -----------
+    inputs: dict 
+        inputs dictionary with parameters for images to select - see 
+        detailed list of possible keys in function check_images_available
+    
+    Returns:
+    -----------
+        folium map with polygon area(s) as map overlay(s).
+    &#34;&#34;&#34;
+
+    # Compute polygon area(s) if not provided explicitly or computed before
+    if (&#39;point&#39; in inputs) and (&#39;polygon&#39; not in inputs):
+        if not &#39;radius&#39; in inputs:
+            inputs[&#39;radius&#39;] = 20
+        
+        inputs[&#39;polygon&#39;] = sat_tools.bbox_from_point(inputs[&#39;point&#39;], inputs[&#39;radius&#39;])
+        pixel_width = inputs[&#39;radius&#39;]*2*1000 / 10
+        
+        if &#39;max_size&#39; in inputs and pixel_width &gt; inputs[&#39;max_size&#39;]:
+            inputs[&#39;polygons_list&#39;] = sat_tools.split_area(inputs[&#39;polygon&#39;], pixel_width, inputs[&#39;max_size&#39;])
+
+    # Convert large and small polygon to geodataframe for plotting
+    crs = {&#39;init&#39;: &#39;epsg:4326&#39;}
+    polygon_shp_large = Polygon(inputs[&#39;polygon&#39;])
+    polygon_df_large = gpd.GeoDataFrame(index=[0], crs=crs, geometry=[polygon_shp_large])
+
+    if &#39;polygons_list&#39; in inputs:
+        polygons_shp = [Polygon(coords) for coords in inputs[&#39;polygons_list&#39;]]
+        polygons_df = gpd.GeoDataFrame(crs=crs)
+        polygons_df[&#39;geometry&#39;] = None
+        for i in range(len(polygons_shp)):
+            polygons_df.loc[i, &#39;geometry&#39;] = polygons_shp[i]             
+
+    # Plot polygon area(s) on an interactive map
+    m = folium.Map([inputs[&#39;polygon&#39;][0][1], inputs[&#39;polygon&#39;][0][0]], zoom_start=9)
+    folium.GeoJson(polygon_df_large, name=&#39;requested area&#39;).add_to(m) # plot large area
+    if &#39;polygons_list&#39; in inputs:
+        folium.GeoJson(polygons_df, name=&#39;split area&#39;,
+                   style_function=lambda x: {&#39;color&#39;:&#39;#228B22&#39;}).add_to(m) # plot split areas
+
+    # Add satellite layer
+    tile = folium.TileLayer(
+        tiles = &#39;https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}&#39;,
+        attr = &#39;Esri&#39;,
+        name = &#39;Esri Satellite&#39;,
+        overlay = False,
+        control = True
+       ).add_to(m)
+
+    # Add layer control and lat/lng popups
+    folium.LatLngPopup().add_to(m)
+    folium.LayerControl().add_to(m)
+    
+    display(m)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.raster_copy"><code class="name flex">
+<span>def <span class="ident">raster_copy</span></span>(<span>s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n, t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n, nodata=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def raster_copy( s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+                 t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+                 nodata=None ):
+
+    if verbose != 0:
+        print(&#39;Copy %d,%d,%d,%d to %d,%d,%d,%d.&#39;
+              % (s_xoff, s_yoff, s_xsize, s_ysize,
+             t_xoff, t_yoff, t_xsize, t_ysize ))
+
+    if nodata is not None:
+        return raster_copy_with_nodata(
+            s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+            t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+            nodata )
+
+    s_band = s_fh.GetRasterBand( s_band_n )
+    m_band = None
+    # Works only in binary mode and doesn&#39;t take into account
+    # intermediate transparency values for compositing.
+    if s_band.GetMaskFlags() != gdal.GMF_ALL_VALID:
+        m_band = s_band.GetMaskBand()
+    elif s_band.GetColorInterpretation() == gdal.GCI_AlphaBand:
+        m_band = s_band
+    if m_band is not None:
+        return raster_copy_with_mask(
+            s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+            t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+            m_band )
+
+    s_band = s_fh.GetRasterBand( s_band_n )
+    t_band = t_fh.GetRasterBand( t_band_n )
+
+    data = s_band.ReadRaster( s_xoff, s_yoff, s_xsize, s_ysize,
+                             t_xsize, t_ysize, t_band.DataType )
+    t_band.WriteRaster( t_xoff, t_yoff, t_xsize, t_ysize,
+                        data, t_xsize, t_ysize, t_band.DataType )
+
+    return 0</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.raster_copy_with_mask"><code class="name flex">
+<span>def <span class="ident">raster_copy_with_mask</span></span>(<span>s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n, t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n, m_band)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def raster_copy_with_mask( s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+                           t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+                           m_band ):
+    try:
+        import numpy as Numeric
+    except ImportError:
+        import Numeric
+
+    s_band = s_fh.GetRasterBand( s_band_n )
+    t_band = t_fh.GetRasterBand( t_band_n )
+
+    data_src = s_band.ReadAsArray( s_xoff, s_yoff, s_xsize, s_ysize,
+                                   t_xsize, t_ysize )
+    data_mask = m_band.ReadAsArray( s_xoff, s_yoff, s_xsize, s_ysize,
+                                    t_xsize, t_ysize )
+    data_dst = t_band.ReadAsArray( t_xoff, t_yoff, t_xsize, t_ysize )
+
+    mask_test = Numeric.equal(data_mask, 0)
+    to_write = Numeric.choose( mask_test, (data_src, data_dst) )
+
+    t_band.WriteArray( to_write, t_xoff, t_yoff )
+
+    return 0</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.raster_copy_with_nodata"><code class="name flex">
+<span>def <span class="ident">raster_copy_with_nodata</span></span>(<span>s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n, t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n, nodata)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def raster_copy_with_nodata( s_fh, s_xoff, s_yoff, s_xsize, s_ysize, s_band_n,
+                             t_fh, t_xoff, t_yoff, t_xsize, t_ysize, t_band_n,
+                             nodata ):
+    try:
+        import numpy as Numeric
+    except ImportError:
+        import Numeric
+
+    s_band = s_fh.GetRasterBand( s_band_n )
+    t_band = t_fh.GetRasterBand( t_band_n )
+
+    data_src = s_band.ReadAsArray( s_xoff, s_yoff, s_xsize, s_ysize,
+                                   t_xsize, t_ysize )
+    data_dst = t_band.ReadAsArray( t_xoff, t_yoff, t_xsize, t_ysize )
+
+    nodata_test = Numeric.equal(data_src,nodata)
+    to_write = Numeric.choose( nodata_test, (data_src, data_dst) )
+
+    t_band.WriteArray( to_write, t_xoff, t_yoff )
+
+    return 0</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.remove_cloudy_images"><code class="name flex">
+<span>def <span class="ident">remove_cloudy_images</span></span>(<span>im_list, satname, prc_cloud_cover=75)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Removes very cloudy images from the GEE collection to be downloaded.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>im_list: list
+list of images in the collection
+satname:
+name of the satellite mission
+prc_cloud_cover: int
+percentage of cloud cover acceptable on the images</p>
+<h2 id="returns">Returns:</h2>
+<p>im_list_upt: list
+updated list of images</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def remove_cloudy_images(im_list, satname, prc_cloud_cover=75):
+    &#34;&#34;&#34;
+    Removes very cloudy images from the GEE collection to be downloaded.
+   
+    Arguments:
+    -----------
+    im_list: list 
+        list of images in the collection
+    satname:
+        name of the satellite mission
+    prc_cloud_cover: int
+        percentage of cloud cover acceptable on the images
+    
+    Returns:
+    -----------
+    im_list_upt: list
+        updated list of images
+    &#34;&#34;&#34;
+    
+    # remove very cloudy images from the collection
+    if satname in [&#39;L5&#39;,&#39;L7&#39;,&#39;L8&#39;]:
+        cloud_property = &#39;CLOUD_COVER&#39;
+    elif satname in [&#39;S2&#39;, &#39;S2_RGB&#39;]:
+        cloud_property = &#39;CLOUDY_PIXEL_PERCENTAGE&#39;
+    cloud_cover = [_[&#39;properties&#39;][cloud_property] for _ in im_list]
+    if np.any([_ &gt; prc_cloud_cover for _ in cloud_cover]):
+        idx_delete = np.where([_ &gt; prc_cloud_cover for _ in cloud_cover])[0]
+        im_list_upt = [x for k,x in enumerate(im_list) if k not in idx_delete]
+    else:
+        im_list_upt = im_list
+        
+    return im_list_upt</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.retrieve_images"><code class="name flex">
+<span>def <span class="ident">retrieve_images</span></span>(<span>inputs, im_dict_T1=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Downloads all images from Landsat 5, Landsat 7, Landsat 8 and Sentinel-2
+covering the area of interest, acquired between the specified dates and with
+the specified maximum cloud cover.</p>
+<p>The downloaded images are in .tif format and organised in subfolders, divided
+by satellite mission and subdivided by pixel resolution.</p>
+<p>For each image, several bands are downloaded and stored in a single file (for
+S2-10m the R/G/B/NIR bands, for S2-20m the SWIR band, for S2-60m the Quality
+Assessment band, and for Landsat 7 &amp; 8 the same + the Coastal Aerosols band,
+and the panchromatic band which is stored separately). GDAL's <code>GetRasterBand</code>
+method then splits the various bands for computations during preprocessing.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>inputs: dict
+inputs dictionary with parameters for images to select - see
+detailed list of possible keys in function check_images_available
+im_dict_T1: dict, optional (default: None)
+you can pass as argument the output of check_images_available(), in order
+to avoid re-checking available images online</p>
+<h2 id="returns">Returns:</h2>
+<p>metadata: dict
+contains the information about the satellite images that were downloaded:
+date, filename, georeferencing accuracy and image coordinate reference system</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def retrieve_images(inputs, im_dict_T1=None):
+    &#34;&#34;&#34;
+    Downloads all images from Landsat 5, Landsat 7, Landsat 8 and Sentinel-2
+    covering the area of interest, acquired between the specified dates and with
+    the specified maximum cloud cover.
+
+    The downloaded images are in .tif format and organised in subfolders, divided
+    by satellite mission and subdivided by pixel resolution.
+
+    For each image, several bands are downloaded and stored in a single file (for
+    S2-10m the R/G/B/NIR bands, for S2-20m the SWIR band, for S2-60m the Quality
+    Assessment band, and for Landsat 7 &amp; 8 the same + the Coastal Aerosols band,
+    and the panchromatic band which is stored separately). GDAL&#39;s `GetRasterBand` 
+    method then splits the various bands for computations during preprocessing.
+
+    Arguments:
+    -----------
+    inputs: dict 
+        inputs dictionary with parameters for images to select - see 
+        detailed list of possible keys in function check_images_available
+    im_dict_T1: dict, optional (default: None)
+        you can pass as argument the output of check_images_available(), in order
+        to avoid re-checking available images online
+
+    Returns:
+    -----------
+    metadata: dict
+        contains the information about the satellite images that were downloaded:
+        date, filename, georeferencing accuracy and image coordinate reference system
+    &#34;&#34;&#34;
+    
+    # initialise connection with GEE server
+    ee.Initialize()
+    
+    # check image availabiliy and retrieve list of images
+    try:
+        test = len(im_dict_T1)
+    except:
+        im_dict_T1, im_dict_T2 = check_images_available(inputs)
+    
+    # if user also wants to download T2 images, merge both lists
+    if (&#39;include_T2&#39; in inputs.keys()) and (inputs[&#39;include_T2&#39;] == True):
+        for key in inputs[&#39;sat_list&#39;]:
+            if key == &#39;S2&#39;: continue
+            else: im_dict_T1[key] += im_dict_T2[key]
+        
+    # create a new directory name for this site of study
+    if not &#39;sitename&#39; in inputs:
+        inputs[&#39;sitename&#39;] = &#39;Data-{}&#39;.format(datetime.now().strftime(&#39;%Y-%m-%d&#39;))
+    im_folder = os.path.join(inputs[&#39;filepath&#39;],inputs[&#39;sitename&#39;])
+    if not os.path.exists(im_folder): os.makedirs(im_folder)    
+
+    # Download images listed in im_dict_T1, with polygon clipping
+    print(&#39;\nDownloading images:&#39;)
+    suffix = &#39;.tif&#39;
+    delete_counter = 0 # counter for incorrect S2_RGB
+    for satname in im_dict_T1.keys():
+        print(&#39;\n%s: %d image(s)&#39;%(satname,len(im_dict_T1[satname])))
+        
+        # create subfolder structure to store the different bands
+        filepaths = create_folder_structure(im_folder, satname)
+        
+        # initialise variables and loop through images
+        georef_accs = []; filenames = []; all_names = []; im_epsg = []
+        for i in range(len(im_dict_T1[satname])):
+
+            #======================================================================#
+            # Metadata: we need first to get info from each image&#39;s metadata
+            im_meta = im_dict_T1[satname][i]
+            
+            # get time of acquisition (UNIX time) and convert to datetime
+            t = im_meta[&#39;properties&#39;][&#39;system:time_start&#39;]
+            im_timestamp = datetime.fromtimestamp(t/1000, tz=pytz.utc)
+            im_date = im_timestamp.strftime(&#39;%Y-%m-%d-%H-%M-%S&#39;)
+
+            # get epsg code
+            im_epsg.append(int(im_meta[&#39;bands&#39;][0][&#39;crs&#39;][5:]))
+            
+            # get geometric accuracy
+            if satname in [&#39;L5&#39;,&#39;L7&#39;,&#39;L8&#39;]:
+                if &#39;GEOMETRIC_RMSE_MODEL&#39; in im_meta[&#39;properties&#39;].keys():
+                    acc_georef = im_meta[&#39;properties&#39;][&#39;GEOMETRIC_RMSE_MODEL&#39;]
+                else:
+                    acc_georef = 12 # default value of accuracy (RMSE = 12m)
+            elif satname in [&#39;S2&#39;, &#39;S2_RGB&#39;]:
+                # Sentinel-2 products don&#39;t provide a georeferencing accuracy (RMSE as in Landsat)
+                # but they have a flag indicating if the geometric quality control was passed or failed
+                # if passed a value of 1 is stored if failed a value of -1 is stored in the metadata
+                skip_geo_check = False
+                if &#39;GEOMETRIC_QUALITY_FLAG&#39; in im_meta[&#39;properties&#39;].keys(): 
+                    key = &#39;GEOMETRIC_QUALITY_FLAG&#39;
+                elif &#39;quality_check&#39; in im_meta[&#39;properties&#39;].keys():
+                    key = &#39;quality_check&#39;
+                else:
+                    acc_georef = -1
+                    skip_geo_check = True
+                if not skip_geo_check:
+                    if im_meta[&#39;properties&#39;][key] == &#39;PASSED&#39;: acc_georef = 1
+                    else: acc_georef = -1 
+            georef_accs.append(acc_georef)
+            
+            # get band information
+            bands = dict([])
+            im_fn = dict([])
+            # delete dimensions key from dict, otherwise the entire image is extracted (don&#39;t know why)
+            im_bands = im_meta[&#39;bands&#39;]
+            for j in range(len(im_bands)): del im_bands[j][&#39;dimensions&#39;]
+
+            # get polygon index if needed (for multiple areas download below)
+            if &#39;polygons_list&#39; in inputs:
+                polygon_index = im_meta[&#39;polygon_index&#39;]
+
+            #======================================================================#
+            # Landsat 5 download
+            if satname == &#39;L5&#39;:
+                bands[&#39;&#39;] = [im_bands[0], im_bands[1], im_bands[2], im_bands[3],
+                             im_bands[4], im_bands[7]] 
+                im_fn[&#39;&#39;] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                            datetime.now().strftime(&#39;%H-%M-%S&#39;) + suffix 
+                # if two images taken at the same date add &#39;dup&#39; to the name (duplicate)
+                if any(im_fn[&#39;&#39;] in _ for _ in all_names):
+                    im_fn[&#39;&#39;] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_dup&#39; + suffix
+                all_names.append(im_fn[&#39;&#39;])
+                filenames.append(im_fn[&#39;&#39;])
+                # download .tif from GEE
+                while True:
+                    try:
+                        im_ee = ee.Image(im_meta[&#39;id&#39;])
+                        if &#39;polygons_list&#39; in inputs:
+                            local_data = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;&#39;], filepaths[1])
+                        else:
+                            local_data = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;&#39;], filepaths[1])
+                        break
+                    except:
+                        continue
+                # rename the file as the image is downloaded as &#39;data.tif&#39;
+                try:
+                    os.rename(local_data, os.path.join(filepaths[1], im_fn[&#39;&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[1], im_fn[&#39;&#39;]))
+                    os.rename(local_data, os.path.join(filepaths[1], im_fn[&#39;&#39;]))
+                # metadata for .txt file
+                filename_txt = im_fn[&#39;&#39;].replace(&#39;.tif&#39;,&#39;&#39;)
+                metadict = {&#39;filename&#39;:im_fn[&#39;&#39;],&#39;acc_georef&#39;:georef_accs[i],
+                            &#39;epsg&#39;:im_epsg[i]}
+
+            #======================================================================#                  
+            # Landsat 7 and 8 download                
+            elif satname in [&#39;L7&#39;, &#39;L8&#39;]:
+                if satname == &#39;L7&#39;:
+                    bands[&#39;pan&#39;] = [im_bands[8]] # panchromatic band
+                    bands[&#39;ms&#39;] = [im_bands[0], im_bands[1], im_bands[2], im_bands[3],
+                                   im_bands[4], im_bands[9]] # multispectral bands
+                else:
+                    bands[&#39;pan&#39;] = [im_bands[7]] # panchromatic band
+                    bands[&#39;ms&#39;] = [im_bands[1], im_bands[2], im_bands[3], im_bands[4],
+                                   im_bands[5], im_bands[11]] # multispectral bands
+                for key in bands.keys():
+                    im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                 key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + suffix
+                # if two images taken at the same date add &#39;dup&#39; to the name (duplicate)
+                if any(im_fn[&#39;pan&#39;] in _ for _ in all_names):
+                    for key in bands.keys():
+                        im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                     key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_dup&#39; + suffix                    
+                all_names.append(im_fn[&#39;pan&#39;])
+                filenames.append(im_fn[&#39;pan&#39;])           
+                # download .tif from GEE (panchromatic band and multispectral bands)
+                while True:
+                    try:
+                        im_ee = ee.Image(im_meta[&#39;id&#39;])
+                        if &#39;polygons_list&#39; in inputs:
+                            local_data_pan = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;pan&#39;], filepaths[1])
+                            local_data_ms = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;ms&#39;], filepaths[2])
+                        else:
+                            local_data_pan = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;pan&#39;], filepaths[1])
+                            local_data_ms = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;ms&#39;], filepaths[2])
+                        break
+                    except:
+                        continue
+                # rename the files as the image is downloaded as &#39;data.tif&#39;
+                try: # panchromatic
+                    os.rename(local_data_pan, os.path.join(filepaths[1], im_fn[&#39;pan&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[1], im_fn[&#39;pan&#39;]))
+                    os.rename(local_data_pan, os.path.join(filepaths[1], im_fn[&#39;pan&#39;])) 
+                try: # multispectral
+                    os.rename(local_data_ms, os.path.join(filepaths[2], im_fn[&#39;ms&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[2], im_fn[&#39;ms&#39;]))
+                    os.rename(local_data_ms, os.path.join(filepaths[2], im_fn[&#39;ms&#39;]))   
+                # metadata for .txt file
+                filename_txt = im_fn[&#39;pan&#39;].replace(&#39;_pan&#39;,&#39;&#39;).replace(&#39;.tif&#39;,&#39;&#39;)
+                metadict = {&#39;filename&#39;:im_fn[&#39;pan&#39;],&#39;acc_georef&#39;:georef_accs[i],
+                            &#39;epsg&#39;:im_epsg[i]}
+                 
+            #======================================================================#
+            # Sentinel-2 Level 1-C download
+
+            # TODO: add RE2 band extraction (im_bands[5], 20m resolution)
+
+            elif satname in [&#39;S2&#39;]:
+                bands[&#39;10m&#39;] = [im_bands[1], im_bands[2], im_bands[3], im_bands[7]] # multispectral bands
+                bands[&#39;20m&#39;] = [im_bands[11]] # SWIR2 band
+                bands[&#39;60m&#39;] = [im_bands[15]] # QA band
+                for key in bands.keys():
+                    im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                 key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + suffix
+                # if two images taken at the same date add &#39;dup&#39; to the name (duplicate)
+                if any(im_fn[&#39;10m&#39;] in _ for _ in all_names):
+                    for key in bands.keys():
+                        im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                     key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_dup&#39; + suffix 
+                    # also check for triplicates (only on S2 imagery) and add &#39;tri&#39; to the name
+                    if im_fn[&#39;10m&#39;] in all_names:
+                        for key in bands.keys():
+                            im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                         key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_tri&#39; + suffix    
+                all_names.append(im_fn[&#39;10m&#39;])
+                filenames.append(im_fn[&#39;10m&#39;]) 
+                # download .tif from GEE (multispectral bands at 3 different resolutions)
+                while True:
+                    try:
+                        im_ee = ee.Image(im_meta[&#39;id&#39;])
+                        if &#39;polygons_list&#39; in inputs:
+                            local_data_10m = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;10m&#39;], filepaths[1])
+                            local_data_20m = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;20m&#39;], filepaths[2])
+                            local_data_60m = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;60m&#39;], filepaths[3])
+                        else:
+                            local_data_10m = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;10m&#39;], filepaths[1])
+                            local_data_20m = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;20m&#39;], filepaths[2])
+                            local_data_60m = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;60m&#39;], filepaths[3])
+                        break
+                    except:
+                        continue
+                # rename the files as the image is downloaded as &#39;data.tif&#39;
+                try: # 10m
+                    os.rename(local_data_10m, os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                    os.rename(local_data_10m, os.path.join(filepaths[1], im_fn[&#39;10m&#39;])) 
+                try: # 20m
+                    os.rename(local_data_20m, os.path.join(filepaths[2], im_fn[&#39;20m&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[2], im_fn[&#39;20m&#39;]))
+                    os.rename(local_data_20m, os.path.join(filepaths[2], im_fn[&#39;20m&#39;])) 
+                try: # 60m
+                    os.rename(local_data_60m, os.path.join(filepaths[3], im_fn[&#39;60m&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[3], im_fn[&#39;60m&#39;]))
+                    os.rename(local_data_60m, os.path.join(filepaths[3], im_fn[&#39;60m&#39;]))
+                # metadata for .txt file
+                filename_txt = im_fn[&#39;10m&#39;].replace(&#39;_10m&#39;,&#39;&#39;).replace(&#39;.tif&#39;,&#39;&#39;)
+                metadict = {&#39;filename&#39;:im_fn[&#39;10m&#39;],&#39;acc_georef&#39;:georef_accs[i],
+                            &#39;epsg&#39;:im_epsg[i]}
+
+            #======================================================================#
+            # Sentinel-2 Level 2-A download
+            elif satname in [&#39;S2_RGB&#39;]:
+                bands[&#39;10m&#39;] = [im_bands[15], im_bands[16], im_bands[17]] # True Color RGB bands
+                for key in bands.keys():
+                    im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                 key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + suffix
+                # if two images taken at the same date add &#39;dup&#39; to the name (duplicate)
+                if any(im_fn[&#39;10m&#39;] in _ for _ in all_names):
+                    for key in bands.keys():
+                        im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                     key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_dup&#39; + suffix 
+                    # also check for triplicates (only on S2 imagery) and add &#39;tri&#39; to the name
+                    if im_fn[&#39;10m&#39;] in all_names:
+                        for key in bands.keys():
+                            im_fn[key] = im_date + &#39;_&#39; + satname + &#39;_&#39; + inputs[&#39;sitename&#39;] + &#39;_&#39; +\
+                                         key + &#39;_&#39; + datetime.now().strftime(&#39;%H-%M-%S&#39;) + &#39;_tri&#39; + suffix    
+                all_names.append(im_fn[&#39;10m&#39;])
+                filenames.append(im_fn[&#39;10m&#39;]) 
+                # download .tif from GEE
+                while True:
+                    try:
+                        im_ee = ee.Image(im_meta[&#39;id&#39;])
+                        if &#39;polygons_list&#39; in inputs:
+                            local_data_10m = download_tif(im_ee, inputs[&#39;polygons_list&#39;][polygon_index], bands[&#39;10m&#39;], filepaths[1])
+                        else:
+                            local_data_10m = download_tif(im_ee, inputs[&#39;polygon&#39;], bands[&#39;10m&#39;], filepaths[1])
+                        break
+                    except:
+                        continue
+                # delete image and go to next one if it has too many black or white pixels (i.e.) area 
+                # on the limit of a satellite route, recalibrating errors, duplicates, open sea, etc.)
+                # TODO: try to download a valid older image instead of just continuing
+                if plt.imread(os.path.join(filepaths[1],&#39;data.tif&#39;)).mean() &lt; 50 or\
+                   plt.imread(os.path.join(filepaths[1],&#39;data.tif&#39;)).mean() &gt; 150:
+                    os.remove(os.path.join(filepaths[1], &#39;data.tif&#39;))
+                    print(&#39;\r%d%%&#39; %int((i+1)/len(im_dict_T1[satname])*100), end=&#39;&#39;)
+                    delete_counter += 1
+                    continue
+                # rename the files as images are downloaded as &#39;data.tif&#39;
+                try: # 10m
+                    os.rename(local_data_10m, os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                except: # overwrite if already exists
+                    os.remove(os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                    os.rename(local_data_10m, os.path.join(filepaths[1], im_fn[&#39;10m&#39;]))
+                # metadata for .txt file
+                filename_txt = im_fn[&#39;10m&#39;].replace(&#39;_10m&#39;,&#39;&#39;).replace(&#39;.tif&#39;,&#39;&#39;)
+                metadict = {&#39;filename&#39;:im_fn[&#39;10m&#39;],&#39;acc_georef&#39;:georef_accs[i],
+                            &#39;epsg&#39;:im_epsg[i]}
+
+            # write metadata
+            with open(os.path.join(filepaths[0],filename_txt + &#39;.txt&#39;), &#39;w&#39;) as f:
+                for key in metadict.keys():
+                    f.write(&#39;%s\t%s\n&#39;%(key,metadict[key]))  
+
+            # print percentage completion for user
+            print(&#39;\r%d%%&#39; %int((i+1)/len(im_dict_T1[satname])*100), end=&#39;&#39;)
+    
+    # print the nb of incorrect S2_RGB that were deleted
+    if delete_counter &gt; 0:
+                print(&#39;\n\n{} images in the list have not been downloaded&#39;.format(delete_counter) +\
+                      &#39; due to too many missing pixels (area on\nthe edge of a satellite route,&#39; +\
+                      &#39; recalibrating errors, duplicates, open sea, etc.).&#39;)
+
+    # once all images have been downloaded, load metadata from .txt files
+    metadata = get_metadata(inputs)
+          
+    # merge overlapping images (if the polygon is at the boundary of an image)
+    # and images with the exact same date (i.e. set to False if you download 
+    # several chunks from the same S2 tile at the same date)
+    if (not &#39;merge&#39; in inputs) and (not &#39;polygons_list&#39; in inputs):
+        inputs[&#39;merge&#39;] = True
+    elif &#39;polygons_list&#39; in inputs:
+        inputs[&#39;merge&#39;] = False
+
+    if (&#39;S2&#39; in metadata.keys()) and (inputs[&#39;merge&#39;] == True):
+        try:
+            metadata = merge_overlapping_images(metadata,inputs)
+        except:
+            print(&#39;WARNING: there was an error while merging overlapping S2 images.&#39;)
+
+    # save metadata dict
+    with open(os.path.join(im_folder, inputs[&#39;sitename&#39;] + &#39;_metadata&#39; + &#39;.pkl&#39;), &#39;wb&#39;) as f:
+        pickle.dump(metadata, f)
+
+    return metadata</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="totalsat.sat_download.file_info"><code class="flex name class">
+<span>class <span class="ident">file_info</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class holding information about a GDAL file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class file_info:
+    &#34;&#34;&#34;A class holding information about a GDAL file.&#34;&#34;&#34;
+
+    def init_from_name(self, filename):
+        &#34;&#34;&#34;
+        Initialize file_info from filename
+
+        filename -- Name of file to read.
+
+        Returns 1 on success or 0 if the file can&#39;t be opened.
+        &#34;&#34;&#34;
+        fh = gdal.Open( filename )
+        if fh is None:
+            return 0
+
+        self.filename = filename
+        self.bands = fh.RasterCount
+        self.xsize = fh.RasterXSize
+        self.ysize = fh.RasterYSize
+        self.band_type = fh.GetRasterBand(1).DataType
+        self.projection = fh.GetProjection()
+        self.geotransform = fh.GetGeoTransform()
+        self.ulx = self.geotransform[0]
+        self.uly = self.geotransform[3]
+        self.lrx = self.ulx + self.geotransform[1] * self.xsize
+        self.lry = self.uly + self.geotransform[5] * self.ysize
+
+        ct = fh.GetRasterBand(1).GetRasterColorTable()
+        if ct is not None:
+            self.ct = ct.Clone()
+        else:
+            self.ct = None
+
+        return 1
+
+    def report( self ):
+        print(&#39;Filename: &#39;+ self.filename)
+        print(&#39;File Size: %dx%dx%d&#39;
+              % (self.xsize, self.ysize, self.bands))
+        print(&#39;Pixel Size: %f x %f&#39;
+              % (self.geotransform[1],self.geotransform[5]))
+        print(&#39;UL:(%f,%f)   LR:(%f,%f)&#39;
+              % (self.ulx,self.uly,self.lrx,self.lry))
+
+    def copy_into( self, t_fh, s_band = 1, t_band = 1, nodata_arg=None ):
+        &#34;&#34;&#34;
+        Copy this files image into target file.
+
+        This method will compute the overlap area of the file_info objects
+        file, and the target gdal.Dataset object, and copy the image data
+        for the common window area.  It is assumed that the files are in
+        a compatible projection ... no checking or warping is done.  However,
+        if the destination file is a different resolution, or different
+        image pixel type, the appropriate resampling and conversions will
+        be done (using normal GDAL promotion/demotion rules).
+
+        t_fh -- gdal.Dataset object for the file into which some or all
+        of this file may be copied.
+
+        Returns 1 on success (or if nothing needs to be copied), and zero one
+        failure.
+        &#34;&#34;&#34;
+        t_geotransform = t_fh.GetGeoTransform()
+        t_ulx = t_geotransform[0]
+        t_uly = t_geotransform[3]
+        t_lrx = t_geotransform[0] + t_fh.RasterXSize * t_geotransform[1]
+        t_lry = t_geotransform[3] + t_fh.RasterYSize * t_geotransform[5]
+
+        # figure out intersection region
+        tgw_ulx = max(t_ulx,self.ulx)
+        tgw_lrx = min(t_lrx,self.lrx)
+        if t_geotransform[5] &lt; 0:
+            tgw_uly = min(t_uly,self.uly)
+            tgw_lry = max(t_lry,self.lry)
+        else:
+            tgw_uly = max(t_uly,self.uly)
+            tgw_lry = min(t_lry,self.lry)
+
+        # do they even intersect?
+        if tgw_ulx &gt;= tgw_lrx:
+            return 1
+        if t_geotransform[5] &lt; 0 and tgw_uly &lt;= tgw_lry:
+            return 1
+        if t_geotransform[5] &gt; 0 and tgw_uly &gt;= tgw_lry:
+            return 1
+
+        # compute target window in pixel coordinates.
+        tw_xoff = int((tgw_ulx - t_geotransform[0]) / t_geotransform[1] + 0.1)
+        tw_yoff = int((tgw_uly - t_geotransform[3]) / t_geotransform[5] + 0.1)
+        tw_xsize = int((tgw_lrx - t_geotransform[0])/t_geotransform[1] + 0.5) \
+                   - tw_xoff
+        tw_ysize = int((tgw_lry - t_geotransform[3])/t_geotransform[5] + 0.5) \
+                   - tw_yoff
+
+        if tw_xsize &lt; 1 or tw_ysize &lt; 1:
+            return 1
+
+        # Compute source window in pixel coordinates.
+        sw_xoff = int((tgw_ulx - self.geotransform[0]) / self.geotransform[1])
+        sw_yoff = int((tgw_uly - self.geotransform[3]) / self.geotransform[5])
+        sw_xsize = int((tgw_lrx - self.geotransform[0]) \
+                       / self.geotransform[1] + 0.5) - sw_xoff
+        sw_ysize = int((tgw_lry - self.geotransform[3]) \
+                       / self.geotransform[5] + 0.5) - sw_yoff
+
+        if sw_xsize &lt; 1 or sw_ysize &lt; 1:
+            return 1
+
+        # Open the source file, and copy the selected region.
+        s_fh = gdal.Open( self.filename )
+
+        return raster_copy( s_fh, sw_xoff, sw_yoff, sw_xsize, sw_ysize, s_band,
+                            t_fh, tw_xoff, tw_yoff, tw_xsize, tw_ysize, t_band,
+                            nodata_arg )</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="totalsat.sat_download.file_info.copy_into"><code class="name flex">
+<span>def <span class="ident">copy_into</span></span>(<span>self, t_fh, s_band=1, t_band=1, nodata_arg=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Copy this files image into target file.</p>
+<p>This method will compute the overlap area of the file_info objects
+file, and the target gdal.Dataset object, and copy the image data
+for the common window area.
+It is assumed that the files are in
+a compatible projection &hellip; no checking or warping is done.
+However,
+if the destination file is a different resolution, or different
+image pixel type, the appropriate resampling and conversions will
+be done (using normal GDAL promotion/demotion rules).</p>
+<p>t_fh &ndash; gdal.Dataset object for the file into which some or all
+of this file may be copied.</p>
+<p>Returns 1 on success (or if nothing needs to be copied), and zero one
+failure.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy_into( self, t_fh, s_band = 1, t_band = 1, nodata_arg=None ):
+    &#34;&#34;&#34;
+    Copy this files image into target file.
+
+    This method will compute the overlap area of the file_info objects
+    file, and the target gdal.Dataset object, and copy the image data
+    for the common window area.  It is assumed that the files are in
+    a compatible projection ... no checking or warping is done.  However,
+    if the destination file is a different resolution, or different
+    image pixel type, the appropriate resampling and conversions will
+    be done (using normal GDAL promotion/demotion rules).
+
+    t_fh -- gdal.Dataset object for the file into which some or all
+    of this file may be copied.
+
+    Returns 1 on success (or if nothing needs to be copied), and zero one
+    failure.
+    &#34;&#34;&#34;
+    t_geotransform = t_fh.GetGeoTransform()
+    t_ulx = t_geotransform[0]
+    t_uly = t_geotransform[3]
+    t_lrx = t_geotransform[0] + t_fh.RasterXSize * t_geotransform[1]
+    t_lry = t_geotransform[3] + t_fh.RasterYSize * t_geotransform[5]
+
+    # figure out intersection region
+    tgw_ulx = max(t_ulx,self.ulx)
+    tgw_lrx = min(t_lrx,self.lrx)
+    if t_geotransform[5] &lt; 0:
+        tgw_uly = min(t_uly,self.uly)
+        tgw_lry = max(t_lry,self.lry)
+    else:
+        tgw_uly = max(t_uly,self.uly)
+        tgw_lry = min(t_lry,self.lry)
+
+    # do they even intersect?
+    if tgw_ulx &gt;= tgw_lrx:
+        return 1
+    if t_geotransform[5] &lt; 0 and tgw_uly &lt;= tgw_lry:
+        return 1
+    if t_geotransform[5] &gt; 0 and tgw_uly &gt;= tgw_lry:
+        return 1
+
+    # compute target window in pixel coordinates.
+    tw_xoff = int((tgw_ulx - t_geotransform[0]) / t_geotransform[1] + 0.1)
+    tw_yoff = int((tgw_uly - t_geotransform[3]) / t_geotransform[5] + 0.1)
+    tw_xsize = int((tgw_lrx - t_geotransform[0])/t_geotransform[1] + 0.5) \
+               - tw_xoff
+    tw_ysize = int((tgw_lry - t_geotransform[3])/t_geotransform[5] + 0.5) \
+               - tw_yoff
+
+    if tw_xsize &lt; 1 or tw_ysize &lt; 1:
+        return 1
+
+    # Compute source window in pixel coordinates.
+    sw_xoff = int((tgw_ulx - self.geotransform[0]) / self.geotransform[1])
+    sw_yoff = int((tgw_uly - self.geotransform[3]) / self.geotransform[5])
+    sw_xsize = int((tgw_lrx - self.geotransform[0]) \
+                   / self.geotransform[1] + 0.5) - sw_xoff
+    sw_ysize = int((tgw_lry - self.geotransform[3]) \
+                   / self.geotransform[5] + 0.5) - sw_yoff
+
+    if sw_xsize &lt; 1 or sw_ysize &lt; 1:
+        return 1
+
+    # Open the source file, and copy the selected region.
+    s_fh = gdal.Open( self.filename )
+
+    return raster_copy( s_fh, sw_xoff, sw_yoff, sw_xsize, sw_ysize, s_band,
+                        t_fh, tw_xoff, tw_yoff, tw_xsize, tw_ysize, t_band,
+                        nodata_arg )</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.file_info.init_from_name"><code class="name flex">
+<span>def <span class="ident">init_from_name</span></span>(<span>self, filename)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialize file_info from filename</p>
+<p>filename &ndash; Name of file to read.</p>
+<p>Returns 1 on success or 0 if the file can't be opened.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def init_from_name(self, filename):
+    &#34;&#34;&#34;
+    Initialize file_info from filename
+
+    filename -- Name of file to read.
+
+    Returns 1 on success or 0 if the file can&#39;t be opened.
+    &#34;&#34;&#34;
+    fh = gdal.Open( filename )
+    if fh is None:
+        return 0
+
+    self.filename = filename
+    self.bands = fh.RasterCount
+    self.xsize = fh.RasterXSize
+    self.ysize = fh.RasterYSize
+    self.band_type = fh.GetRasterBand(1).DataType
+    self.projection = fh.GetProjection()
+    self.geotransform = fh.GetGeoTransform()
+    self.ulx = self.geotransform[0]
+    self.uly = self.geotransform[3]
+    self.lrx = self.ulx + self.geotransform[1] * self.xsize
+    self.lry = self.uly + self.geotransform[5] * self.ysize
+
+    ct = fh.GetRasterBand(1).GetRasterColorTable()
+    if ct is not None:
+        self.ct = ct.Clone()
+    else:
+        self.ct = None
+
+    return 1</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_download.file_info.report"><code class="name flex">
+<span>def <span class="ident">report</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def report( self ):
+    print(&#39;Filename: &#39;+ self.filename)
+    print(&#39;File Size: %dx%dx%d&#39;
+          % (self.xsize, self.ysize, self.bands))
+    print(&#39;Pixel Size: %f x %f&#39;
+          % (self.geotransform[1],self.geotransform[5]))
+    print(&#39;UL:(%f,%f)   LR:(%f,%f)&#39;
+          % (self.ulx,self.uly,self.lrx,self.lry))</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="totalsat" href="index.html">totalsat</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="totalsat.sat_download.Usage" href="#totalsat.sat_download.Usage">Usage</a></code></li>
+<li><code><a title="totalsat.sat_download.check_images_available" href="#totalsat.sat_download.check_images_available">check_images_available</a></code></li>
+<li><code><a title="totalsat.sat_download.create_folder_structure" href="#totalsat.sat_download.create_folder_structure">create_folder_structure</a></code></li>
+<li><code><a title="totalsat.sat_download.download_footprints" href="#totalsat.sat_download.download_footprints">download_footprints</a></code></li>
+<li><code><a title="totalsat.sat_download.download_tif" href="#totalsat.sat_download.download_tif">download_tif</a></code></li>
+<li><code><a title="totalsat.sat_download.filter_S2_collection" href="#totalsat.sat_download.filter_S2_collection">filter_S2_collection</a></code></li>
+<li><code><a title="totalsat.sat_download.gdal_merge_main" href="#totalsat.sat_download.gdal_merge_main">gdal_merge_main</a></code></li>
+<li><code><a title="totalsat.sat_download.get_metadata" href="#totalsat.sat_download.get_metadata">get_metadata</a></code></li>
+<li><code><a title="totalsat.sat_download.merge_overlapping_images" href="#totalsat.sat_download.merge_overlapping_images">merge_overlapping_images</a></code></li>
+<li><code><a title="totalsat.sat_download.names_to_fileinfos" href="#totalsat.sat_download.names_to_fileinfos">names_to_fileinfos</a></code></li>
+<li><code><a title="totalsat.sat_download.plot_requested_area" href="#totalsat.sat_download.plot_requested_area">plot_requested_area</a></code></li>
+<li><code><a title="totalsat.sat_download.raster_copy" href="#totalsat.sat_download.raster_copy">raster_copy</a></code></li>
+<li><code><a title="totalsat.sat_download.raster_copy_with_mask" href="#totalsat.sat_download.raster_copy_with_mask">raster_copy_with_mask</a></code></li>
+<li><code><a title="totalsat.sat_download.raster_copy_with_nodata" href="#totalsat.sat_download.raster_copy_with_nodata">raster_copy_with_nodata</a></code></li>
+<li><code><a title="totalsat.sat_download.remove_cloudy_images" href="#totalsat.sat_download.remove_cloudy_images">remove_cloudy_images</a></code></li>
+<li><code><a title="totalsat.sat_download.retrieve_images" href="#totalsat.sat_download.retrieve_images">retrieve_images</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="totalsat.sat_download.file_info" href="#totalsat.sat_download.file_info">file_info</a></code></h4>
+<ul class="">
+<li><code><a title="totalsat.sat_download.file_info.copy_into" href="#totalsat.sat_download.file_info.copy_into">copy_into</a></code></li>
+<li><code><a title="totalsat.sat_download.file_info.init_from_name" href="#totalsat.sat_download.file_info.init_from_name">init_from_name</a></code></li>
+<li><code><a title="totalsat.sat_download.file_info.report" href="#totalsat.sat_download.file_info.report">report</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.3</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,33 @@
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.7
+  - numpy=1.16.3
+  - matplotlib=3.0.3
+  - pillow=6.2.1
+  - earthengine-api=0.1.173 # later version 0.1.226 doesn't work for now
+  - gdal=2.3.3
+  - pandas=0.24.2
+  - geopandas=0.4.1
+  - pytz=2019.1
+  - scikit-image=0.15.0
+  - scikit-learn=0.20.3
+  - shapely=1.6.4
+  - scipy=1.2.1
+  - astropy=3.2.1
+  - xlrd=1.2.0
+  - spyder
+  - notebook
+  - pip=20.1.1
+  - pip:
+    - folium==0.10.1
+    - rasterio==1.1.5
+    - geopy==1.22.0
+    - pyproj==2.6.1
+    - keras==2.4.0
+    - natsort==7.0.1
+    - pdoc3==0.8.3
+    - geojson==2.5.0
+    - osmnx==0.15.1 #if bug, remove osmnx
+    - seaborn==0.10.1

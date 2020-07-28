@@ -1,0 +1,2009 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.3" />
+<title>totalsat.sat_preprocess API documentation</title>
+<meta name="description" content="This module contains functions to preprocess multispectral satellite images (creation
+of RGB images through pixel rescaling / downsampling / …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>totalsat.sat_preprocess</code></h1>
+</header>
+<section id="section-intro">
+<p>This module contains functions to preprocess multispectral satellite images (creation
+of RGB images through pixel rescaling / downsampling / pansharpening, cloud masks,
+different remote sensing indices, etc.) once downloaded from the GEE server.</p>
+<p>Original author: Kilian Vos, Water Research Laboratory,
+University of New South Wales, 2018
+<a href="https://github.com/kvos/CoastSat">https://github.com/kvos/CoastSat</a>
+Modifications and additions: Thomas de Mareuil, Total E-LAB, 2020</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+This module contains functions to preprocess multispectral satellite images (creation
+of RGB images through pixel rescaling / downsampling / pansharpening, cloud masks,
+different remote sensing indices, etc.) once downloaded from the GEE server.
+
+Original author: Kilian Vos, Water Research Laboratory,
+                 University of New South Wales, 2018
+                 https://github.com/kvos/CoastSat
+Modifications and additions: Thomas de Mareuil, Total E-LAB, 2020
+&#34;&#34;&#34;
+
+# load image processing modules
+import numpy as np
+import skimage
+import skimage.transform as transform
+import skimage.morphology as morphology
+import sklearn.decomposition as decomposition
+import skimage.exposure as exposure
+from osgeo import gdal
+from osgeo import osr
+import matplotlib.pyplot as plt
+import ee
+from ee import batch
+
+# additional modules
+import os
+import pdb
+import shapely
+import time
+
+# other totalsat modules
+from totalsat import sat_tools
+
+np.seterr(all=&#39;ignore&#39;) # raise/ignore divisions by 0 and nans
+
+
+###################################################################################################
+# RASTER PROCESSING
+###################################################################################################
+
+def create_cloud_mask(im_QA, satname, cloud_mask_issue):
+    &#34;&#34;&#34;
+    Creates a cloud mask using the information contained in the Quality Assessment (QA) band
+    for each satellite.
+
+    Arguments:
+    -----------
+    im_QA: np.array
+        Image containing the QA band
+    satname: string
+        short name for the satellite: &#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39; or &#39;S2&#39;/&#39;S2_RGB&#39;
+    cloud_mask_issue: boolean
+        Set to True if there is an issue with the cloud mask and pixels are being
+        erroneously masked on the images. It will check pixels around to determine
+        if the cloud information is a mistake and shouldn&#39;t be taken into account.
+
+    Returns:
+    -----------
+    cloud_mask : np.array
+        boolean array with True if a pixel is cloudy and False otherwise  
+    &#34;&#34;&#34;
+
+    # convert QA bits (the value of bits allocated to cloud cover vary depending on the satellite mission)
+    if satname == &#39;L8&#39;:
+        cloud_values = [2800, 2804, 2808, 2812, 6896, 6900, 6904, 6908]
+    elif satname == &#39;L7&#39; or satname == &#39;L5&#39;:
+        cloud_values = [752, 756, 760, 764]
+    elif satname == &#39;S2&#39; or satname == &#39;S2_RGB&#39;:
+        cloud_values = [1024, 2048] # 1024 = dense clouds, 2048 = cirrus clouds
+
+    # find which pixels have bits corresponding to cloud values
+    cloud_mask = np.isin(im_QA, cloud_values)
+
+    # remove cloud pixels that form very thin features. These can be for example beach or swash pixels
+    # that are erroneously identified as clouds by the CFMASK algorithm applied to the images by the USGS
+    if sum(sum(cloud_mask)) &gt; 0 and sum(sum(~cloud_mask)) &gt; 0:
+        morphology.remove_small_objects(cloud_mask, min_size=10, connectivity=1, in_place=True)
+
+        if cloud_mask_issue:
+            elem = morphology.square(3) # use a square of width 3 pixels
+            cloud_mask = morphology.binary_opening(cloud_mask,elem) # perform image opening
+            # remove objects with less than 25 connected pixels
+            morphology.remove_small_objects(cloud_mask, min_size=25, connectivity=1, in_place=True)
+
+    return cloud_mask
+
+
+def hist_match(source, template):
+    &#34;&#34;&#34;
+    Adjust the pixel values of a grayscale (1-channel) image such that its histogram 
+    matches that of a target image (panchromatic band). Used in pansharpening.
+
+    Arguments:
+    -----------
+    source: np.array
+        Image to transform; the histogram is computed over the flattened
+        array
+    template: np.array
+        Template image; can have different dimensions than source
+        
+    Returns:
+    -----------
+    matched: np.array
+        The transformed output image    
+    &#34;&#34;&#34;
+
+    oldshape = source.shape
+    source = source.ravel()
+    template = template.ravel()
+
+    # get the set of unique pixel values and their corresponding indices and counts
+    s_values, bin_idx, s_counts = np.unique(source, return_inverse=True,
+                                            return_counts=True)
+    t_values, t_counts = np.unique(template, return_counts=True)
+
+    # take the cumsum of the counts and normalize by the number of pixels to get 
+    # the empirical cumulative distribution functions for the source and template
+    # images (maps pixel value --&gt; quantile)
+    s_quantiles = np.cumsum(s_counts).astype(np.float64)
+    s_quantiles /= s_quantiles[-1]
+    t_quantiles = np.cumsum(t_counts).astype(np.float64)
+    t_quantiles /= t_quantiles[-1]
+
+    # interpolate linearly to find the pixel values in the template image that
+    # correspond most closely to the quantiles in the source image
+    interp_t_values = np.interp(s_quantiles, t_quantiles, t_values)
+
+    return interp_t_values[bin_idx].reshape(oldshape)
+
+
+def pansharpen(im_ms, im_pan, cloud_mask):
+    &#34;&#34;&#34;
+    Pansharpens a multispectral image, using the panchromatic band and a cloud mask.
+    A PCA is applied to the image, then the 1st PC is replaced, after histogram 
+    matching with the panchromatic band. Note that it is essential to match the
+    histograms of the 1st PC and the panchromatic band before replacing and 
+    inverting the PCA.
+
+    Arguments:
+    -----------
+    im_ms: np.array
+        Multispectral image to pansharpen (3D - bands separated by GDAL)
+    im_pan: np.array
+        Panchromatic band (2D)
+    cloud_mask: np.array
+        2D cloud mask with True for cloud pixels
+
+    Returns:
+    -----------
+    im_ms_ps: np.ndarray
+        Pansharpened multispectral image (3D)
+    &#34;&#34;&#34;
+
+    # reshape image into vector and apply cloud mask
+    vec = im_ms.reshape(im_ms.shape[0] * im_ms.shape[1], im_ms.shape[2])
+    vec_mask = cloud_mask.reshape(im_ms.shape[0] * im_ms.shape[1])
+    vec = vec[~vec_mask, :]
+    # apply PCA to multispectral bands
+    pca = decomposition.PCA()
+    vec_pcs = pca.fit_transform(vec)
+
+    # replace 1st PC with pan band (after matching histograms)
+    vec_pan = im_pan.reshape(im_pan.shape[0] * im_pan.shape[1])
+    vec_pan = vec_pan[~vec_mask]
+    vec_pcs[:,0] = hist_match(vec_pan, vec_pcs[:,0])
+    vec_ms_ps = pca.inverse_transform(vec_pcs)
+
+    # reshape vector into image
+    vec_ms_ps_full = np.ones((len(vec_mask), im_ms.shape[2])) * np.nan
+    vec_ms_ps_full[~vec_mask,:] = vec_ms_ps
+    im_ms_ps = vec_ms_ps_full.reshape(im_ms.shape[0], im_ms.shape[1], im_ms.shape[2])
+
+    return im_ms_ps
+
+
+def rescale_image_intensity(im, cloud_mask, prob_high):
+    &#34;&#34;&#34;
+    Rescales the intensity of an image (multispectral or single band) by applying
+    a cloud mask and clipping the prob_high upper percentile. This functions allows
+    to stretch the contrast of an image, only for visualisation purposes.
+
+    Arguments:
+    -----------
+    im: np.array
+        Image to rescale, can be 3D (multispectral) or 2D (single band)
+    cloud_mask: np.array
+        2D cloud mask with True where cloud pixels are
+    prob_high: float
+        probability of exceedence used to calculate the upper percentile
+
+    Returns:
+    -----------
+    im_adj: np.array
+        rescaled image
+    &#34;&#34;&#34;
+
+    # lower percentile is set to 0
+    prc_low = 0
+
+    # reshape the 2D cloud mask into a 1D vector
+    vec_mask = cloud_mask.reshape(im.shape[0] * im.shape[1])
+
+    # if image contains several bands, stretch the contrast for each band
+    if len(im.shape) &gt; 2:
+        # reshape into a vector
+        vec =  im.reshape(im.shape[0] * im.shape[1], im.shape[2])
+        # initiliase with NaN values
+        vec_adj = np.ones((len(vec_mask), im.shape[2])) * np.nan
+        # loop through the bands
+        for i in range(im.shape[2]):
+            # find the higher percentile (based on prob)
+            prc_high = np.percentile(vec[~vec_mask, i], prob_high)
+            # clip the image around the 2 percentiles and rescale the contrast
+            vec_rescaled = exposure.rescale_intensity(vec[~vec_mask, i],
+                                                      in_range=(prc_low, prc_high))
+            vec_adj[~vec_mask,i] = vec_rescaled
+        # reshape into image
+        im_adj = vec_adj.reshape(im.shape[0], im.shape[1], im.shape[2])
+
+    # if image only has 1 band (grayscale image)
+    else:
+        vec =  im.reshape(im.shape[0] * im.shape[1])
+        vec_adj = np.ones(len(vec_mask)) * np.nan
+        prc_high = np.percentile(vec[~vec_mask], prob_high)
+        vec_rescaled = exposure.rescale_intensity(vec[~vec_mask], in_range=(prc_low, prc_high))
+        vec_adj[~vec_mask] = vec_rescaled
+        im_adj = vec_adj.reshape(im.shape[0], im.shape[1])
+
+    return im_adj
+
+
+def preprocess_single(fn, satname, cloud_mask_issue):
+    &#34;&#34;&#34;
+    Reads the image and outputs the pansharpened/down-sampled multispectral bands,
+    the georeferencing vector of the image (coordinates of the upper left pixel),
+    the cloud mask, the QA band and a no_data image. 
+    For Landsat 7-8 it also outputs the panchromatic band, and for Sentinel 2 it
+    also outputs the 20m SWIR band.
+
+    Arguments:
+    -----------
+    fn: str or list of str
+        filename of the image .tif file. For L7, L8 and S2 this argument
+        is a list of filenames, one filename for each resolution (30m 
+        and 15m for Landsat 7-8, 10m, 20m and 60m for Sentinel 2)
+    satname: str
+        name of the satellite mission (e.g., &#39;L5&#39;)
+    cloud_mask_issue: boolean
+        True if there is an issue with the cloud mask and wrong pixels are being masked
+
+    Returns:
+    -----------
+    im_ms: np.array
+        3D array (stored as a 1-channel image) containing the multispectral bands (B, G, R, NIR, SWIR1)
+    georef: np.array
+        vector of 6 elements [Xtr, Xscale, Xshear, Ytr, Yshear, Yscale] defining the coordinates
+        of the top-left pixel of the image
+    cloud_mask: np.array
+        2D cloud mask with True where cloud pixels are
+    im_extra : np.array
+        2D array containing the 20m resolution SWIR band for Sentinel-2 and the 15m resolution
+        panchromatic band for Landsat 7 and Landsat 8. This field is empty for Landsat 5.
+    im_QA: np.array
+        2D array containing the QA band, from which the cloud_mask can be computed.
+    im_nodata: np.array
+        2D array with True where no data values (-inf) are located.
+    &#34;&#34;&#34;
+
+    #=============================================================================================#
+    # L5 images
+    #=============================================================================================#
+    if satname == &#39;L5&#39;:
+
+        # read all bands
+        data = gdal.Open(fn, gdal.GA_ReadOnly)
+        georef = np.array(data.GetGeoTransform())
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_ms = np.stack(bands, 2)
+
+        # down-sample to 15 m (half of the original pixel size)
+        nrows = im_ms.shape[0]*2
+        ncols = im_ms.shape[1]*2
+
+        # create cloud mask
+        im_QA = im_ms[:,:,5]
+        im_ms = im_ms[:,:,:-1]
+        cloud_mask = create_cloud_mask(im_QA, satname, cloud_mask_issue)
+
+        # resize the image using bilinear interpolation (order 1)
+        im_ms = transform.resize(im_ms,(nrows, ncols), order=1, preserve_range=True,
+                                 mode=&#39;constant&#39;)
+        # resize the image using nearest neighbour interpolation (order 0)
+        cloud_mask = transform.resize(cloud_mask, (nrows, ncols), order=0, preserve_range=True,
+                                      mode=&#39;constant&#39;).astype(&#39;bool_&#39;)
+
+        # adjust georeferencing vector to the new image size
+        # scale becomes 15m and the origin is adjusted to the center of new top left pixel
+        georef[1] = 15
+        georef[5] = -15
+        georef[0] = georef[0] + 7.5
+        georef[3] = georef[3] - 7.5
+        
+        # check if -inf or nan values on any band and add to cloud mask
+        im_nodata = np.zeros(cloud_mask.shape).astype(bool)
+        for k in range(im_ms.shape[2]):
+            im_inf = np.isin(im_ms[:,:,k], -np.inf)
+            im_nan = np.isnan(im_ms[:,:,k])
+            cloud_mask = np.logical_or(np.logical_or(cloud_mask, im_inf), im_nan)
+            im_nodata = np.logical_or(np.logical_or(im_nodata, im_inf), im_nan)
+        # check if there are pixels with 0 intensity in the Green, NIR and SWIR bands and add those
+        # to the cloud mask as otherwise they will cause errors when calculating the NDWI and MNDWI
+        im_zeros = np.ones(cloud_mask.shape).astype(bool)
+        for k in [1,3,4]: # loop through the Green, NIR and SWIR bands
+            im_zeros = np.logical_and(np.isin(im_ms[:,:,k],0), im_zeros)
+        # update cloud mask and nodata
+        cloud_mask = np.logical_or(im_zeros, cloud_mask)
+        im_nodata = np.logical_or(im_zeros, im_nodata)
+        # no extra image for Landsat 5 (they are all 30 m bands)
+        im_extra = []
+
+    #=============================================================================================#
+    # L7 images
+    #=============================================================================================#
+    elif satname == &#39;L7&#39;:
+
+        # read pan image
+        fn_pan = fn[0]
+        data = gdal.Open(fn_pan, gdal.GA_ReadOnly)
+        georef = np.array(data.GetGeoTransform())
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_pan = np.stack(bands, 2)[:,:,0]
+
+        # size of pan image
+        nrows = im_pan.shape[0]
+        ncols = im_pan.shape[1]
+
+        # read ms image
+        fn_ms = fn[1]
+        data = gdal.Open(fn_ms, gdal.GA_ReadOnly)
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_ms = np.stack(bands, 2)
+
+        # create cloud mask
+        im_QA = im_ms[:,:,5]
+        cloud_mask = create_cloud_mask(im_QA, satname, cloud_mask_issue)
+
+        # resize the image using bilinear interpolation (order 1)
+        im_ms = im_ms[:,:,:5]
+        im_ms = transform.resize(im_ms,(nrows, ncols), order=1, preserve_range=True,
+                                 mode=&#39;constant&#39;)
+        # resize the image using nearest neighbour interpolation (order 0)
+        cloud_mask = transform.resize(cloud_mask, (nrows, ncols), order=0, preserve_range=True,
+                                      mode=&#39;constant&#39;).astype(&#39;bool_&#39;)
+        # check if -inf or nan values on any band and eventually add those pixels to cloud mask
+        im_nodata = np.zeros(cloud_mask.shape).astype(bool)
+        for k in range(im_ms.shape[2]):
+            im_inf = np.isin(im_ms[:,:,k], -np.inf)
+            im_nan = np.isnan(im_ms[:,:,k])
+            cloud_mask = np.logical_or(np.logical_or(cloud_mask, im_inf), im_nan)
+            im_nodata = np.logical_or(np.logical_or(im_nodata, im_inf), im_nan)
+        # check if there are pixels with 0 intensity in the Green, NIR and SWIR bands and add those
+        # to the cloud mask as otherwise they will cause errors when calculating the NDWI and MNDWI
+        im_zeros = np.ones(cloud_mask.shape).astype(bool)
+        for k in [1,3,4]: # loop through the Green, NIR and SWIR bands
+            im_zeros = np.logical_and(np.isin(im_ms[:,:,k],0), im_zeros)
+        # update cloud mask and nodata
+        cloud_mask = np.logical_or(im_zeros, cloud_mask)
+        im_nodata = np.logical_or(im_zeros, im_nodata)
+
+        # pansharpen Green, Red, NIR (where there is overlapping with pan band in L7)
+        try:
+            im_ms_ps = pansharpen(im_ms[:,:,[1,2,3]], im_pan, cloud_mask)
+        except: # if pansharpening fails, keep downsampled bands (for long runs)
+            im_ms_ps = im_ms[:,:,[1,2,3]]
+        # add downsampled Blue and SWIR1 bands
+        im_ms_ps = np.append(im_ms[:,:,[0]], im_ms_ps, axis=2)
+        im_ms_ps = np.append(im_ms_ps, im_ms[:,:,[4]], axis=2)
+
+        im_ms = im_ms_ps.copy()
+        # the extra image is the 15m panchromatic band
+        im_extra = im_pan
+
+    #=============================================================================================#
+    # L8 images
+    #=============================================================================================#
+    elif satname == &#39;L8&#39;:
+
+        # read pan image
+        fn_pan = fn[0]
+        data = gdal.Open(fn_pan, gdal.GA_ReadOnly)
+        georef = np.array(data.GetGeoTransform())
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_pan = np.stack(bands, 2)[:,:,0]
+
+        # size of pan image
+        nrows = im_pan.shape[0]
+        ncols = im_pan.shape[1]
+
+        # read ms image
+        fn_ms = fn[1]
+        data = gdal.Open(fn_ms, gdal.GA_ReadOnly)
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_ms = np.stack(bands, 2)
+
+        # create cloud mask
+        im_QA = im_ms[:,:,5]
+        cloud_mask = create_cloud_mask(im_QA, satname, cloud_mask_issue)
+
+        # resize the image using bilinear interpolation (order 1)
+        im_ms = im_ms[:,:,:5]
+        im_ms = transform.resize(im_ms,(nrows, ncols), order=1, preserve_range=True,
+                                 mode=&#39;constant&#39;)
+        # resize the image using nearest neighbour interpolation (order 0)
+        cloud_mask = transform.resize(cloud_mask, (nrows, ncols), order=0, preserve_range=True,
+                                      mode=&#39;constant&#39;).astype(&#39;bool_&#39;)
+        # check if -inf or nan values on any band and eventually add those pixels to cloud mask
+        im_nodata = np.zeros(cloud_mask.shape).astype(bool)
+        for k in range(im_ms.shape[2]):
+            im_inf = np.isin(im_ms[:,:,k], -np.inf)
+            im_nan = np.isnan(im_ms[:,:,k])
+            cloud_mask = np.logical_or(np.logical_or(cloud_mask, im_inf), im_nan)
+            im_nodata = np.logical_or(np.logical_or(im_nodata, im_inf), im_nan)
+        # check if there are pixels with 0 intensity in the Green, NIR and SWIR bands and add those
+        # to the cloud mask as otherwise they will cause errors when calculating the NDWI and MNDWI
+        im_zeros = np.ones(cloud_mask.shape).astype(bool)
+        for k in [1,3,4]: # loop through the Green, NIR and SWIR bands
+            im_zeros = np.logical_and(np.isin(im_ms[:,:,k],0), im_zeros)
+        # update cloud mask and nodata
+        cloud_mask = np.logical_or(im_zeros, cloud_mask)
+        im_nodata = np.logical_or(im_zeros, im_nodata)
+
+        # pansharpen Blue, Green, Red (where there is overlapping with pan band in L8)
+        try:
+            im_ms_ps = pansharpen(im_ms[:,:,[0,1,2]], im_pan, cloud_mask)
+        except: # if pansharpening fails, keep downsampled bands (for long runs)
+            im_ms_ps = im_ms[:,:,[0,1,2]]
+        # add downsampled NIR and SWIR1 bands
+        im_ms_ps = np.append(im_ms_ps, im_ms[:,:,[3,4]], axis=2)
+
+        im_ms = im_ms_ps.copy()
+        # the extra image is the 15m panchromatic band
+        im_extra = im_pan
+
+    #=============================================================================================#
+    # S2 images
+    #=============================================================================================#
+
+    # TODO: Add RE2 band processing (need to first add RE2 band download in sat_download).
+
+    if satname == &#39;S2&#39;:
+
+        # read 10m bands (B,G,R,NIR)
+        fn10 = fn[0]
+        data = gdal.Open(fn10, gdal.GA_ReadOnly)
+        georef = np.array(data.GetGeoTransform())
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im10 = np.stack(bands, 2)
+        im10 = im10/10000 # TOA scaled to 10000
+
+        # if image contains only zeros (can happen with S2), skip the image
+        if sum(sum(sum(im10))) &lt; 1:
+            im_ms = []
+            georef = []
+            # skip the image by giving it a full cloud_mask
+            cloud_mask = np.ones((im10.shape[0],im10.shape[1])).astype(&#39;bool&#39;)
+            return im_ms, georef, cloud_mask, [], [], []
+
+        # size of 10m bands
+        nrows = im10.shape[0]
+        ncols = im10.shape[1]
+
+        # read 20m band (SWIR1)
+        fn20 = fn[1]
+        data = gdal.Open(fn20, gdal.GA_ReadOnly)
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im20 = np.stack(bands, 2)
+        im20 = im20[:,:,0]
+        im20 = im20/10000 # TOA scaled to 10000
+
+        # resize the image using bilinear interpolation (order 1)
+        im_swir = transform.resize(im20, (nrows, ncols), order=1, preserve_range=True,
+                                   mode=&#39;constant&#39;)
+        im_swir = np.expand_dims(im_swir, axis=2)
+
+        # append down-sampled SWIR1 band to the other 10m bands
+        im_ms = np.append(im10, im_swir, axis=2)
+
+        # create cloud mask using 60m QA band (not as good as Landsat cloud cover)
+        fn60 = fn[2]
+        data = gdal.Open(fn60, gdal.GA_ReadOnly)
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im60 = np.stack(bands, 2)
+        im_QA = im60[:,:,0]
+        cloud_mask = create_cloud_mask(im_QA, satname, cloud_mask_issue)
+        # resize the cloud mask using nearest neighbour interpolation (order 0)
+        cloud_mask = transform.resize(cloud_mask,(nrows, ncols), order=0, preserve_range=True,
+                                      mode=&#39;constant&#39;)
+        # check if -inf or nan values on any band and add to cloud mask
+        im_nodata = np.zeros(cloud_mask.shape).astype(bool)
+        for k in range(im_ms.shape[2]):
+            im_inf = np.isin(im_ms[:,:,k], -np.inf)
+            im_nan = np.isnan(im_ms[:,:,k])
+            cloud_mask = np.logical_or(np.logical_or(cloud_mask, im_inf), im_nan)
+            im_nodata = np.logical_or(np.logical_or(im_nodata, im_inf), im_nan)
+
+        # check if there are pixels with 0 intensity in the Green, NIR and SWIR bands and add those
+        # to the cloud mask as otherwise they will cause errors when calculating the NDWI and MNDWI
+        im_zeros = np.ones(cloud_mask.shape).astype(bool)
+        for k in [1,3,4]: # loop through the Green, NIR and SWIR bands
+            im_zeros = np.logical_and(np.isin(im_ms[:,:,k],0), im_zeros)
+        # update cloud mask and nodata
+        cloud_mask = np.logical_or(im_zeros, cloud_mask)
+        im_nodata = np.logical_or(im_zeros, im_nodata)
+
+        # the extra image is the 20m SWIR band
+        im_extra = im20
+
+    return im_ms, georef, cloud_mask, im_extra, im_QA, im_nodata
+
+
+def create_file(im_ms, cloud_mask, date, satname, filepath_out,
+                georef, crs, formula, colormap, show):
+    &#34;&#34;&#34;
+    Function meant to be called by save_file to create and save a new raster file (TIF format)
+    corresponding to a user-selected band combination (either a custom formula, or a pre-
+    defined index such as RGB or NDVI). For 1-band formulas, it also outputs a JPG
+    visualization in a chosen colormap.
+
+    Arguments:
+    -----------
+    im_ms: np.array
+        3D array containing the pansharpened/down-sampled bands (B, G, R, NIR, SWIR1)
+    cloud_mask: np.array
+        2D cloud mask with True where cloud pixels are
+    date: str
+        string containing the date at which the image was acquired
+    satname: str
+        name of the satellite mission (e.g., &#39;L5&#39;)
+    filepath_out: str
+        path to folder to save outputs (folder potentially created by save_file function)
+    georef: list, optional
+        georef vector to append to TIF file if image_format=&#39;tif&#39;
+    crs: int, optional
+        crs to append to TIF file if image_foramt=&#39;tif&#39;
+    formula: str, optional (default: &#39;[ RGB ]&#39;&#39;)
+        Remote sensing index or band combination to be computed using the preprocessed raster
+        bands. Available indices are: RGB, NDVI, NDWI, BSI, AVI, NDSI, NDMI, SI, and valid 
+        combinations are of the form: [ R * 0.5 , NIR * 1 , B * 0.7 ]. Spaces are important
+        for the parser to understand the formula, and coefficients correspond to pixel intensity
+        (in %). See more details here: sentinel-hub.com/sites/default/Custom_script_tutorial.pdf.
+    colormap: str, optional (default: &#39;summer&#39;)
+        Plot the index using a specific matplotlib colormap so that features
+        are more visual. Possible colormaps are listed on: 
+        https://matplotlib.org/examples/color/colormaps_reference.html
+    show: bool, optional (default: False)
+        output a visualization of the images as they are processed
+
+    Returns:
+    -----------
+        Saves an image corresponding to the preprocessed satellite image.
+    &#34;&#34;&#34;
+
+    # Rescale band intensity
+    im_RGB = rescale_image_intensity(im_ms[:,:,[2,1,0]], cloud_mask, 99.9)
+    im_NIR = rescale_image_intensity(im_ms[:,:,3], cloud_mask, 99.9)
+    im_SWIR = rescale_image_intensity(im_ms[:,:,4], cloud_mask, 99.9)
+
+    # Formula correspondence dictionary
+    corres = {&#39;R&#39;: &#39;im_RGB[...,0]&#39;,
+        &#39;G&#39;: &#39;im_RGB[...,1]&#39;,
+        &#39;B&#39;: &#39;im_RGB[...,2]&#39;,
+        &#39;RGB&#39;: &#39;im_RGB&#39;,
+        &#39;NIR&#39;: &#39;im_NIR&#39;,
+        &#39;SWIR&#39;: &#39;im_SWIR&#39;,
+        &#39;NDVI&#39;: &#39;(im_NIR - im_RGB[...,0]) / (im_NIR + im_RGB[...,0])&#39;,
+        &#39;AVI&#39;: &#39;(im_NIR * (1 - im_RGB[...,0]) * (im_NIR - im_RGB[...,0]))**(1/3)&#39;,
+        &#39;SI&#39;: &#39;((1 - im_RGB[...,0]) * (1 - im_RGB[...,1]) * (1 - im_RGB[...,2]))**(1/3)&#39;,
+        &#39;BSI&#39;: &#39;((im_SWIR + im_RGB[...,0]) - (im_NIR + im_RGB[...,2])) / ((im_SWIR + im_RGB[...,0]) + (im_NIR + im_RGB[...,2]))&#39;,
+        &#39;NDWI&#39;: &#39;(im_NIR - im_RGB[...,0]) / (im_NIR + im_RGB[...,0])&#39;,
+        &#39;NDMI&#39;: &#39;(im_NIR - im_SWIR) / (im_NIR + im_SWIR)&#39;,
+        &#39;NDSI&#39;: &#39;(im_RGB[...,1] - im_SWIR) / (im_RGB[...,1] + im_SWIR)&#39;
+        } # you can just add any index here, as long as it uses R, G, B, NIR or SWIR (SWIR2) bands
+
+    # Interpret the formula thanks to correspondence dictionary
+    formula_stripped = formula.replace(&#39;[&#39;,&#39;&#39;).replace(&#39;]&#39;,&#39;&#39;).replace(&#39; &#39;,&#39;&#39;) # store stripped formula
+    count = 0
+    for key, value in corres.items():
+        formula = formula.replace(&#39; &#39;+key+&#39; &#39;, value) 
+        count += 1
+    assert count &gt; 0, &#39;Please enter a valid formula. Valid formulas include band combinations&#39; + \
+                      &#39; written such as [ R * 0.5 , NIR * 1 , B * 0.7 ] (with spaces everywhere)&#39; + \
+                      &#39; and predefined formulas among: {}&#39;.format(list(corres.keys()))
+    
+    # Execute the formula with eval function
+    im_formula = np.asarray(eval(formula)) # thanks to the assertion above, eval content is safe
+    #print(&#39;1 &#39;, im_formula.shape)
+    if len(im_formula.shape) &gt; 3:
+        im_formula = np.squeeze(im_formula)
+    #print(&#39;2 &#39;,im_formula.shape)
+    if im_formula.shape[2] &gt; 3:
+        im_formula = np.moveaxis(im_formula, 0, -1) # put channels as last axis to reshape as image
+    #    print(&#39;3 &#39;,im_formula.shape)
+    im_formula = skimage.img_as_ubyte(im_formula) # convert to uint8 (TODO: check if better before applying formula)
+    #print(&#39;4 &#39;,im_formula.shape)
+    im_formula = im_formula.astype(&#39;int&#39;)
+
+    # Write the new raster with gdal
+    dst_ds = gdal.GetDriverByName(&#39;GTiff&#39;).Create(os.path.join(filepath_out, date + &#39;_&#39; + satname +\
+                                      &#39;_&#39; + formula_stripped + &#39;.tif&#39;),
+                                      im_formula.shape[1], im_formula.shape[0], im_formula.shape[2], 
+                                      gdal.GDT_Byte)
+    dst_ds.SetGeoTransform(georef) # specify coords
+    srs = osr.SpatialReference() # establish encoding
+    srs.ImportFromEPSG(crs) # set to original image crs
+    dst_ds.SetProjection(srs.ExportToWkt()) # export crs to tiff-understandable format
+    for i in range(im_formula.shape[2]):
+        # print(im_formula.shape)
+        dst_ds.GetRasterBand(i+1).WriteArray(im_formula[...,i]) # write all bands to raster
+    dst_ds.FlushCache() # write to disk
+    dst_ds = None # close process
+
+    # If final raster has only 1 band, also save as png with specified colormap for visualization
+    if im_formula.shape[2] == 1:
+        im_formula = np.squeeze(im_formula)
+        plt.imsave(os.path.join(filepath_out, date + &#39;_&#39; + satname + &#39;_&#39; + formula_stripped + &#39;.png&#39;),
+                   im_formula, cmap=plt.get_cmap(colormap))
+
+    # show example
+    if show:
+        if im_formula.shape[2] == 1:
+            fig = plt.figure(figsize = (10,10))
+            plt.title(&#39;Image preview&#39;)
+            plt.imshow(im_formula, cmap=plt.get_cmap(colormap))
+        else:
+            fig = plt.figure(figsize = (10,10))
+            plt.title(&#39;Image preview&#39;)
+            plt.imshow(im_formula)
+
+    # If needed, plot RGB image as a figure with title, custom size and resolution, etc.
+    # fig = plt.figure()
+    # fig.set_size_inches([18,9])
+    # ax1 = fig.add_subplot(111)
+    # ax1.axis(&#39;off&#39;)
+    # ax1.imshow(im_RGB)
+    # ax1.set_title(date + &#39;   &#39; + satname, fontsize=16)
+
+    # Same, but with other bands in the plot alongside RGB
+   # if im_RGB.shape[1] &gt; 2*im_RGB.shape[0]:
+   #     ax1 = fig.add_subplot(311)
+   #     ax2 = fig.add_subplot(312)
+   #     ax3 = fig.add_subplot(313)
+   # else:
+   #     ax1 = fig.add_subplot(131)
+   #     ax2 = fig.add_subplot(132)
+   #     ax3 = fig.add_subplot(133)
+   # # RGB
+   # ax1.axis(&#39;off&#39;)
+   # ax1.imshow(im_RGB)
+   # ax1.set_title(date + &#39;   &#39; + satname, fontsize=16)
+   # # NIR
+   # ax2.axis(&#39;off&#39;)
+   # ax2.imshow(im_NIR, cmap=&#39;seismic&#39;)
+   # ax2.set_title(&#39;Near Infrared&#39;, fontsize=16)
+   # # SWIR
+   # ax3.axis(&#39;off&#39;)
+   # ax3.imshow(im_SWIR, cmap=&#39;seismic&#39;)
+   # ax3.set_title(&#39;Short-wave Infrared&#39;, fontsize=16)
+
+    # Save figure
+    # plt.rcParams[&#39;savefig.jpeg_quality&#39;] = 100 # disable jpeg lossy image compression
+    # fig.savefig(os.path.join(filepath, date + &#39;_&#39; + satname + &#39;.jpg&#39;), dpi = 150) 
+    
+    # Alternative saving parameters (no margins, higher resolution)
+    # fig.savefig(os.path.join(filepath, date + &#39;_&#39; + satname + &#39;.jpg&#39;), 
+    #      bbox_inches = &#39;tight&#39;, pad_inches = 0, dpi=1000)
+    # plt.close()
+
+
+def save_files(metadata, inputs, formula=&#39;[ RGB ]&#39;, colormap=&#39;summer&#39;,
+               show=False, cloud_mask_issue=False):
+    &#34;&#34;&#34;
+    Creates and saves a new raster file (TIF format) corresponding to a user-selected 
+    band combination (either a custom formula, or a pre-defined index such as RGB or 
+    NDVI), for all the images contained in metadata. For 1-band formulas, it also 
+    saves a JPG visualization in a chosen colormap.
+
+    Arguments:
+    -----------
+    metadata: dict
+        contains all the information about the satellite images that were downloaded
+    inputs: dict 
+        input parameters from sat_download (sitename, filepath, polygon, dates, sat_list)    
+    cloud_mask_issue: boolean, optional (default: False)
+            True if there is an issue with the cloud mask and pixels
+            are erroneously being masked on the images
+    formula: str, optional (default: &#39;[ RGB ]&#39;)
+        Remote sensing index or band combination to be computed using the preprocessed raster
+        bands. Available indices are: RGB, NDVI, NDWI, BSI, AVI, NDSI, NDMI, SI, and valid 
+        combinations are of the form: [ R * 0.5 , NIR * 1 , B * 0.7 ]. Spaces are important
+        for the parser to understand the formula, and coefficients correspond to pixel intensity
+        (in %). See more details here: sentinel-hub.com/sites/default/Custom_script_tutorial.pdf.
+    colormap: str, optional (default: &#39;summer&#39;)
+        Plot the index using a specific matplotlib colormap so that features
+        are more visual. Possible colormaps are listed on: 
+        https://matplotlib.org/examples/color/colormaps_reference.html
+    show: bool, optional (default: False)
+        output a visualization of the images as they are processed
+    
+    Returns:
+    -----------
+        Stores the images in a folder named /preprocessed.
+    &#34;&#34;&#34;
+
+    sitename = inputs[&#39;sitename&#39;]
+    filepath_data = inputs[&#39;filepath&#39;]
+    formula_stripped = formula.replace(&#39;[&#39;,&#39;&#39;).replace(&#39;]&#39;,&#39;&#39;).replace(&#39; &#39;, &#39;&#39;)
+
+    print(&#39;Starting preprocessing as {}...&#39;.format(formula_stripped))
+
+    # create subfolder to store the files
+    if len(formula) &lt;= 8:
+        filepath_out = os.path.join(filepath_data, sitename, &#39;preprocessed_files&#39;,
+                                   &#39;{}&#39;.format(formula_stripped))
+    else:
+        filepath_out = os.path.join(filepath_data, sitename, &#39;preprocessed_files&#39;, &#39;custom_formula&#39;)
+    if not os.path.exists(filepath_out):
+            os.makedirs(filepath_out)
+
+    # loop through satellite list
+    for satname in metadata.keys():
+
+        filepath = sat_tools.get_filepath(inputs,satname)
+        filenames = metadata[satname][&#39;filenames&#39;]
+
+        # loop through images
+        for i in range(len(filenames)):
+            # image filename
+            fn = sat_tools.get_filenames(filenames[i],filepath, satname)
+            # get crs
+            crs = int(metadata[satname][&#39;epsg&#39;][i])
+            # read and preprocess image
+            im_ms, georef, cloud_mask, im_extra, im_QA, im_nodata = preprocess_single(fn, satname, cloud_mask_issue)
+            # create and save file with requested parameters
+            date = filenames[i][:-4]
+            plt.ioff()  # turning interactive plotting off (in case we use the plotting options in create_file)
+            try:
+                create_file(im_ms, cloud_mask, date, satname, filepath_out,
+                            georef, crs, formula, colormap, show)
+            except:
+                continue
+            # print percentage completion for user
+            print(&#39;\r%d%%&#39; %int((i+1)/len(filenames)*100), end=&#39;&#39;)
+
+    # print the location where the images have been saved
+    print(&#39;\n{} satellite images saved in {}&#39;.format(formula_stripped, filepath_out))
+
+
+def timelapse(timelapse_settings, correct_path_row=False):
+    &#34;&#34;&#34;
+    Saves a timelapse video (.mp4) of images corresponding to the arguments
+    in the Google Drive linked to the user&#39;s GEE account.
+
+    Available images are Landsat 5 (03/1984 - 05/2013), Landsat 7 (04/1999 - present,
+    but several system failures make Landsat 8 a preferred choice when possible),
+    and Landsat 8 (06/2013 - present).
+
+    TODO: 1) download video directly on disk, 2) add Sentinel-2 and MODIS, 3) add 
+    remote sensing indices timelapse, 4) merge sources if dates spans over several
+    satellite periods.
+
+    Arguments:
+    -----------
+    timelapse_settings: dict, with possible keys:
+        sat: str
+            &#39;L5&#39;, &#39;L7&#39; or &#39;L8&#39; (careful with satellite working periods)
+        dates: list of str
+            start and end dates in format: yyyy-mm-dd
+        max_cloud_cover: int
+            maximum cloud cover percentage
+        bands: list
+            bands to select, in format [&#39;R&#39;, &#39;G&#39;, &#39;B&#39;], among &#39;R&#39;, &#39;G&#39;, &#39;B&#39;, &#39;NIR&#39;,
+            &#39;SWIR1&#39;, &#39;SWIR2&#39;, &#39;PAN&#39; (and &#39;CA&#39; for Landsat 8)
+        filename: str
+            name of the video to be saved on Drive
+        bbox: list
+            list of (lon, lat) tuples corresponding to summits of the area of interest -
+            note that you need to pass either a bbox or a point and radius
+        point: tuple
+            center of the area of interest in (lon, lat) format (ex: (-122.7286, 37.6325))
+        radius: int
+            radius of the area of interest, in km
+        video_dim: int, optional (default: 720)
+            width of the output video - choose a higer value to increase quality
+        frames_per_sec: int, optional (default: 12)
+            nb of images per second in the output video - choose a higher value for
+            a smoother result
+    correct_path_row: boolean, optional (default: False)
+        set to True if the output video shows black areas, meaning that your area
+        overlaps on 2 satellite areas - the function will run a new search to 
+        correct the automatic Landsat image selection
+
+    Returns:
+    -----------
+    saves timelapse as {filename}.mp4 in the user&#39;s Google Drive account linked to GEE
+    &#34;&#34;&#34;
+
+    # Initializations
+    ee.Initialize()
+    sat_corres = {&#39;L5&#39;:&#39;LANDSAT/LT05/C01/T1_TOA&#39;, 
+              &#39;L7&#39;:&#39;LANDSAT/LE07/C01/T1_TOA&#39;,
+              &#39;L8&#39;:&#39;LANDSAT/LC08/C01/T1_TOA&#39;}
+    band_corres_L5_L7 = {&#39;R&#39;:&#39;B3&#39;, &#39;G&#39;:&#39;B2&#39;, &#39;B&#39;:&#39;B1&#39;, &#39;NIR&#39;:&#39;B4&#39;,
+                         &#39;SWIR1&#39;:&#39;B5&#39;, &#39;TIR&#39;:&#39;B6&#39;, &#39;SWIR2&#39;:&#39;B7&#39;, &#39;PAN&#39;:&#39;B8&#39;}
+    band_corres_L8 = {&#39;R&#39;:&#39;B4&#39;, &#39;G&#39;:&#39;B3&#39;, &#39;B&#39;:&#39;B2&#39;, &#39;NIR&#39;:&#39;B5&#39;,
+                      &#39;SWIR1&#39;:&#39;B6&#39;, &#39;SWIR2&#39;:&#39;B7&#39;, &#39;PAN&#39;:&#39;B8&#39;, &#39;CA&#39;:&#39;B1&#39;}
+    if &#39;video_dim&#39; not in timelapse_settings:
+        timelapse_settings[&#39;video_dim&#39;] = 720
+    if &#39;frames_per_sec&#39; not in timelapse_settings:
+        timelapse_settings[&#39;frames_per_sec&#39;] = 12
+    bands = timelapse_settings[&#39;bands&#39;]
+
+    # Choose image collection
+    sat = timelapse_settings[&#39;sat&#39;]
+    collection = ee.ImageCollection(sat_corres[sat])
+
+    # Define area
+    assert (&#39;point&#39; in timelapse_settings) or (&#39;bbox&#39; in timelapse_settings),\
+                                             &#39;Please pass point &amp; radius or bbox coordinates.&#39;
+    if &#39;point&#39; in timelapse_settings:
+        assert &#39;radius&#39; in timelapse_settings, &#34;Don&#39;t forget to pass the radius of the area of study.&#34;
+        center = ee.Geometry.Point(timelapse_settings[&#39;point&#39;])
+        user_bbox = sat_tools.bbox_from_point(timelapse_settings[&#39;point&#39;], timelapse_settings[&#39;radius&#39;])
+        user_bbox = ee.Geometry.Polygon(user_bbox)
+    elif &#39;bbox&#39; in timelapse_settings:
+        user_bbox = ee.Geometry.Polygon(timelapse_settings[&#39;bbox&#39;])
+        center = shapely.geometry.Polygon(timelapse_settings[&#39;bbox&#39;]).centroid.coords[0]
+        center = ee.Geometry.Point(center)
+    collection = collection.filterBounds(center)
+
+    # Correct Landsat path and row selection if needed
+    if correct_path_row:
+        print(&#39;Correcting Landsat tile selection...&#39;)
+        path, row = sat_tools.find_path_row(point)
+        collection = collection.filter(ee.Filter.eq(&#39;WRS_PATH&#39;, path))
+        collection = collection.filter(ee.Filter.eq(&#39;WRS_ROW&#39;, row))
+        print(&#39;Done, now applying date and cloud filters.&#39;)
+ 
+    # Apply date and cloud filters
+    collection = collection.filter(ee.Filter.lt(&#39;CLOUD_COVER&#39;, timelapse_settings[&#39;max_cloud_cover&#39;]))
+    collection = collection.filterDate(timelapse_settings[&#39;dates&#39;][0], timelapse_settings[&#39;dates&#39;][1])
+
+    # Select the bands and convert to 8-bit
+    if timelapse_settings[&#39;sat&#39;] == &#39;L8&#39;:
+        user_bands = [band_corres_L8[bands[0]], band_corres_L8[bands[1]], band_corres_L8[bands[2]]]
+    else:
+        user_bands = [band_corres_L5_L7[bands[0]], band_corres_L5_L7[bands[1]], band_corres_L5_L7[bands[2]]]
+    collection = collection.select(user_bands)
+    def convertBit(image):
+        return image.multiply(512).uint8()
+    collection = collection.map(convertBit)
+    
+    # Print info for user
+    count = collection.size()
+    #print(&#34;{} images successfully selected.&#34;.format(count))
+    print(&#34;Processing timelapse on GEE server...&#34;)
+
+    # Export to video and launch processing on GEE
+    video = batch.Export.video.toDrive(collection, description=timelapse_settings[&#39;filename&#39;],
+                                 dimensions = timelapse_settings[&#39;video_dim&#39;],
+                                 framesPerSecond = timelapse_settings[&#39;frames_per_sec&#39;],
+                                 region=user_bbox.getInfo()[&#34;coordinates&#34;])
+    __ = batch.Task.start(video)
+
+    # Monitor the task
+    while video.status()[&#39;state&#39;] in [&#39;READY&#39;, &#39;RUNNING&#39;]:
+        print(video.status()[&#39;state&#39;])
+        time.sleep(10)
+    else:
+        print(video.status()[&#39;state&#39;] + &#39; - Please check on your Google Drive account.&#39;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="totalsat.sat_preprocess.create_cloud_mask"><code class="name flex">
+<span>def <span class="ident">create_cloud_mask</span></span>(<span>im_QA, satname, cloud_mask_issue)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a cloud mask using the information contained in the Quality Assessment (QA) band
+for each satellite.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>im_QA: np.array
+Image containing the QA band
+satname: string
+short name for the satellite: 'L5', 'L7', 'L8' or 'S2'/'S2_RGB'
+cloud_mask_issue: boolean
+Set to True if there is an issue with the cloud mask and pixels are being
+erroneously masked on the images. It will check pixels around to determine
+if the cloud information is a mistake and shouldn't be taken into account.</p>
+<h2 id="returns">Returns:</h2>
+<p>cloud_mask : np.array
+boolean array with True if a pixel is cloudy and False otherwise</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_cloud_mask(im_QA, satname, cloud_mask_issue):
+    &#34;&#34;&#34;
+    Creates a cloud mask using the information contained in the Quality Assessment (QA) band
+    for each satellite.
+
+    Arguments:
+    -----------
+    im_QA: np.array
+        Image containing the QA band
+    satname: string
+        short name for the satellite: &#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39; or &#39;S2&#39;/&#39;S2_RGB&#39;
+    cloud_mask_issue: boolean
+        Set to True if there is an issue with the cloud mask and pixels are being
+        erroneously masked on the images. It will check pixels around to determine
+        if the cloud information is a mistake and shouldn&#39;t be taken into account.
+
+    Returns:
+    -----------
+    cloud_mask : np.array
+        boolean array with True if a pixel is cloudy and False otherwise  
+    &#34;&#34;&#34;
+
+    # convert QA bits (the value of bits allocated to cloud cover vary depending on the satellite mission)
+    if satname == &#39;L8&#39;:
+        cloud_values = [2800, 2804, 2808, 2812, 6896, 6900, 6904, 6908]
+    elif satname == &#39;L7&#39; or satname == &#39;L5&#39;:
+        cloud_values = [752, 756, 760, 764]
+    elif satname == &#39;S2&#39; or satname == &#39;S2_RGB&#39;:
+        cloud_values = [1024, 2048] # 1024 = dense clouds, 2048 = cirrus clouds
+
+    # find which pixels have bits corresponding to cloud values
+    cloud_mask = np.isin(im_QA, cloud_values)
+
+    # remove cloud pixels that form very thin features. These can be for example beach or swash pixels
+    # that are erroneously identified as clouds by the CFMASK algorithm applied to the images by the USGS
+    if sum(sum(cloud_mask)) &gt; 0 and sum(sum(~cloud_mask)) &gt; 0:
+        morphology.remove_small_objects(cloud_mask, min_size=10, connectivity=1, in_place=True)
+
+        if cloud_mask_issue:
+            elem = morphology.square(3) # use a square of width 3 pixels
+            cloud_mask = morphology.binary_opening(cloud_mask,elem) # perform image opening
+            # remove objects with less than 25 connected pixels
+            morphology.remove_small_objects(cloud_mask, min_size=25, connectivity=1, in_place=True)
+
+    return cloud_mask</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_preprocess.create_file"><code class="name flex">
+<span>def <span class="ident">create_file</span></span>(<span>im_ms, cloud_mask, date, satname, filepath_out, georef, crs, formula, colormap, show)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function meant to be called by save_file to create and save a new raster file (TIF format)
+corresponding to a user-selected band combination (either a custom formula, or a pre-
+defined index such as RGB or NDVI). For 1-band formulas, it also outputs a JPG
+visualization in a chosen colormap.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>im_ms: np.array
+3D array containing the pansharpened/down-sampled bands (B, G, R, NIR, SWIR1)
+cloud_mask: np.array
+2D cloud mask with True where cloud pixels are
+date: str
+string containing the date at which the image was acquired
+satname: str
+name of the satellite mission (e.g., 'L5')
+filepath_out: str
+path to folder to save outputs (folder potentially created by save_file function)
+georef: list, optional
+georef vector to append to TIF file if image_format='tif'
+crs: int, optional
+crs to append to TIF file if image_foramt='tif'
+formula: str, optional (default: '[ RGB ]'')
+Remote sensing index or band combination to be computed using the preprocessed raster
+bands. Available indices are: RGB, NDVI, NDWI, BSI, AVI, NDSI, NDMI, SI, and valid
+combinations are of the form: [ R * 0.5 , NIR * 1 , B * 0.7 ]. Spaces are important
+for the parser to understand the formula, and coefficients correspond to pixel intensity
+(in %). See more details here: sentinel-hub.com/sites/default/Custom_script_tutorial.pdf.
+colormap: str, optional (default: 'summer')
+Plot the index using a specific matplotlib colormap so that features
+are more visual. Possible colormaps are listed on:
+<a href="https://matplotlib.org/examples/color/colormaps_reference.html">https://matplotlib.org/examples/color/colormaps_reference.html</a>
+show: bool, optional (default: False)
+output a visualization of the images as they are processed</p>
+<h2 id="returns">Returns:</h2>
+<pre><code>Saves an image corresponding to the preprocessed satellite image.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_file(im_ms, cloud_mask, date, satname, filepath_out,
+                georef, crs, formula, colormap, show):
+    &#34;&#34;&#34;
+    Function meant to be called by save_file to create and save a new raster file (TIF format)
+    corresponding to a user-selected band combination (either a custom formula, or a pre-
+    defined index such as RGB or NDVI). For 1-band formulas, it also outputs a JPG
+    visualization in a chosen colormap.
+
+    Arguments:
+    -----------
+    im_ms: np.array
+        3D array containing the pansharpened/down-sampled bands (B, G, R, NIR, SWIR1)
+    cloud_mask: np.array
+        2D cloud mask with True where cloud pixels are
+    date: str
+        string containing the date at which the image was acquired
+    satname: str
+        name of the satellite mission (e.g., &#39;L5&#39;)
+    filepath_out: str
+        path to folder to save outputs (folder potentially created by save_file function)
+    georef: list, optional
+        georef vector to append to TIF file if image_format=&#39;tif&#39;
+    crs: int, optional
+        crs to append to TIF file if image_foramt=&#39;tif&#39;
+    formula: str, optional (default: &#39;[ RGB ]&#39;&#39;)
+        Remote sensing index or band combination to be computed using the preprocessed raster
+        bands. Available indices are: RGB, NDVI, NDWI, BSI, AVI, NDSI, NDMI, SI, and valid 
+        combinations are of the form: [ R * 0.5 , NIR * 1 , B * 0.7 ]. Spaces are important
+        for the parser to understand the formula, and coefficients correspond to pixel intensity
+        (in %). See more details here: sentinel-hub.com/sites/default/Custom_script_tutorial.pdf.
+    colormap: str, optional (default: &#39;summer&#39;)
+        Plot the index using a specific matplotlib colormap so that features
+        are more visual. Possible colormaps are listed on: 
+        https://matplotlib.org/examples/color/colormaps_reference.html
+    show: bool, optional (default: False)
+        output a visualization of the images as they are processed
+
+    Returns:
+    -----------
+        Saves an image corresponding to the preprocessed satellite image.
+    &#34;&#34;&#34;
+
+    # Rescale band intensity
+    im_RGB = rescale_image_intensity(im_ms[:,:,[2,1,0]], cloud_mask, 99.9)
+    im_NIR = rescale_image_intensity(im_ms[:,:,3], cloud_mask, 99.9)
+    im_SWIR = rescale_image_intensity(im_ms[:,:,4], cloud_mask, 99.9)
+
+    # Formula correspondence dictionary
+    corres = {&#39;R&#39;: &#39;im_RGB[...,0]&#39;,
+        &#39;G&#39;: &#39;im_RGB[...,1]&#39;,
+        &#39;B&#39;: &#39;im_RGB[...,2]&#39;,
+        &#39;RGB&#39;: &#39;im_RGB&#39;,
+        &#39;NIR&#39;: &#39;im_NIR&#39;,
+        &#39;SWIR&#39;: &#39;im_SWIR&#39;,
+        &#39;NDVI&#39;: &#39;(im_NIR - im_RGB[...,0]) / (im_NIR + im_RGB[...,0])&#39;,
+        &#39;AVI&#39;: &#39;(im_NIR * (1 - im_RGB[...,0]) * (im_NIR - im_RGB[...,0]))**(1/3)&#39;,
+        &#39;SI&#39;: &#39;((1 - im_RGB[...,0]) * (1 - im_RGB[...,1]) * (1 - im_RGB[...,2]))**(1/3)&#39;,
+        &#39;BSI&#39;: &#39;((im_SWIR + im_RGB[...,0]) - (im_NIR + im_RGB[...,2])) / ((im_SWIR + im_RGB[...,0]) + (im_NIR + im_RGB[...,2]))&#39;,
+        &#39;NDWI&#39;: &#39;(im_NIR - im_RGB[...,0]) / (im_NIR + im_RGB[...,0])&#39;,
+        &#39;NDMI&#39;: &#39;(im_NIR - im_SWIR) / (im_NIR + im_SWIR)&#39;,
+        &#39;NDSI&#39;: &#39;(im_RGB[...,1] - im_SWIR) / (im_RGB[...,1] + im_SWIR)&#39;
+        } # you can just add any index here, as long as it uses R, G, B, NIR or SWIR (SWIR2) bands
+
+    # Interpret the formula thanks to correspondence dictionary
+    formula_stripped = formula.replace(&#39;[&#39;,&#39;&#39;).replace(&#39;]&#39;,&#39;&#39;).replace(&#39; &#39;,&#39;&#39;) # store stripped formula
+    count = 0
+    for key, value in corres.items():
+        formula = formula.replace(&#39; &#39;+key+&#39; &#39;, value) 
+        count += 1
+    assert count &gt; 0, &#39;Please enter a valid formula. Valid formulas include band combinations&#39; + \
+                      &#39; written such as [ R * 0.5 , NIR * 1 , B * 0.7 ] (with spaces everywhere)&#39; + \
+                      &#39; and predefined formulas among: {}&#39;.format(list(corres.keys()))
+    
+    # Execute the formula with eval function
+    im_formula = np.asarray(eval(formula)) # thanks to the assertion above, eval content is safe
+    #print(&#39;1 &#39;, im_formula.shape)
+    if len(im_formula.shape) &gt; 3:
+        im_formula = np.squeeze(im_formula)
+    #print(&#39;2 &#39;,im_formula.shape)
+    if im_formula.shape[2] &gt; 3:
+        im_formula = np.moveaxis(im_formula, 0, -1) # put channels as last axis to reshape as image
+    #    print(&#39;3 &#39;,im_formula.shape)
+    im_formula = skimage.img_as_ubyte(im_formula) # convert to uint8 (TODO: check if better before applying formula)
+    #print(&#39;4 &#39;,im_formula.shape)
+    im_formula = im_formula.astype(&#39;int&#39;)
+
+    # Write the new raster with gdal
+    dst_ds = gdal.GetDriverByName(&#39;GTiff&#39;).Create(os.path.join(filepath_out, date + &#39;_&#39; + satname +\
+                                      &#39;_&#39; + formula_stripped + &#39;.tif&#39;),
+                                      im_formula.shape[1], im_formula.shape[0], im_formula.shape[2], 
+                                      gdal.GDT_Byte)
+    dst_ds.SetGeoTransform(georef) # specify coords
+    srs = osr.SpatialReference() # establish encoding
+    srs.ImportFromEPSG(crs) # set to original image crs
+    dst_ds.SetProjection(srs.ExportToWkt()) # export crs to tiff-understandable format
+    for i in range(im_formula.shape[2]):
+        # print(im_formula.shape)
+        dst_ds.GetRasterBand(i+1).WriteArray(im_formula[...,i]) # write all bands to raster
+    dst_ds.FlushCache() # write to disk
+    dst_ds = None # close process
+
+    # If final raster has only 1 band, also save as png with specified colormap for visualization
+    if im_formula.shape[2] == 1:
+        im_formula = np.squeeze(im_formula)
+        plt.imsave(os.path.join(filepath_out, date + &#39;_&#39; + satname + &#39;_&#39; + formula_stripped + &#39;.png&#39;),
+                   im_formula, cmap=plt.get_cmap(colormap))
+
+    # show example
+    if show:
+        if im_formula.shape[2] == 1:
+            fig = plt.figure(figsize = (10,10))
+            plt.title(&#39;Image preview&#39;)
+            plt.imshow(im_formula, cmap=plt.get_cmap(colormap))
+        else:
+            fig = plt.figure(figsize = (10,10))
+            plt.title(&#39;Image preview&#39;)
+            plt.imshow(im_formula)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_preprocess.hist_match"><code class="name flex">
+<span>def <span class="ident">hist_match</span></span>(<span>source, template)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adjust the pixel values of a grayscale (1-channel) image such that its histogram
+matches that of a target image (panchromatic band). Used in pansharpening.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>source: np.array
+Image to transform; the histogram is computed over the flattened
+array
+template: np.array
+Template image; can have different dimensions than source</p>
+<h2 id="returns">Returns:</h2>
+<p>matched: np.array
+The transformed output image</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def hist_match(source, template):
+    &#34;&#34;&#34;
+    Adjust the pixel values of a grayscale (1-channel) image such that its histogram 
+    matches that of a target image (panchromatic band). Used in pansharpening.
+
+    Arguments:
+    -----------
+    source: np.array
+        Image to transform; the histogram is computed over the flattened
+        array
+    template: np.array
+        Template image; can have different dimensions than source
+        
+    Returns:
+    -----------
+    matched: np.array
+        The transformed output image    
+    &#34;&#34;&#34;
+
+    oldshape = source.shape
+    source = source.ravel()
+    template = template.ravel()
+
+    # get the set of unique pixel values and their corresponding indices and counts
+    s_values, bin_idx, s_counts = np.unique(source, return_inverse=True,
+                                            return_counts=True)
+    t_values, t_counts = np.unique(template, return_counts=True)
+
+    # take the cumsum of the counts and normalize by the number of pixels to get 
+    # the empirical cumulative distribution functions for the source and template
+    # images (maps pixel value --&gt; quantile)
+    s_quantiles = np.cumsum(s_counts).astype(np.float64)
+    s_quantiles /= s_quantiles[-1]
+    t_quantiles = np.cumsum(t_counts).astype(np.float64)
+    t_quantiles /= t_quantiles[-1]
+
+    # interpolate linearly to find the pixel values in the template image that
+    # correspond most closely to the quantiles in the source image
+    interp_t_values = np.interp(s_quantiles, t_quantiles, t_values)
+
+    return interp_t_values[bin_idx].reshape(oldshape)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_preprocess.pansharpen"><code class="name flex">
+<span>def <span class="ident">pansharpen</span></span>(<span>im_ms, im_pan, cloud_mask)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Pansharpens a multispectral image, using the panchromatic band and a cloud mask.
+A PCA is applied to the image, then the 1st PC is replaced, after histogram
+matching with the panchromatic band. Note that it is essential to match the
+histograms of the 1st PC and the panchromatic band before replacing and
+inverting the PCA.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>im_ms: np.array
+Multispectral image to pansharpen (3D - bands separated by GDAL)
+im_pan: np.array
+Panchromatic band (2D)
+cloud_mask: np.array
+2D cloud mask with True for cloud pixels</p>
+<h2 id="returns">Returns:</h2>
+<p>im_ms_ps: np.ndarray
+Pansharpened multispectral image (3D)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def pansharpen(im_ms, im_pan, cloud_mask):
+    &#34;&#34;&#34;
+    Pansharpens a multispectral image, using the panchromatic band and a cloud mask.
+    A PCA is applied to the image, then the 1st PC is replaced, after histogram 
+    matching with the panchromatic band. Note that it is essential to match the
+    histograms of the 1st PC and the panchromatic band before replacing and 
+    inverting the PCA.
+
+    Arguments:
+    -----------
+    im_ms: np.array
+        Multispectral image to pansharpen (3D - bands separated by GDAL)
+    im_pan: np.array
+        Panchromatic band (2D)
+    cloud_mask: np.array
+        2D cloud mask with True for cloud pixels
+
+    Returns:
+    -----------
+    im_ms_ps: np.ndarray
+        Pansharpened multispectral image (3D)
+    &#34;&#34;&#34;
+
+    # reshape image into vector and apply cloud mask
+    vec = im_ms.reshape(im_ms.shape[0] * im_ms.shape[1], im_ms.shape[2])
+    vec_mask = cloud_mask.reshape(im_ms.shape[0] * im_ms.shape[1])
+    vec = vec[~vec_mask, :]
+    # apply PCA to multispectral bands
+    pca = decomposition.PCA()
+    vec_pcs = pca.fit_transform(vec)
+
+    # replace 1st PC with pan band (after matching histograms)
+    vec_pan = im_pan.reshape(im_pan.shape[0] * im_pan.shape[1])
+    vec_pan = vec_pan[~vec_mask]
+    vec_pcs[:,0] = hist_match(vec_pan, vec_pcs[:,0])
+    vec_ms_ps = pca.inverse_transform(vec_pcs)
+
+    # reshape vector into image
+    vec_ms_ps_full = np.ones((len(vec_mask), im_ms.shape[2])) * np.nan
+    vec_ms_ps_full[~vec_mask,:] = vec_ms_ps
+    im_ms_ps = vec_ms_ps_full.reshape(im_ms.shape[0], im_ms.shape[1], im_ms.shape[2])
+
+    return im_ms_ps</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_preprocess.preprocess_single"><code class="name flex">
+<span>def <span class="ident">preprocess_single</span></span>(<span>fn, satname, cloud_mask_issue)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the image and outputs the pansharpened/down-sampled multispectral bands,
+the georeferencing vector of the image (coordinates of the upper left pixel),
+the cloud mask, the QA band and a no_data image.
+For Landsat 7-8 it also outputs the panchromatic band, and for Sentinel 2 it
+also outputs the 20m SWIR band.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>fn: str or list of str
+filename of the image .tif file. For L7, L8 and S2 this argument
+is a list of filenames, one filename for each resolution (30m
+and 15m for Landsat 7-8, 10m, 20m and 60m for Sentinel 2)
+satname: str
+name of the satellite mission (e.g., 'L5')
+cloud_mask_issue: boolean
+True if there is an issue with the cloud mask and wrong pixels are being masked</p>
+<h2 id="returns">Returns:</h2>
+<p>im_ms: np.array
+3D array (stored as a 1-channel image) containing the multispectral bands (B, G, R, NIR, SWIR1)
+georef: np.array
+vector of 6 elements [Xtr, Xscale, Xshear, Ytr, Yshear, Yscale] defining the coordinates
+of the top-left pixel of the image
+cloud_mask: np.array
+2D cloud mask with True where cloud pixels are
+im_extra : np.array
+2D array containing the 20m resolution SWIR band for Sentinel-2 and the 15m resolution
+panchromatic band for Landsat 7 and Landsat 8. This field is empty for Landsat 5.
+im_QA: np.array
+2D array containing the QA band, from which the cloud_mask can be computed.
+im_nodata: np.array
+2D array with True where no data values (-inf) are located.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def preprocess_single(fn, satname, cloud_mask_issue):
+    &#34;&#34;&#34;
+    Reads the image and outputs the pansharpened/down-sampled multispectral bands,
+    the georeferencing vector of the image (coordinates of the upper left pixel),
+    the cloud mask, the QA band and a no_data image. 
+    For Landsat 7-8 it also outputs the panchromatic band, and for Sentinel 2 it
+    also outputs the 20m SWIR band.
+
+    Arguments:
+    -----------
+    fn: str or list of str
+        filename of the image .tif file. For L7, L8 and S2 this argument
+        is a list of filenames, one filename for each resolution (30m 
+        and 15m for Landsat 7-8, 10m, 20m and 60m for Sentinel 2)
+    satname: str
+        name of the satellite mission (e.g., &#39;L5&#39;)
+    cloud_mask_issue: boolean
+        True if there is an issue with the cloud mask and wrong pixels are being masked
+
+    Returns:
+    -----------
+    im_ms: np.array
+        3D array (stored as a 1-channel image) containing the multispectral bands (B, G, R, NIR, SWIR1)
+    georef: np.array
+        vector of 6 elements [Xtr, Xscale, Xshear, Ytr, Yshear, Yscale] defining the coordinates
+        of the top-left pixel of the image
+    cloud_mask: np.array
+        2D cloud mask with True where cloud pixels are
+    im_extra : np.array
+        2D array containing the 20m resolution SWIR band for Sentinel-2 and the 15m resolution
+        panchromatic band for Landsat 7 and Landsat 8. This field is empty for Landsat 5.
+    im_QA: np.array
+        2D array containing the QA band, from which the cloud_mask can be computed.
+    im_nodata: np.array
+        2D array with True where no data values (-inf) are located.
+    &#34;&#34;&#34;
+
+    #=============================================================================================#
+    # L5 images
+    #=============================================================================================#
+    if satname == &#39;L5&#39;:
+
+        # read all bands
+        data = gdal.Open(fn, gdal.GA_ReadOnly)
+        georef = np.array(data.GetGeoTransform())
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_ms = np.stack(bands, 2)
+
+        # down-sample to 15 m (half of the original pixel size)
+        nrows = im_ms.shape[0]*2
+        ncols = im_ms.shape[1]*2
+
+        # create cloud mask
+        im_QA = im_ms[:,:,5]
+        im_ms = im_ms[:,:,:-1]
+        cloud_mask = create_cloud_mask(im_QA, satname, cloud_mask_issue)
+
+        # resize the image using bilinear interpolation (order 1)
+        im_ms = transform.resize(im_ms,(nrows, ncols), order=1, preserve_range=True,
+                                 mode=&#39;constant&#39;)
+        # resize the image using nearest neighbour interpolation (order 0)
+        cloud_mask = transform.resize(cloud_mask, (nrows, ncols), order=0, preserve_range=True,
+                                      mode=&#39;constant&#39;).astype(&#39;bool_&#39;)
+
+        # adjust georeferencing vector to the new image size
+        # scale becomes 15m and the origin is adjusted to the center of new top left pixel
+        georef[1] = 15
+        georef[5] = -15
+        georef[0] = georef[0] + 7.5
+        georef[3] = georef[3] - 7.5
+        
+        # check if -inf or nan values on any band and add to cloud mask
+        im_nodata = np.zeros(cloud_mask.shape).astype(bool)
+        for k in range(im_ms.shape[2]):
+            im_inf = np.isin(im_ms[:,:,k], -np.inf)
+            im_nan = np.isnan(im_ms[:,:,k])
+            cloud_mask = np.logical_or(np.logical_or(cloud_mask, im_inf), im_nan)
+            im_nodata = np.logical_or(np.logical_or(im_nodata, im_inf), im_nan)
+        # check if there are pixels with 0 intensity in the Green, NIR and SWIR bands and add those
+        # to the cloud mask as otherwise they will cause errors when calculating the NDWI and MNDWI
+        im_zeros = np.ones(cloud_mask.shape).astype(bool)
+        for k in [1,3,4]: # loop through the Green, NIR and SWIR bands
+            im_zeros = np.logical_and(np.isin(im_ms[:,:,k],0), im_zeros)
+        # update cloud mask and nodata
+        cloud_mask = np.logical_or(im_zeros, cloud_mask)
+        im_nodata = np.logical_or(im_zeros, im_nodata)
+        # no extra image for Landsat 5 (they are all 30 m bands)
+        im_extra = []
+
+    #=============================================================================================#
+    # L7 images
+    #=============================================================================================#
+    elif satname == &#39;L7&#39;:
+
+        # read pan image
+        fn_pan = fn[0]
+        data = gdal.Open(fn_pan, gdal.GA_ReadOnly)
+        georef = np.array(data.GetGeoTransform())
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_pan = np.stack(bands, 2)[:,:,0]
+
+        # size of pan image
+        nrows = im_pan.shape[0]
+        ncols = im_pan.shape[1]
+
+        # read ms image
+        fn_ms = fn[1]
+        data = gdal.Open(fn_ms, gdal.GA_ReadOnly)
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_ms = np.stack(bands, 2)
+
+        # create cloud mask
+        im_QA = im_ms[:,:,5]
+        cloud_mask = create_cloud_mask(im_QA, satname, cloud_mask_issue)
+
+        # resize the image using bilinear interpolation (order 1)
+        im_ms = im_ms[:,:,:5]
+        im_ms = transform.resize(im_ms,(nrows, ncols), order=1, preserve_range=True,
+                                 mode=&#39;constant&#39;)
+        # resize the image using nearest neighbour interpolation (order 0)
+        cloud_mask = transform.resize(cloud_mask, (nrows, ncols), order=0, preserve_range=True,
+                                      mode=&#39;constant&#39;).astype(&#39;bool_&#39;)
+        # check if -inf or nan values on any band and eventually add those pixels to cloud mask
+        im_nodata = np.zeros(cloud_mask.shape).astype(bool)
+        for k in range(im_ms.shape[2]):
+            im_inf = np.isin(im_ms[:,:,k], -np.inf)
+            im_nan = np.isnan(im_ms[:,:,k])
+            cloud_mask = np.logical_or(np.logical_or(cloud_mask, im_inf), im_nan)
+            im_nodata = np.logical_or(np.logical_or(im_nodata, im_inf), im_nan)
+        # check if there are pixels with 0 intensity in the Green, NIR and SWIR bands and add those
+        # to the cloud mask as otherwise they will cause errors when calculating the NDWI and MNDWI
+        im_zeros = np.ones(cloud_mask.shape).astype(bool)
+        for k in [1,3,4]: # loop through the Green, NIR and SWIR bands
+            im_zeros = np.logical_and(np.isin(im_ms[:,:,k],0), im_zeros)
+        # update cloud mask and nodata
+        cloud_mask = np.logical_or(im_zeros, cloud_mask)
+        im_nodata = np.logical_or(im_zeros, im_nodata)
+
+        # pansharpen Green, Red, NIR (where there is overlapping with pan band in L7)
+        try:
+            im_ms_ps = pansharpen(im_ms[:,:,[1,2,3]], im_pan, cloud_mask)
+        except: # if pansharpening fails, keep downsampled bands (for long runs)
+            im_ms_ps = im_ms[:,:,[1,2,3]]
+        # add downsampled Blue and SWIR1 bands
+        im_ms_ps = np.append(im_ms[:,:,[0]], im_ms_ps, axis=2)
+        im_ms_ps = np.append(im_ms_ps, im_ms[:,:,[4]], axis=2)
+
+        im_ms = im_ms_ps.copy()
+        # the extra image is the 15m panchromatic band
+        im_extra = im_pan
+
+    #=============================================================================================#
+    # L8 images
+    #=============================================================================================#
+    elif satname == &#39;L8&#39;:
+
+        # read pan image
+        fn_pan = fn[0]
+        data = gdal.Open(fn_pan, gdal.GA_ReadOnly)
+        georef = np.array(data.GetGeoTransform())
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_pan = np.stack(bands, 2)[:,:,0]
+
+        # size of pan image
+        nrows = im_pan.shape[0]
+        ncols = im_pan.shape[1]
+
+        # read ms image
+        fn_ms = fn[1]
+        data = gdal.Open(fn_ms, gdal.GA_ReadOnly)
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im_ms = np.stack(bands, 2)
+
+        # create cloud mask
+        im_QA = im_ms[:,:,5]
+        cloud_mask = create_cloud_mask(im_QA, satname, cloud_mask_issue)
+
+        # resize the image using bilinear interpolation (order 1)
+        im_ms = im_ms[:,:,:5]
+        im_ms = transform.resize(im_ms,(nrows, ncols), order=1, preserve_range=True,
+                                 mode=&#39;constant&#39;)
+        # resize the image using nearest neighbour interpolation (order 0)
+        cloud_mask = transform.resize(cloud_mask, (nrows, ncols), order=0, preserve_range=True,
+                                      mode=&#39;constant&#39;).astype(&#39;bool_&#39;)
+        # check if -inf or nan values on any band and eventually add those pixels to cloud mask
+        im_nodata = np.zeros(cloud_mask.shape).astype(bool)
+        for k in range(im_ms.shape[2]):
+            im_inf = np.isin(im_ms[:,:,k], -np.inf)
+            im_nan = np.isnan(im_ms[:,:,k])
+            cloud_mask = np.logical_or(np.logical_or(cloud_mask, im_inf), im_nan)
+            im_nodata = np.logical_or(np.logical_or(im_nodata, im_inf), im_nan)
+        # check if there are pixels with 0 intensity in the Green, NIR and SWIR bands and add those
+        # to the cloud mask as otherwise they will cause errors when calculating the NDWI and MNDWI
+        im_zeros = np.ones(cloud_mask.shape).astype(bool)
+        for k in [1,3,4]: # loop through the Green, NIR and SWIR bands
+            im_zeros = np.logical_and(np.isin(im_ms[:,:,k],0), im_zeros)
+        # update cloud mask and nodata
+        cloud_mask = np.logical_or(im_zeros, cloud_mask)
+        im_nodata = np.logical_or(im_zeros, im_nodata)
+
+        # pansharpen Blue, Green, Red (where there is overlapping with pan band in L8)
+        try:
+            im_ms_ps = pansharpen(im_ms[:,:,[0,1,2]], im_pan, cloud_mask)
+        except: # if pansharpening fails, keep downsampled bands (for long runs)
+            im_ms_ps = im_ms[:,:,[0,1,2]]
+        # add downsampled NIR and SWIR1 bands
+        im_ms_ps = np.append(im_ms_ps, im_ms[:,:,[3,4]], axis=2)
+
+        im_ms = im_ms_ps.copy()
+        # the extra image is the 15m panchromatic band
+        im_extra = im_pan
+
+    #=============================================================================================#
+    # S2 images
+    #=============================================================================================#
+
+    # TODO: Add RE2 band processing (need to first add RE2 band download in sat_download).
+
+    if satname == &#39;S2&#39;:
+
+        # read 10m bands (B,G,R,NIR)
+        fn10 = fn[0]
+        data = gdal.Open(fn10, gdal.GA_ReadOnly)
+        georef = np.array(data.GetGeoTransform())
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im10 = np.stack(bands, 2)
+        im10 = im10/10000 # TOA scaled to 10000
+
+        # if image contains only zeros (can happen with S2), skip the image
+        if sum(sum(sum(im10))) &lt; 1:
+            im_ms = []
+            georef = []
+            # skip the image by giving it a full cloud_mask
+            cloud_mask = np.ones((im10.shape[0],im10.shape[1])).astype(&#39;bool&#39;)
+            return im_ms, georef, cloud_mask, [], [], []
+
+        # size of 10m bands
+        nrows = im10.shape[0]
+        ncols = im10.shape[1]
+
+        # read 20m band (SWIR1)
+        fn20 = fn[1]
+        data = gdal.Open(fn20, gdal.GA_ReadOnly)
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im20 = np.stack(bands, 2)
+        im20 = im20[:,:,0]
+        im20 = im20/10000 # TOA scaled to 10000
+
+        # resize the image using bilinear interpolation (order 1)
+        im_swir = transform.resize(im20, (nrows, ncols), order=1, preserve_range=True,
+                                   mode=&#39;constant&#39;)
+        im_swir = np.expand_dims(im_swir, axis=2)
+
+        # append down-sampled SWIR1 band to the other 10m bands
+        im_ms = np.append(im10, im_swir, axis=2)
+
+        # create cloud mask using 60m QA band (not as good as Landsat cloud cover)
+        fn60 = fn[2]
+        data = gdal.Open(fn60, gdal.GA_ReadOnly)
+        bands = [data.GetRasterBand(k + 1).ReadAsArray() for k in range(data.RasterCount)]
+        im60 = np.stack(bands, 2)
+        im_QA = im60[:,:,0]
+        cloud_mask = create_cloud_mask(im_QA, satname, cloud_mask_issue)
+        # resize the cloud mask using nearest neighbour interpolation (order 0)
+        cloud_mask = transform.resize(cloud_mask,(nrows, ncols), order=0, preserve_range=True,
+                                      mode=&#39;constant&#39;)
+        # check if -inf or nan values on any band and add to cloud mask
+        im_nodata = np.zeros(cloud_mask.shape).astype(bool)
+        for k in range(im_ms.shape[2]):
+            im_inf = np.isin(im_ms[:,:,k], -np.inf)
+            im_nan = np.isnan(im_ms[:,:,k])
+            cloud_mask = np.logical_or(np.logical_or(cloud_mask, im_inf), im_nan)
+            im_nodata = np.logical_or(np.logical_or(im_nodata, im_inf), im_nan)
+
+        # check if there are pixels with 0 intensity in the Green, NIR and SWIR bands and add those
+        # to the cloud mask as otherwise they will cause errors when calculating the NDWI and MNDWI
+        im_zeros = np.ones(cloud_mask.shape).astype(bool)
+        for k in [1,3,4]: # loop through the Green, NIR and SWIR bands
+            im_zeros = np.logical_and(np.isin(im_ms[:,:,k],0), im_zeros)
+        # update cloud mask and nodata
+        cloud_mask = np.logical_or(im_zeros, cloud_mask)
+        im_nodata = np.logical_or(im_zeros, im_nodata)
+
+        # the extra image is the 20m SWIR band
+        im_extra = im20
+
+    return im_ms, georef, cloud_mask, im_extra, im_QA, im_nodata</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_preprocess.rescale_image_intensity"><code class="name flex">
+<span>def <span class="ident">rescale_image_intensity</span></span>(<span>im, cloud_mask, prob_high)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Rescales the intensity of an image (multispectral or single band) by applying
+a cloud mask and clipping the prob_high upper percentile. This functions allows
+to stretch the contrast of an image, only for visualisation purposes.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>im: np.array
+Image to rescale, can be 3D (multispectral) or 2D (single band)
+cloud_mask: np.array
+2D cloud mask with True where cloud pixels are
+prob_high: float
+probability of exceedence used to calculate the upper percentile</p>
+<h2 id="returns">Returns:</h2>
+<p>im_adj: np.array
+rescaled image</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rescale_image_intensity(im, cloud_mask, prob_high):
+    &#34;&#34;&#34;
+    Rescales the intensity of an image (multispectral or single band) by applying
+    a cloud mask and clipping the prob_high upper percentile. This functions allows
+    to stretch the contrast of an image, only for visualisation purposes.
+
+    Arguments:
+    -----------
+    im: np.array
+        Image to rescale, can be 3D (multispectral) or 2D (single band)
+    cloud_mask: np.array
+        2D cloud mask with True where cloud pixels are
+    prob_high: float
+        probability of exceedence used to calculate the upper percentile
+
+    Returns:
+    -----------
+    im_adj: np.array
+        rescaled image
+    &#34;&#34;&#34;
+
+    # lower percentile is set to 0
+    prc_low = 0
+
+    # reshape the 2D cloud mask into a 1D vector
+    vec_mask = cloud_mask.reshape(im.shape[0] * im.shape[1])
+
+    # if image contains several bands, stretch the contrast for each band
+    if len(im.shape) &gt; 2:
+        # reshape into a vector
+        vec =  im.reshape(im.shape[0] * im.shape[1], im.shape[2])
+        # initiliase with NaN values
+        vec_adj = np.ones((len(vec_mask), im.shape[2])) * np.nan
+        # loop through the bands
+        for i in range(im.shape[2]):
+            # find the higher percentile (based on prob)
+            prc_high = np.percentile(vec[~vec_mask, i], prob_high)
+            # clip the image around the 2 percentiles and rescale the contrast
+            vec_rescaled = exposure.rescale_intensity(vec[~vec_mask, i],
+                                                      in_range=(prc_low, prc_high))
+            vec_adj[~vec_mask,i] = vec_rescaled
+        # reshape into image
+        im_adj = vec_adj.reshape(im.shape[0], im.shape[1], im.shape[2])
+
+    # if image only has 1 band (grayscale image)
+    else:
+        vec =  im.reshape(im.shape[0] * im.shape[1])
+        vec_adj = np.ones(len(vec_mask)) * np.nan
+        prc_high = np.percentile(vec[~vec_mask], prob_high)
+        vec_rescaled = exposure.rescale_intensity(vec[~vec_mask], in_range=(prc_low, prc_high))
+        vec_adj[~vec_mask] = vec_rescaled
+        im_adj = vec_adj.reshape(im.shape[0], im.shape[1])
+
+    return im_adj</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_preprocess.save_files"><code class="name flex">
+<span>def <span class="ident">save_files</span></span>(<span>metadata, inputs, formula='[ RGB ]', colormap='summer', show=False, cloud_mask_issue=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates and saves a new raster file (TIF format) corresponding to a user-selected
+band combination (either a custom formula, or a pre-defined index such as RGB or
+NDVI), for all the images contained in metadata. For 1-band formulas, it also
+saves a JPG visualization in a chosen colormap.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>metadata: dict
+contains all the information about the satellite images that were downloaded
+inputs: dict
+input parameters from sat_download (sitename, filepath, polygon, dates, sat_list)
+<br>
+cloud_mask_issue: boolean, optional (default: False)
+True if there is an issue with the cloud mask and pixels
+are erroneously being masked on the images
+formula: str, optional (default: '[ RGB ]')
+Remote sensing index or band combination to be computed using the preprocessed raster
+bands. Available indices are: RGB, NDVI, NDWI, BSI, AVI, NDSI, NDMI, SI, and valid
+combinations are of the form: [ R * 0.5 , NIR * 1 , B * 0.7 ]. Spaces are important
+for the parser to understand the formula, and coefficients correspond to pixel intensity
+(in %). See more details here: sentinel-hub.com/sites/default/Custom_script_tutorial.pdf.
+colormap: str, optional (default: 'summer')
+Plot the index using a specific matplotlib colormap so that features
+are more visual. Possible colormaps are listed on:
+<a href="https://matplotlib.org/examples/color/colormaps_reference.html">https://matplotlib.org/examples/color/colormaps_reference.html</a>
+show: bool, optional (default: False)
+output a visualization of the images as they are processed</p>
+<h2 id="returns">Returns:</h2>
+<pre><code>Stores the images in a folder named /preprocessed.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_files(metadata, inputs, formula=&#39;[ RGB ]&#39;, colormap=&#39;summer&#39;,
+               show=False, cloud_mask_issue=False):
+    &#34;&#34;&#34;
+    Creates and saves a new raster file (TIF format) corresponding to a user-selected 
+    band combination (either a custom formula, or a pre-defined index such as RGB or 
+    NDVI), for all the images contained in metadata. For 1-band formulas, it also 
+    saves a JPG visualization in a chosen colormap.
+
+    Arguments:
+    -----------
+    metadata: dict
+        contains all the information about the satellite images that were downloaded
+    inputs: dict 
+        input parameters from sat_download (sitename, filepath, polygon, dates, sat_list)    
+    cloud_mask_issue: boolean, optional (default: False)
+            True if there is an issue with the cloud mask and pixels
+            are erroneously being masked on the images
+    formula: str, optional (default: &#39;[ RGB ]&#39;)
+        Remote sensing index or band combination to be computed using the preprocessed raster
+        bands. Available indices are: RGB, NDVI, NDWI, BSI, AVI, NDSI, NDMI, SI, and valid 
+        combinations are of the form: [ R * 0.5 , NIR * 1 , B * 0.7 ]. Spaces are important
+        for the parser to understand the formula, and coefficients correspond to pixel intensity
+        (in %). See more details here: sentinel-hub.com/sites/default/Custom_script_tutorial.pdf.
+    colormap: str, optional (default: &#39;summer&#39;)
+        Plot the index using a specific matplotlib colormap so that features
+        are more visual. Possible colormaps are listed on: 
+        https://matplotlib.org/examples/color/colormaps_reference.html
+    show: bool, optional (default: False)
+        output a visualization of the images as they are processed
+    
+    Returns:
+    -----------
+        Stores the images in a folder named /preprocessed.
+    &#34;&#34;&#34;
+
+    sitename = inputs[&#39;sitename&#39;]
+    filepath_data = inputs[&#39;filepath&#39;]
+    formula_stripped = formula.replace(&#39;[&#39;,&#39;&#39;).replace(&#39;]&#39;,&#39;&#39;).replace(&#39; &#39;, &#39;&#39;)
+
+    print(&#39;Starting preprocessing as {}...&#39;.format(formula_stripped))
+
+    # create subfolder to store the files
+    if len(formula) &lt;= 8:
+        filepath_out = os.path.join(filepath_data, sitename, &#39;preprocessed_files&#39;,
+                                   &#39;{}&#39;.format(formula_stripped))
+    else:
+        filepath_out = os.path.join(filepath_data, sitename, &#39;preprocessed_files&#39;, &#39;custom_formula&#39;)
+    if not os.path.exists(filepath_out):
+            os.makedirs(filepath_out)
+
+    # loop through satellite list
+    for satname in metadata.keys():
+
+        filepath = sat_tools.get_filepath(inputs,satname)
+        filenames = metadata[satname][&#39;filenames&#39;]
+
+        # loop through images
+        for i in range(len(filenames)):
+            # image filename
+            fn = sat_tools.get_filenames(filenames[i],filepath, satname)
+            # get crs
+            crs = int(metadata[satname][&#39;epsg&#39;][i])
+            # read and preprocess image
+            im_ms, georef, cloud_mask, im_extra, im_QA, im_nodata = preprocess_single(fn, satname, cloud_mask_issue)
+            # create and save file with requested parameters
+            date = filenames[i][:-4]
+            plt.ioff()  # turning interactive plotting off (in case we use the plotting options in create_file)
+            try:
+                create_file(im_ms, cloud_mask, date, satname, filepath_out,
+                            georef, crs, formula, colormap, show)
+            except:
+                continue
+            # print percentage completion for user
+            print(&#39;\r%d%%&#39; %int((i+1)/len(filenames)*100), end=&#39;&#39;)
+
+    # print the location where the images have been saved
+    print(&#39;\n{} satellite images saved in {}&#39;.format(formula_stripped, filepath_out))</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_preprocess.timelapse"><code class="name flex">
+<span>def <span class="ident">timelapse</span></span>(<span>timelapse_settings, correct_path_row=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves a timelapse video (.mp4) of images corresponding to the arguments
+in the Google Drive linked to the user's GEE account.</p>
+<p>Available images are Landsat 5 (03/1984 - 05/2013), Landsat 7 (04/1999 - present,
+but several system failures make Landsat 8 a preferred choice when possible),
+and Landsat 8 (06/2013 - present).</p>
+<p>TODO: 1) download video directly on disk, 2) add Sentinel-2 and MODIS, 3) add
+remote sensing indices timelapse, 4) merge sources if dates spans over several
+satellite periods.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>timelapse_settings: dict, with possible keys:
+sat: str
+'L5', 'L7' or 'L8' (careful with satellite working periods)
+dates: list of str
+start and end dates in format: yyyy-mm-dd
+max_cloud_cover: int
+maximum cloud cover percentage
+bands: list
+bands to select, in format ['R', 'G', 'B'], among 'R', 'G', 'B', 'NIR',
+'SWIR1', 'SWIR2', 'PAN' (and 'CA' for Landsat 8)
+filename: str
+name of the video to be saved on Drive
+bbox: list
+list of (lon, lat) tuples corresponding to summits of the area of interest -
+note that you need to pass either a bbox or a point and radius
+point: tuple
+center of the area of interest in (lon, lat) format (ex: (-122.7286, 37.6325))
+radius: int
+radius of the area of interest, in km
+video_dim: int, optional (default: 720)
+width of the output video - choose a higer value to increase quality
+frames_per_sec: int, optional (default: 12)
+nb of images per second in the output video - choose a higher value for
+a smoother result
+correct_path_row: boolean, optional (default: False)
+set to True if the output video shows black areas, meaning that your area
+overlaps on 2 satellite areas - the function will run a new search to
+correct the automatic Landsat image selection</p>
+<h2 id="returns">Returns:</h2>
+<p>saves timelapse as {filename}.mp4 in the user's Google Drive account linked to GEE</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def timelapse(timelapse_settings, correct_path_row=False):
+    &#34;&#34;&#34;
+    Saves a timelapse video (.mp4) of images corresponding to the arguments
+    in the Google Drive linked to the user&#39;s GEE account.
+
+    Available images are Landsat 5 (03/1984 - 05/2013), Landsat 7 (04/1999 - present,
+    but several system failures make Landsat 8 a preferred choice when possible),
+    and Landsat 8 (06/2013 - present).
+
+    TODO: 1) download video directly on disk, 2) add Sentinel-2 and MODIS, 3) add 
+    remote sensing indices timelapse, 4) merge sources if dates spans over several
+    satellite periods.
+
+    Arguments:
+    -----------
+    timelapse_settings: dict, with possible keys:
+        sat: str
+            &#39;L5&#39;, &#39;L7&#39; or &#39;L8&#39; (careful with satellite working periods)
+        dates: list of str
+            start and end dates in format: yyyy-mm-dd
+        max_cloud_cover: int
+            maximum cloud cover percentage
+        bands: list
+            bands to select, in format [&#39;R&#39;, &#39;G&#39;, &#39;B&#39;], among &#39;R&#39;, &#39;G&#39;, &#39;B&#39;, &#39;NIR&#39;,
+            &#39;SWIR1&#39;, &#39;SWIR2&#39;, &#39;PAN&#39; (and &#39;CA&#39; for Landsat 8)
+        filename: str
+            name of the video to be saved on Drive
+        bbox: list
+            list of (lon, lat) tuples corresponding to summits of the area of interest -
+            note that you need to pass either a bbox or a point and radius
+        point: tuple
+            center of the area of interest in (lon, lat) format (ex: (-122.7286, 37.6325))
+        radius: int
+            radius of the area of interest, in km
+        video_dim: int, optional (default: 720)
+            width of the output video - choose a higer value to increase quality
+        frames_per_sec: int, optional (default: 12)
+            nb of images per second in the output video - choose a higher value for
+            a smoother result
+    correct_path_row: boolean, optional (default: False)
+        set to True if the output video shows black areas, meaning that your area
+        overlaps on 2 satellite areas - the function will run a new search to 
+        correct the automatic Landsat image selection
+
+    Returns:
+    -----------
+    saves timelapse as {filename}.mp4 in the user&#39;s Google Drive account linked to GEE
+    &#34;&#34;&#34;
+
+    # Initializations
+    ee.Initialize()
+    sat_corres = {&#39;L5&#39;:&#39;LANDSAT/LT05/C01/T1_TOA&#39;, 
+              &#39;L7&#39;:&#39;LANDSAT/LE07/C01/T1_TOA&#39;,
+              &#39;L8&#39;:&#39;LANDSAT/LC08/C01/T1_TOA&#39;}
+    band_corres_L5_L7 = {&#39;R&#39;:&#39;B3&#39;, &#39;G&#39;:&#39;B2&#39;, &#39;B&#39;:&#39;B1&#39;, &#39;NIR&#39;:&#39;B4&#39;,
+                         &#39;SWIR1&#39;:&#39;B5&#39;, &#39;TIR&#39;:&#39;B6&#39;, &#39;SWIR2&#39;:&#39;B7&#39;, &#39;PAN&#39;:&#39;B8&#39;}
+    band_corres_L8 = {&#39;R&#39;:&#39;B4&#39;, &#39;G&#39;:&#39;B3&#39;, &#39;B&#39;:&#39;B2&#39;, &#39;NIR&#39;:&#39;B5&#39;,
+                      &#39;SWIR1&#39;:&#39;B6&#39;, &#39;SWIR2&#39;:&#39;B7&#39;, &#39;PAN&#39;:&#39;B8&#39;, &#39;CA&#39;:&#39;B1&#39;}
+    if &#39;video_dim&#39; not in timelapse_settings:
+        timelapse_settings[&#39;video_dim&#39;] = 720
+    if &#39;frames_per_sec&#39; not in timelapse_settings:
+        timelapse_settings[&#39;frames_per_sec&#39;] = 12
+    bands = timelapse_settings[&#39;bands&#39;]
+
+    # Choose image collection
+    sat = timelapse_settings[&#39;sat&#39;]
+    collection = ee.ImageCollection(sat_corres[sat])
+
+    # Define area
+    assert (&#39;point&#39; in timelapse_settings) or (&#39;bbox&#39; in timelapse_settings),\
+                                             &#39;Please pass point &amp; radius or bbox coordinates.&#39;
+    if &#39;point&#39; in timelapse_settings:
+        assert &#39;radius&#39; in timelapse_settings, &#34;Don&#39;t forget to pass the radius of the area of study.&#34;
+        center = ee.Geometry.Point(timelapse_settings[&#39;point&#39;])
+        user_bbox = sat_tools.bbox_from_point(timelapse_settings[&#39;point&#39;], timelapse_settings[&#39;radius&#39;])
+        user_bbox = ee.Geometry.Polygon(user_bbox)
+    elif &#39;bbox&#39; in timelapse_settings:
+        user_bbox = ee.Geometry.Polygon(timelapse_settings[&#39;bbox&#39;])
+        center = shapely.geometry.Polygon(timelapse_settings[&#39;bbox&#39;]).centroid.coords[0]
+        center = ee.Geometry.Point(center)
+    collection = collection.filterBounds(center)
+
+    # Correct Landsat path and row selection if needed
+    if correct_path_row:
+        print(&#39;Correcting Landsat tile selection...&#39;)
+        path, row = sat_tools.find_path_row(point)
+        collection = collection.filter(ee.Filter.eq(&#39;WRS_PATH&#39;, path))
+        collection = collection.filter(ee.Filter.eq(&#39;WRS_ROW&#39;, row))
+        print(&#39;Done, now applying date and cloud filters.&#39;)
+ 
+    # Apply date and cloud filters
+    collection = collection.filter(ee.Filter.lt(&#39;CLOUD_COVER&#39;, timelapse_settings[&#39;max_cloud_cover&#39;]))
+    collection = collection.filterDate(timelapse_settings[&#39;dates&#39;][0], timelapse_settings[&#39;dates&#39;][1])
+
+    # Select the bands and convert to 8-bit
+    if timelapse_settings[&#39;sat&#39;] == &#39;L8&#39;:
+        user_bands = [band_corres_L8[bands[0]], band_corres_L8[bands[1]], band_corres_L8[bands[2]]]
+    else:
+        user_bands = [band_corres_L5_L7[bands[0]], band_corres_L5_L7[bands[1]], band_corres_L5_L7[bands[2]]]
+    collection = collection.select(user_bands)
+    def convertBit(image):
+        return image.multiply(512).uint8()
+    collection = collection.map(convertBit)
+    
+    # Print info for user
+    count = collection.size()
+    #print(&#34;{} images successfully selected.&#34;.format(count))
+    print(&#34;Processing timelapse on GEE server...&#34;)
+
+    # Export to video and launch processing on GEE
+    video = batch.Export.video.toDrive(collection, description=timelapse_settings[&#39;filename&#39;],
+                                 dimensions = timelapse_settings[&#39;video_dim&#39;],
+                                 framesPerSecond = timelapse_settings[&#39;frames_per_sec&#39;],
+                                 region=user_bbox.getInfo()[&#34;coordinates&#34;])
+    __ = batch.Task.start(video)
+
+    # Monitor the task
+    while video.status()[&#39;state&#39;] in [&#39;READY&#39;, &#39;RUNNING&#39;]:
+        print(video.status()[&#39;state&#39;])
+        time.sleep(10)
+    else:
+        print(video.status()[&#39;state&#39;] + &#39; - Please check on your Google Drive account.&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="totalsat" href="index.html">totalsat</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="totalsat.sat_preprocess.create_cloud_mask" href="#totalsat.sat_preprocess.create_cloud_mask">create_cloud_mask</a></code></li>
+<li><code><a title="totalsat.sat_preprocess.create_file" href="#totalsat.sat_preprocess.create_file">create_file</a></code></li>
+<li><code><a title="totalsat.sat_preprocess.hist_match" href="#totalsat.sat_preprocess.hist_match">hist_match</a></code></li>
+<li><code><a title="totalsat.sat_preprocess.pansharpen" href="#totalsat.sat_preprocess.pansharpen">pansharpen</a></code></li>
+<li><code><a title="totalsat.sat_preprocess.preprocess_single" href="#totalsat.sat_preprocess.preprocess_single">preprocess_single</a></code></li>
+<li><code><a title="totalsat.sat_preprocess.rescale_image_intensity" href="#totalsat.sat_preprocess.rescale_image_intensity">rescale_image_intensity</a></code></li>
+<li><code><a title="totalsat.sat_preprocess.save_files" href="#totalsat.sat_preprocess.save_files">save_files</a></code></li>
+<li><code><a title="totalsat.sat_preprocess.timelapse" href="#totalsat.sat_preprocess.timelapse">timelapse</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.3</a>.</p>
+</footer>
+</body>
+</html>

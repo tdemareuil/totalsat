@@ -1,0 +1,4119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.3" />
+<title>totalsat.sat_tools API documentation</title>
+<meta name="description" content="This module contains utilities to work with satellite images, in
+particular functions related to geographic computations, an image
+annotator using the …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>totalsat.sat_tools</code></h1>
+</header>
+<section id="section-intro">
+<p>This module contains utilities to work with satellite images, in
+particular functions related to geographic computations, an image
+annotator using the matplotlib console, and an image slicer sub-module.</p>
+<p>Original author: Kilian Vos, Water Research Laboratory,
+University of New South Wales, 2018
+Modifications and additions: Thomas de Mareuil, Total E-LAB, 2020</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+This module contains utilities to work with satellite images, in
+particular functions related to geographic computations, an image
+annotator using the matplotlib console, and an image slicer sub-module.
+    
+Original author: Kilian Vos, Water Research Laboratory,
+                 University of New South Wales, 2018
+Modifications and additions: Thomas de Mareuil, Total E-LAB, 2020
+&#34;&#34;&#34;
+
+# load modules
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+import pdb
+from osgeo import gdal, osr
+import geopandas as gpd
+import pandas as pd
+from shapely import geometry
+import skimage.transform as transform
+from astropy.convolution import convolve
+import math
+from pylab import ginput
+import pickle
+import folium
+import json
+import csv
+import geopy
+import pyproj
+from PIL import Image
+from natsort import realsorted
+import glob
+
+# other totalsat modules
+from totalsat import sat_preprocess, sat_tools
+
+
+###################################################################################################
+# COORDINATES CONVERSION AND REVERSE GEOCODING FUNCTIONS
+###################################################################################################
+
+def convert_pix2world(points, georef):
+    &#34;&#34;&#34;
+    Converts pixel coordinates (pixel row and column) to world projected 
+    coordinates performing an affine transformation.
+
+    Arguments:
+    -----------
+    points: np.array or list of np.array
+        array with 2 columns (row first and column second)
+    georef: np.array
+        vector of 6 elements [Xtr, Xscale, Xshear, Ytr, Yshear, Yscale]
+                
+    Returns:    
+    -----------
+    points_converted: np.array or list of np.array 
+        converted coordinates, first columns with X and second column with Y
+        
+    &#34;&#34;&#34;
+    
+    # make affine transformation matrix
+    aff_mat = np.array([[georef[1], georef[2], georef[0]],
+                       [georef[4], georef[5], georef[3]],
+                       [0, 0, 1]])
+    # create affine transformation
+    tform = transform.AffineTransform(aff_mat)
+
+    # if list of arrays
+    if type(points) is list:
+        points_converted = []
+        # iterate over the list
+        for i, arr in enumerate(points): 
+            tmp = arr[:,[1,0]]
+            points_converted.append(tform(tmp))
+          
+    # if single array
+    elif type(points) is np.ndarray:
+        tmp = points[:,[1,0]]
+        points_converted = tform(tmp)
+        
+    else:
+        raise Exception(&#39;invalid input type&#39;)
+        
+    return points_converted
+
+
+def convert_world2pix(points, georef):
+    &#34;&#34;&#34;
+    Converts world projected coordinates (X,Y) to image coordinates 
+    (pixel row and column) performing an affine transformation.
+
+    Arguments:
+    -----------
+    points: np.array or list of np.array
+        array with 2 columns (X,Y)
+    georef: np.array
+        vector of 6 elements [Xtr, Xscale, Xshear, Ytr, Yshear, Yscale]
+                
+    Returns:    
+    -----------
+    points_converted: np.array or list of np.array 
+        converted coordinates (pixel row and column)
+    
+    &#34;&#34;&#34;
+    
+    # make affine transformation matrix
+    aff_mat = np.array([[georef[1], georef[2], georef[0]],
+                       [georef[4], georef[5], georef[3]],
+                       [0, 0, 1]])
+    # create affine transformation
+    tform = transform.AffineTransform(aff_mat)
+    
+    # if list of arrays
+    if type(points) is list:
+        points_converted = []
+        # iterate over the list
+        for i, arr in enumerate(points): 
+            points_converted.append(tform.inverse(points))
+            
+    # if single array    
+    elif type(points) is np.ndarray:
+        points_converted = tform.inverse(points)
+        
+    else:
+        print(&#39;invalid input type&#39;)
+        raise
+        
+    return points_converted
+
+
+def convert_epsg(points, epsg_in, epsg_out):
+    &#34;&#34;&#34;
+    Converts from one spatial reference to another using the epsg codes.
+
+    Arguments:
+    -----------
+    points: np.array or list of np.ndarray
+        array with 2 columns (rows first and columns second)
+    epsg_in: int
+        epsg code of the spatial reference in which the input is
+    epsg_out: int
+        epsg code of the spatial reference in which the output will be            
+                
+    Returns:    
+    -----------
+    points_converted: np.array or list of np.array 
+        converted coordinates from epsg_in to epsg_out
+        
+    &#34;&#34;&#34;
+    
+    # define input and output spatial references
+    inSpatialRef = osr.SpatialReference()
+    inSpatialRef.ImportFromEPSG(epsg_in)
+    outSpatialRef = osr.SpatialReference()
+    outSpatialRef.ImportFromEPSG(epsg_out)
+    # create a coordinates transform
+    coordTransform = osr.CoordinateTransformation(inSpatialRef, outSpatialRef)
+    # if list of arrays
+    if type(points) is list:
+        points_converted = []
+        # iterate over the list
+        for i, arr in enumerate(points): 
+            points_converted.append(np.array(coordTransform.TransformPoints(arr)))
+    # if single array
+    elif type(points) is np.ndarray:
+        points_converted = np.array(coordTransform.TransformPoint(points))
+        # note: I removed the &#39;s&#39; in &#39;TransformPoints&#39; - might need to add it back if bug
+    else:
+        raise Exception(&#39;invalid input type&#39;)
+
+    return points_converted
+
+
+def bbox_from_point(point, radius):
+    &#34;&#34;&#34;
+    Computes a square bounding box with chosen radius around point coordinates.
+
+    Arguments:
+    -----------
+    point: tuple
+        point coordinates in format: (lon,lat)
+    radius: int
+        radius (in km) of bounding box around center coordinates
+    
+    Returns:
+    -----------
+    bbox: list
+        list of coordinates (lon, lat) of the 4 bounding box summits
+    &#34;&#34;&#34;
+
+    # We use the approximations: 1 decimal degree of latitude = 111.321 km
+    #                            1 decimal degree of longitude = cos(latitude in DD * pi/180) * 111.321 km
+    # where 111.321 km is the length of a DD of longitude at the equator and pi/180 converts DDs to radians.
+    x_min = round(point[0], 3) - \
+            round(radius / (math.cos(round(point[1],3) * math.pi/180) * 111.321), 3)
+    x_max = round(point[0], 3) + \
+            round(radius / (math.cos(round(point[1],3) * math.pi/180) * 111.321), 3)
+    y_min = round(point[1], 3) - round(radius/111.321, 3)
+    y_max = round(point[1], 3) + round(radius/111.321, 3)
+    
+    return [[x_min, y_max],[x_max, y_max],[x_max, y_min],[x_min, y_min]]
+
+
+def split_area(bbox, pixel_width, max_size):
+    &#34;&#34;&#34;
+    Splits a square polygon in smaller squares.
+
+    Arguments:
+    -----------
+    bbox: list
+        list of coordinates (lon, lat) of the 4 bounding box summits - must be in
+        the order: [[x_min, y_max],[x_max, y_max],[x_max, y_min],[x_min, y_min]]
+    pixel_width: int
+        width of the bbox, in pixels
+    max_size: int
+        maximum authorized pixel width
+
+    Returns:
+    -----------
+    small_boxes: list
+        list of smaller boxes (with coordinates in the same format as the original)
+    &#34;&#34;&#34;    
+    
+    # get coordinates of the original bbox     
+    x_min = bbox[0][0]
+    y_max = bbox[0][1]
+    x_max = bbox[2][0]
+    y_min = bbox[2][1]
+
+    # compute size of each small box
+    small_boxes = []
+    nb_breaks = int(pixel_width // max_size)
+    x_step = (x_max - x_min) / (nb_breaks+1)
+    y_step = (y_max - y_min) / (nb_breaks+1)
+
+    # compute coordinates of each small box
+    for i in range(nb_breaks+1):
+        x_min_i = x_min + i*x_step
+        x_max_i = x_max - (nb_breaks-i)*x_step
+        for j in range(nb_breaks+1):
+            y_min_i = y_min + j*y_step
+            y_max_i = y_max - (nb_breaks-j)*y_step
+            box_i = [[x_min_i, y_max_i],[x_max_i, y_max_i],[x_max_i, y_min_i],[x_min_i, y_min_i]]
+            small_boxes.append(box_i)
+    
+    return small_boxes
+
+
+def find_path_row(point):
+    &#34;&#34;&#34;
+    Finds the Landsat WRS2 path and row number that best corresponds to any (lat,lon) point.
+    Differs from other implementations where the list of overlapping rows is returned. Here,
+    we return only the path/row combination whose center is closest to the point.
+
+    Arguments:
+    -----------
+    point: tuple
+        point coordinates in format: (lon, lat)
+
+    Returns:
+    -----------
+    path, row: int, int
+        closest WRS2 path/row combination
+    &#34;&#34;&#34;
+
+    # open the path and row list from online resource
+    url = &#34;https://prd-wret.s3-us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/WRS2_descending_0.zip&#34;
+    open_url = urllib.request.urlopen(url)
+    
+    # extract it in temporary file
+    with zipfile.ZipFile(io.BytesIO(open_url.read())) as zip_file:
+        tempdir = tempfile.mkdtemp()
+        zip_file.extractall(tempdir)
+        # data = ogr.Open(os.path.join(tempdir, &#39;WRS2_descending.shp&#39;))
+        # layer = data.GetLayer(0)
+        table = gpd.read_file(os.path.join(tempdir, &#39;WRS2_descending.shp&#39;))
+
+    # clean up after ourselves
+    for file in os.listdir(tempdir):
+        os.unlink(os.path.join(tempdir, file))
+    os.rmdir(tempdir)
+    
+    # compute center of each path/row
+    table[&#39;centroid&#39;] = table[&#39;geometry&#39;].centroid
+    table = table[[&#39;PATH&#39;,&#39;ROW&#39;,&#39;centroid&#39;]]
+    table[&#39;centroid&#39;] = table[&#39;centroid&#39;].apply(lambda x: x.coords[0][::-1])
+    
+    # get the closest path/row from point
+    closest = min(list(table[&#39;centroid&#39;]), key=lambda x: geopy.distance.distance(point[::-1], x).km)
+    path = int(table[table[&#39;centroid&#39;] == closest][&#39;PATH&#39;])
+    row = int(table[table[&#39;centroid&#39;] == closest][&#39;ROW&#39;])
+    
+    return path, row
+
+
+def get_image_centroid(image_path):
+    &#34;&#34;&#34;
+    Get (lat, lon) coordinates of the center of a georeferenced image (.tif), in epsg:4326.
+
+    Arguments:
+    -----------
+    image_path: str
+        path to TIF image file
+
+    Returns:    
+    -----------
+    centroid: tuple
+        (lat, lon) centroid coordinates, in epsg:4326, with 6 decimals
+    &#34;&#34;&#34;
+    
+    # read image
+    try:
+        ds = gdal.Open(image_path)
+    except:
+        raise Exception(&#39;Please provide the path to a georeferenced image.&#39;)
+    
+    # compute centroid coordinates
+    width = ds.RasterXSize
+    height = ds.RasterYSize
+    gt = ds.GetGeoTransform()
+    minx = gt[0]
+    miny = gt[3] + width*gt[4] + height*gt[5] 
+    maxx = gt[0] + width*gt[1] + height*gt[2]
+    maxy = gt[3]
+    centroid = (np.mean([minx,maxx]), np.mean([miny,maxy]))
+
+    # reproject to epsg:4326
+    epsg_in = int(osr.SpatialReference(wkt=ds.GetProjection()).GetAttrValue(&#39;AUTHORITY&#39;,1))
+    inProj = pyproj.Proj(&#39;epsg:&#39;+str(epsg_in))
+    outProj = pyproj.Proj(&#39;epsg:4326&#39;)
+    lat, lon = pyproj.transform(inProj, outProj, centroid[0], centroid[1])
+    
+    return (round(lat,6), round(lon,6))
+
+
+def get_address(coordinates, parsing=&#39;full_address_df&#39;):
+    &#34;&#34;&#34;
+    Get address (city, postcode, etc.) from geographic coordinates, using the 
+    geopy package.
+
+    Arguments:
+    -----------
+    coordinates: tuple
+        (lat, lon) coordinates
+    parsing: str or list of str, optional (default: &#39;full_address_df&#39;)
+        chosen part of the adress to output - by default, the function will output the 
+        whole address as a dataframe. Other possibilities are &#39;full_address_str&#39; and 
+        one or several keys among: [&#39;country&#39;, &#39;state&#39;, &#39;county&#39;, &#39;postcode&#39;, city&#39;,  
+        &#39;road&#39;, &#39;house_number&#39;]. Available keys depend on OSM information for the 
+        specified location, and if the chosen keys aren&#39;t available the function will 
+        fill the blank with a NaN.
+
+    Returns:    
+    -----------
+    address: str or pd.DataFrame
+        result of the parsing specified by user (by default, full address as a dataframe)
+    &#34;&#34;&#34;
+    
+    # Nominatim keys, for reference
+    # all_keys = [&#39;country&#39;, &#39;state&#39;, &#39;county&#39;, &#39;municipality&#39;, &#39;postcode&#39;, &#39;town&#39;, &#39;village&#39;, &#39;city&#39;, 
+    #             &#39;city_district&#39;, &#39;hamlet&#39;, &#39;isolated_dwelling&#39;, &#39;croft&#39;, &#39;quarter&#39;, &#39;district&#39;, &#39;borough&#39;,
+    #             &#39;neighbourhood&#39;, &#39;allotments&#39;, &#39;subdivision&#39;, &#39;suburb&#39;, &#39;road&#39;, &#39;house_number&#39;, &#39;house_name&#39;]
+
+    # query address
+    locator = geopy.geocoders.Nominatim(user_agent=&#34;me&#34;, timeout=10)
+    location = locator.reverse(coordinates, zoom=18) # zoom determines the precision of the address
+
+    # default parsing
+    if parsing == &#39;full_address_df&#39;:
+        parsed_address = location.raw[&#39;address&#39;]
+        df_address = pd.DataFrame(parsed_address, columns=list(parsed_address.keys()), index=[0])
+        df_address[&#39;lat&#39;] = coordinates[0]
+        df_address[&#39;lon&#39;] = coordinates[1]
+        return df_address
+
+    # user-defined parsing
+    elif parsing == &#39;full_address_str&#39;:
+        full_address_str = location.address
+        # postcode = [x.strip() for x in full_address.split(&#39;,&#39;)][-2] # example code to parse from string
+        return full_address_str
+    
+    else:
+        parsed_address = location.raw[&#39;address&#39;]
+        user_parsing = {}
+        if type(parsing) == str:
+            parsing = [parsing]
+        for el in parsing:
+            try:
+                res = parsed_address[el]
+            # Below, we deal with the case when the specified parsing key isn&#39;t in the raw address.
+            # We go through the alternative keys for &#39;city&#39; or &#39;house_number&#39;, and if it still yields
+            # no result, we set the result to None. I guess there are more sythetic ways to do this - 
+            # but it works well or our use case.
+            except:
+                if el == &#39;city&#39;:
+                    alternative_el = &#39;town&#39;
+                    try:
+                        res = parsed_address[alternative_el]
+                    except:
+                        alternative_el = &#39;village&#39;
+                        try:
+                            res = parsed_address[alternative_el]
+                        except:
+                            res = None
+                elif el == &#39;house_number&#39;:
+                    alternative_el = &#39;house_name&#39;
+                    try:
+                        res = parsed_address[alternative_el]
+                    except:
+                        res = None
+                else:
+                    res = None
+            user_parsing[el] = res
+        
+        if len(user_parsing) == 1:
+            return user_parsing[parsing[0]]
+        else:
+            df_address = pd.DataFrame(user_parsing, columns=list(user_parsing.keys()), index=[0])
+            df_address[&#39;lat&#39;] = coordinates[0]
+            df_address[&#39;lon&#39;] = coordinates[1]
+            return df_address
+
+
+###################################################################################################
+# IMAGE ANALYSIS FUNCTIONS
+###################################################################################################
+    
+def nd_index(im1, im2, cloud_mask):
+    &#34;&#34;&#34;
+    Computes normalised difference index on 2 images (2D), given a cloud mask (2D).
+
+    Arguments:
+    -----------
+    im1: np.array
+        first image (2D) with which to calculate the ND index
+    im2: np.array
+        second image (2D) with which to calculate the ND index
+    cloud_mask: np.array
+        2D cloud mask with True where cloud pixels are
+
+    Returns:    
+    -----------
+    im_nd: np.array
+        Image (2D) containing the ND index
+    &#34;&#34;&#34;
+
+    # reshape the cloud mask
+    vec_mask = cloud_mask.reshape(im1.shape[0] * im1.shape[1])
+    # initialise with NaNs
+    vec_nd = np.ones(len(vec_mask)) * np.nan
+    # reshape the two images
+    vec1 = im1.reshape(im1.shape[0] * im1.shape[1])
+    vec2 = im2.reshape(im2.shape[0] * im2.shape[1])
+    # compute the normalised difference index
+    temp = np.divide(vec1[~vec_mask] - vec2[~vec_mask],
+                     vec1[~vec_mask] + vec2[~vec_mask])
+    vec_nd[~vec_mask] = temp
+    # reshape into image
+    im_nd = vec_nd.reshape(im1.shape[0], im1.shape[1])
+
+    return im_nd
+
+    
+def image_std(image, radius):
+    &#34;&#34;&#34;
+    Calculates the standard deviation of an image, using a moving window of 
+    specified radius. Uses astropy&#39;s convolution library.
+    
+    Arguments:
+    -----------
+    image: np.array
+        2D array containing the pixel intensities of a single-band image
+    radius: int
+        radius defining the moving window used to calculate the standard deviation. 
+        For example, radius = 1 will produce a 3x3 moving window.
+        
+    Returns:    
+    -----------
+    win_std: np.array
+        2D array containing the standard deviation of the image
+        
+    &#34;&#34;&#34;  
+    
+    # convert to float
+    image = image.astype(float)
+    # first pad the image
+    image_padded = np.pad(image, radius, &#39;reflect&#39;)
+    # window size
+    win_rows, win_cols = radius*2 + 1, radius*2 + 1
+    # calculate std with uniform filters
+    win_mean = convolve(image_padded, np.ones((win_rows,win_cols)), boundary=&#39;extend&#39;,
+                        normalize_kernel=True, nan_treatment=&#39;interpolate&#39;, preserve_nan=True)
+    win_sqr_mean = convolve(image_padded**2, np.ones((win_rows,win_cols)), boundary=&#39;extend&#39;,
+                        normalize_kernel=True, nan_treatment=&#39;interpolate&#39;, preserve_nan=True)
+    win_var = win_sqr_mean - win_mean**2
+    win_std = np.sqrt(win_var)
+    # remove padding
+    win_std = win_std[radius:-radius, radius:-radius]
+
+    return win_std
+
+
+def mask_raster(fn, mask):
+    &#34;&#34;&#34;
+    Masks a .tif raster using GDAL.
+    
+    Arguments:
+    -----------
+    fn: str
+        filepath + filename of the .tif raster
+    mask: np.array
+        array of boolean where True indicates the pixels that are to be masked
+        
+    Returns:    
+    -----------
+    Overwrites the .tif file directly
+        
+    &#34;&#34;&#34; 
+    
+    # open raster
+    raster = gdal.Open(fn, gdal.GA_Update)
+    # mask raster
+    for i in range(raster.RasterCount):
+        out_band = raster.GetRasterBand(i+1)
+        out_data = out_band.ReadAsArray()
+        out_band.SetNoDataValue(0)
+        no_data_value = out_band.GetNoDataValue()
+        out_data[mask] = no_data_value
+        out_band.WriteArray(out_data)
+    # close dataset and flush cache
+    raster = None
+
+
+###################################################################################################
+# UTILITIES
+###################################################################################################
+    
+def get_filepath(inputs,satname):
+    &#34;&#34;&#34;
+    Create filepath to the different folders containing the satellite images.
+
+    Arguments:
+    -----------
+    inputs: dict with the following keys
+        &#39;sitename&#39;: str
+            name of the site
+        &#39;polygon&#39;: list
+            polygon containing the lon/lat coordinates to be extracted,
+            longitudes in the first column and latitudes in the second column,
+            there are 5 pairs of lat/lon with the fifth point equal to the first point:
+            ```
+            polygon = [[[151.3, -33.7],[151.4, -33.7],[151.4, -33.8],[151.3, -33.8],
+            [151.3, -33.7]]]
+            ```
+        &#39;dates&#39;: list of str
+            list that contains 2 strings with the initial and final dates in 
+            format &#39;yyyy-mm-dd&#39;:
+            ```
+            dates = [&#39;1987-01-01&#39;, &#39;2018-01-01&#39;]
+            ```
+        &#39;sat_list&#39;: list of str
+            list that contains the names of the satellite missions to include: 
+            ```
+            sat_list = [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;, &#39;S2&#39;]
+            ```
+        &#39;filepath_data&#39;: str
+            filepath to the directory where the images are downloaded
+    satname: str
+        short name of the satellite mission (&#39;L5&#39;,&#39;L7&#39;,&#39;L8&#39;,&#39;S2&#39;)
+                
+    Returns:    
+    -----------
+    filepath: str or list of str
+        contains the filepath(s) to the folder(s) containing the satellite images
+    
+    &#34;&#34;&#34;     
+    
+    sitename = inputs[&#39;sitename&#39;]
+    filepath_data = inputs[&#39;filepath&#39;]
+    # access the images
+    if satname == &#39;L5&#39;:
+        # access downloaded Landsat 5 images
+        filepath = os.path.join(filepath_data, sitename, satname, &#39;30m&#39;)
+    elif satname == &#39;L7&#39;:
+        # access downloaded Landsat 7 images
+        filepath_pan = os.path.join(filepath_data, sitename, &#39;L7&#39;, &#39;pan&#39;)
+        filepath_ms = os.path.join(filepath_data, sitename, &#39;L7&#39;, &#39;ms&#39;)
+        filepath = [filepath_pan, filepath_ms]
+    elif satname == &#39;L8&#39;:
+        # access downloaded Landsat 8 images
+        filepath_pan = os.path.join(filepath_data, sitename, &#39;L8&#39;, &#39;pan&#39;)
+        filepath_ms = os.path.join(filepath_data, sitename, &#39;L8&#39;, &#39;ms&#39;)
+        filepath = [filepath_pan, filepath_ms]
+    elif satname == &#39;S2&#39;:
+        # access downloaded Sentinel 2 images
+        filepath10 = os.path.join(filepath_data, sitename, satname, &#39;10m&#39;)
+        filepath20 = os.path.join(filepath_data, sitename, satname, &#39;20m&#39;)
+        filepath60 = os.path.join(filepath_data, sitename, satname, &#39;60m&#39;)
+        filepath = [filepath10, filepath20, filepath60]
+            
+    return filepath
+  
+
+def get_filenames(filename, filepath, satname):
+    &#34;&#34;&#34;
+    Creates filepath + filename for all the bands belonging to the same image.
+
+    Arguments:
+    -----------
+    filename: str
+        name of the downloaded satellite image as found in the metadata
+    filepath: str or list of str
+        contains the filepath(s) to the folder(s) containing the satellite images
+    satname: str
+        short name of the satellite mission       
+        
+    Returns:    
+    -----------
+    fn: str or list of str
+        contains the filepath + filenames to access the satellite image
+  
+    &#34;&#34;&#34;     
+    
+    if satname == &#39;L5&#39;:
+        fn = os.path.join(filepath, filename)
+    if satname == &#39;L7&#39; or satname == &#39;L8&#39;:
+        filename_ms = filename.replace(&#39;pan&#39;,&#39;ms&#39;)
+        fn = [os.path.join(filepath[0], filename),
+              os.path.join(filepath[1], filename_ms)]
+    if satname == &#39;S2&#39;:
+        filename20 = filename.replace(&#39;10m&#39;,&#39;20m&#39;)
+        filename60 = filename.replace(&#39;10m&#39;,&#39;60m&#39;)
+        fn = [os.path.join(filepath[0], filename),
+              os.path.join(filepath[1], filename20),
+              os.path.join(filepath[2], filename60)]
+        
+    return fn
+
+
+def merge_output(output):
+    &#34;&#34;&#34;
+    Function to merge the output dictionary, which has one key per satellite mission
+    into a dictionnary containing all the shorelines and dates ordered chronologically.
+    
+    Arguments:
+    -----------
+    output: dict
+        contains the extracted shorelines and corresponding dates, organised by 
+        satellite mission
+    
+    Returns:    
+    -----------
+    output_all: dict
+        contains the extracted shorelines in a single list sorted by date
+    
+    &#34;&#34;&#34;     
+    
+    # initialize output dict
+    output_all = dict([])
+    satnames = list(output.keys())
+    for key in output[satnames[0]].keys():
+        output_all[key] = []
+    # create extra key for the satellite name
+    output_all[&#39;satname&#39;] = []
+    # fill the output dict
+    for satname in list(output.keys()):
+        for key in output[satnames[0]].keys():
+            output_all[key] = output_all[key] + output[satname][key]
+        output_all[&#39;satname&#39;] = output_all[&#39;satname&#39;] + [_ for _ in np.tile(satname,
+                  len(output[satname][&#39;dates&#39;]))]
+    # sort chronologically
+    idx_sorted = sorted(range(len(output_all[&#39;dates&#39;])), key=output_all[&#39;dates&#39;].__getitem__)
+    for key in output_all.keys():
+        output_all[key] = [output_all[key][i] for i in idx_sorted]
+
+    return output_all
+
+
+def create_gif(input_folder, extension, output_path, duration=200, sort=&#39;numerical&#39;):
+    &#34;&#34;&#34;
+    Creates a gif from images stored in a specified folder.
+    
+    Arguments:
+    -----------
+    input_folder: str
+        path to the folder with images to convert to gif
+    extension: str
+        extension of the images (&#39;.tif&#39;, &#39;.jpg&#39;, &#39;.png&#39;, including the point)
+    output_path: str
+        path and full name of the gif to create (ex: Desktop/mycreation.gif)
+    duration: int, optional (default: 200)
+        duration of the gif loop, in ms/image
+    sort: str, optional (default: &#39;numerical&#39;)
+        logic for sorting filenames - either  &#39;alphabetical&#39; or &#39;numerical&#39;, 
+        if image names include a numeric information (this method makes use of 
+        the natsort library, https://github.com/SethMMorton/natsort, to sort 
+        in real numbers order instead of alphanumerical in order to avoid
+        incoherence such as &#39;1,10,2,3...&#39;)
+
+    Returns:    
+    -----------
+    Saves a gif file at the specified output path.
+    &#34;&#34;&#34;
+    
+    # load and sort images
+    if len(extension) &lt; 4: # add point to extension if it has been forgotten
+        extension = &#39;.&#39; + extension
+    filenames = glob.glob(os.path.join(input_folder, &#39;*&#39;) + extension)
+    if sort == &#39;numerical&#39;:
+        filenames = realsorted(filenames)
+    elif sort == &#39;alphabetical&#39;:
+        filenames.sort()
+    else:
+        raise Exception(&#34;Available sorting logics are &#39;numerical&#39; and &#39;alphabetical&#39;.&#34;)
+
+    # store them into a list of PIL images
+    frames = []
+    for i in filenames:
+        new_frame = Image.open(i)
+        frames.append(new_frame)
+
+    # Save into a GIF file that loops forever
+    frames[0].save(output_path,
+                   format=&#39;GIF&#39;,
+                   append_images=frames[1:],
+                   save_all=True,
+                   duration=duration, loop=0)
+    print(&#39;GIF saved at &#39; + output_path)
+
+
+def plot_geometries(geometries, init_crs=4326):
+    &#34;&#34;&#34;
+    Plots a geodataframe in an interactive folium map, for visualization.
+
+    Arguments:
+    -----------
+    geometries: list or geodataframe
+        either a polygon (as a list of lon,lat coordinates), a list of polygons or a gdf
+    init_crs: int, optional (default: 4326)
+        geometries crs, if not WSG84
+
+    Returns:
+    -----------
+        folium map with geometries as map overlay
+    &#34;&#34;&#34;
+
+    # if the geometries are not a gdf (i.e. a polygon or list of polygons)
+    if str(type(geometries)) != &#34;&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;&#34;:
+        try:
+            is_unique = geometries.shape
+            polygons_shp = geometry.Polygon(geometries)
+            polygons_gdf = gpd.GeoDataFrame(index=[0], crs={&#39;init&#39;:&#39;epsg:&#39;+str(init_crs)}, geometry=[polygons_shp])
+            map_lat = geometries[0][1]
+            map_lon = geometries[0][0]
+        except:
+            polygons_shp = [geometry.Polygon(poly) for poly in geometries]
+            polygons_gdf = gpd.GeoDataFrame(crs={&#39;init&#39;:&#39;epsg:&#39;+str(init_crs)}, geometry=polygons_shp)
+            map_lat = geometries[0][0][1]
+            map_lon = geometries[0][0][0]
+        polygons_gdf = polygons_gdf.to_crs(epsg=4326)
+
+    # if the geomatries are stored in a geodataframe, just convert to epsg:4326
+    else:
+        polygons_gdf = geometries.to_crs(epsg=4326)
+        map_lat = list(list(polygons_gdf[&#39;geometry&#39;])[0].exterior.coords)[0][1]
+        map_lon = list(list(polygons_gdf[&#39;geometry&#39;])[0].exterior.coords)[0][0]
+
+    # Plot polygon labels on an interactive map
+    m = folium.Map([map_lat, map_lon], zoom_start=12)
+    folium.GeoJson(polygons_gdf, name=&#39;polygon labels&#39;).add_to(m)
+
+    # Add satellite layer
+    tile = folium.TileLayer(
+        tiles = &#39;https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}&#39;,
+        attr = &#39;Esri&#39;,
+        name = &#39;Esri Satellite&#39;,
+        overlay = False,
+        control = True
+       ).add_to(m)
+
+    # Add layer control and lat/lng popups
+    folium.LatLngPopup().add_to(m)
+    folium.LayerControl().add_to(m)
+    
+    display(m)
+
+
+###################################################################################################
+# CONVERSIONS BETWEEN FILE FORMATS (GEODATAFRAME, GEOJSON, etc.)
+###################################################################################################
+    
+def polygon_from_kml(fn):
+    &#34;&#34;&#34;
+    Extracts coordinates from a .kml file.
+
+    Arguments:
+    -----------
+    fn: str
+        filepath + filename of the kml file to be read          
+                
+    Returns:    
+    -----------
+    polygon: list
+        coordinates extracted from the .kml file
+        
+    &#34;&#34;&#34;    
+    
+    # read .kml file
+    with open(fn) as kmlFile:
+        doc = kmlFile.read() 
+    # parse to find coordinates field
+    str1 = &#39;&lt;coordinates&gt;&#39;
+    str2 = &#39;&lt;/coordinates&gt;&#39;
+    subdoc = doc[doc.find(str1)+len(str1):doc.find(str2)]
+    coordlist = subdoc.split(&#39;\n&#39;)
+    # read coordinates
+    polygon = []
+    for i in range(1,len(coordlist)-1):
+        polygon.append([float(coordlist[i].split(&#39;,&#39;)[0]), float(coordlist[i].split(&#39;,&#39;)[1])])
+        
+    return [polygon]
+
+def transects_from_geojson(filename):
+    &#34;&#34;&#34;
+    Reads transect coordinates from a .geojson file.
+    
+    Arguments:
+    -----------
+    filename: str
+        contains the path and filename of the geojson file to be loaded
+        
+    Returns:    
+    -----------
+    transects: dict
+        contains the X and Y coordinates of each transect
+        
+    &#34;&#34;&#34;  
+    
+    gdf = gpd.read_file(filename)
+    transects = dict([])
+    for i in gdf.index:
+        transects[gdf.loc[i,&#39;name&#39;]] = np.array(gdf.loc[i,&#39;geometry&#39;].coords)
+        
+    print(&#39;%d transects have been loaded&#39; % len(transects.keys()))
+
+    return transects
+
+def output_to_gdf(output):
+    &#34;&#34;&#34;
+    Saves the mapped shorelines as a gpd.GeoDataFrame    
+
+    Arguments:
+    -----------
+    output: dict
+        contains the coordinates of the mapped shorelines + attributes          
+                
+    Returns:    
+    -----------
+    gdf_all: gpd.GeoDataFrame
+        contains the shorelines + attirbutes
+  
+    &#34;&#34;&#34;    
+     
+    # loop through the mapped shorelines
+    counter = 0
+    for i in range(len(output[&#39;shorelines&#39;])):
+        # skip if there shoreline is empty 
+        if len(output[&#39;shorelines&#39;][i]) == 0:
+            continue
+        else:
+            # save the geometry + attributes
+            geom = geometry.LineString(output[&#39;shorelines&#39;][i])
+            gdf = gpd.GeoDataFrame(geometry=gpd.GeoSeries(geom))
+            gdf.index = [i]
+            gdf.loc[i,&#39;date&#39;] = output[&#39;dates&#39;][i].strftime(&#39;%Y-%m-%d %H:%M:%S&#39;)
+            gdf.loc[i,&#39;satname&#39;] = output[&#39;satname&#39;][i]
+            gdf.loc[i,&#39;geoaccuracy&#39;] = output[&#39;geoaccuracy&#39;][i]
+            gdf.loc[i,&#39;cloud_cover&#39;] = output[&#39;cloud_cover&#39;][i]
+            # store into geodataframe
+            if counter == 0:
+                gdf_all = gdf
+            else:
+                gdf_all = gdf_all.append(gdf)
+            counter = counter + 1
+            
+    return gdf_all
+
+def transects_to_gdf(transects):
+    &#34;&#34;&#34;
+    Saves the shore-normal transects as a gpd.GeoDataFrame    
+
+    Arguments:
+    -----------
+    transects: dict
+        contains the coordinates of the transects          
+                
+    Returns:    
+    -----------
+    gdf_all: gpd.GeoDataFrame
+
+        
+    &#34;&#34;&#34;  
+       
+    # loop through the mapped shorelines
+    for i,key in enumerate(list(transects.keys())):
+        # save the geometry + attributes
+        geom = geometry.LineString(transects[key])
+        gdf = gpd.GeoDataFrame(geometry=gpd.GeoSeries(geom))
+        gdf.index = [i]
+        gdf.loc[i,&#39;name&#39;] = key
+        # store into geodataframe
+        if i == 0:
+            gdf_all = gdf
+        else:
+            gdf_all = gdf_all.append(gdf)
+            
+    return gdf_all
+
+
+###################################################################################################
+# IMAGE ANNOTATOR
+###################################################################################################
+
+def annotate_images(source=None, inputs=None, 
+                    label_type=&#39;polygon&#39;, output_epsg=4326, 
+                    cloud_mask_issue=False):
+    &#34;&#34;&#34;
+    Allows the user to manually draw polygons to annotate images stored in metadata
+    from download (works only with RGB images) or in any chosen directory (works also
+    with grayscale / 1-channel images).
+
+    Arguments:
+    -----------
+    source: dict or str
+        either metadata dict from sat_download, or a chosen folder path
+    inputs: dict (optional, only necessary if source=metadata)
+        input parameters from sat_download (sitename, filepath, polygon, dates, sat_list)
+    label_type: str
+        type of annotations - either &#39;polygon&#39; or &#39;binary&#39;    
+    cloud_mask_issue: boolean, optional (default: False)
+        True if there is an issue with the cloud mask and pixels are erroneously
+        being masked on the images
+    output_epsg: int, optional (default: 4326)
+        output spatial reference system as EPSG code
+
+    Returns (either one or the other, depending on label_type):
+    -----------
+    pts_world_final: np.array - if label_type == &#39;polygon&#39;
+        world coordinates of the polygons that were manually digitized - also saved as 
+        .pkl and .geojson files
+    binary_dict: dict - if label_type == &#39;binary&#39;
+        dictionary with image names as keys and the corresponding True/False labels as values
+    &#34;&#34;&#34;
+    
+    # determine if the source is metadata or a custom folder
+    if type(source) == dict:
+        
+        # check if annotations already exist in the folder corresponding to metadata
+        sitename = inputs[&#39;sitename&#39;]
+        filepath_data = inputs[&#39;filepath&#39;]
+        filepath = os.path.join(filepath_data, sitename)
+        filename = sitename + &#39;_polygon_annotations.pkl&#39;
+        filename_bin = sitename + &#39;_binary_annotations.csv&#39;
+        if filename in os.listdir(filepath):
+            print(&#39;Annotations already exist and have been loaded.&#39;)
+            with open(os.path.join(filepath, filename), &#39;rb&#39;) as f:
+                polygon_annotations = pickle.load(f)
+            return polygon_annotations
+        if filename_bin in os.listdir(filepath):
+            print(&#39;Annotations already exist and have been loaded.&#39;)
+            binary_dict = pd.read_csv(os.path.join(source, filename_bin),
+                                      header=None, names=[&#39;image_name&#39;,&#39;label&#39;])
+            return binary_dict
+
+        # otherwise get the list of images to digitize (only S2, L8 or L5 images, no L7 because of scan line error)
+        else:
+            metadata = source
+            # first try to use S2 images (10m res)
+            if &#39;S2&#39; in metadata.keys():
+                satname = &#39;S2&#39;
+                filepath = sat_tools.get_filepath(inputs,satname)
+                filenames = metadata[satname][&#39;filenames&#39;]
+            # if no S2 images, try L8 (15m res in the RGB with pansharpening)
+            elif not &#39;S2&#39; in metadata.keys() and &#39;L8&#39; in metadata.keys():
+                satname = &#39;L8&#39;
+                filepath = sat_tools.get_filepath(inputs,satname)
+                filenames = metadata[satname][&#39;filenames&#39;]
+            # if no S2 images and no L8, use L5 images
+            elif not &#39;S2&#39; in metadata.keys() and not &#39;L8&#39; in metadata.keys() and &#39;L5&#39; in metadata.keys():
+                satname = &#39;L5&#39;
+                filepath = sat_tools.get_filepath(inputs,satname)
+                filenames = metadata[satname][&#39;filenames&#39;]
+            else:
+                raise Exception(&#39;You cannot annotate L7 images (because of gaps in the images),&#39; +\
+                                &#39;please add S2, L8 or L5 images to your dataset.&#39;)
+    elif type(source) == str:
+        # check if annotations already exist in source folder, otherwise proceed to drawing
+        filenames = os.listdir(source)
+        filenames = [file for file in filenames if file.endswith(&#39;.tif&#39;)]
+        if len(filenames) == 0:
+            raise Exception(&#39;Please make sure your images are georeferenced (.tif).&#39;)
+        
+        # check if there is already a labels file
+        sitename = os.path.basename(os.path.normpath(source))
+        if label_type == &#39;polygon&#39; and os.path.isfile(os.path.join(source, sitename + &#39;_polygon_annotations.pkl&#39;)):
+            print(&#39;Annotations already exist and have been loaded.&#39;)
+            with open(os.path.join(source, sitename + &#39;_polygon_annotations.pkl&#39;), &#39;rb&#39;) as f:
+                polygon_annotations = pickle.load(f)
+            return polygon_annotations
+        if label_type == &#39;binary&#39; and os.path.isfile(os.path.join(source, sitename + &#39;_binary_annotations.csv&#39;)):
+            print(&#39;Annotations already exist and have been loaded.&#39;)
+            binary_dict = pd.read_csv(os.path.join(source, sitename + &#39;_binary_annotations.csv&#39;),
+                                      header=None, names=[&#39;image_name&#39;,&#39;label&#39;])
+            return binary_dict
+    else:
+        raise Exception(&#39;Please pass a valid source of images - either metadata dict from Sentinel&#39; +\
+                        &#39;or Landsat download, or a folder path.&#39;)
+
+    # create figure
+    fig, ax = plt.subplots(1,1, figsize=[8,8], tight_layout=True)
+    mng = plt.get_current_fig_manager()
+    mng.window.showMaximized()
+
+    # loop through the images
+    pts_pix_final = []
+    pts_world_final = []
+    geoms_final = []
+    gdf_final = []
+    binary_dict = {}
+    for i in range(len(filenames)):
+
+        # if source is metadata, read and preprocess image
+        if type(source) == dict:
+            fn = sat_tools.get_filenames(filenames[i], filepath, satname)
+            im_ms, georef, cloud_mask, im_extra, im_QA, im_nodata =\
+                            sat_preprocess.preprocess_single(fn, satname, cloud_mask_issue)
+            im_RGB = sat_preprocess.rescale_image_intensity(im_ms[:,:,[2,1,0]], cloud_mask, 99.9)
+            image_epsg = metadata[satname][&#39;epsg&#39;][i]
+
+        # if source is folder, read the image and get georef
+        else:
+            im_RGB = plt.imread(os.path.join(source, filenames[i]))
+            try:
+                im = gdal.Open(os.path.join(source, filenames[i]), gdal.GA_ReadOnly)
+                georef = np.array(im.GetGeoTransform())
+                image_epsg = int(gdal.Info(im, format=&#39;json&#39;)[&#39;coordinateSystem&#39;][&#39;wkt&#39;].rsplit(&#39;&#34;EPSG&#34;,&#34;&#39;, 1)[-1].split(&#39;&#34;&#39;)[0])
+            except:
+                raise Exception(&#39;Please use only georeferenced images - so that polygons can be&#39; +\
+                                &#39;converted to world coordinates&#39;)
+            if len(im_RGB.shape) &gt;= 3: # RGB image
+                im_RGB = im_RGB[...,[0,1,2]]
+            else: # grayscale image (same name though)
+                im_RGB = im_RGB[...,0]
+
+        # plot the image on a figure
+        ax.axis(&#39;off&#39;)
+        ax.imshow(im_RGB)
+
+        # decide if the image if good enough to label it
+        ax.set_title(&#39;Image {}/{}\n&#39;.format(i+1,len(filenames)) +
+                     &#39;Press &lt;right arrow&gt; on your keyboard if the image is clear enough to label it.\n&#39; +
+                     &#39;If the image is too cloudy press &lt;left arrow&gt; to get another image&#39;, fontsize=14)
+        # set a key event (skip_image) to accept/reject the detections (see https://stackoverflow.com/a/15033071)
+        # this variable needs to be immutable so we can access it after the keypress event
+        skip_image = False
+        key_event = {}
+        def press(event):
+            # store what key was pressed in the dictionary
+            key_event[&#39;pressed&#39;] = event.key
+        # Let the user press a key, right arrow to keep the image, left arrow to skip it -
+        # the loop runs until a key is pressed, which triggers a &#39;break&#39;.
+        # To break the loop the user can also press &#39;escape&#39;.
+        while True:
+            btn_keep = plt.text(1.1, 0.9, &#39;keep ⇨&#39;, size=12, ha=&#34;right&#34;, va=&#34;top&#34;,
+                                transform=ax.transAxes,
+                                bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+            btn_skip = plt.text(-0.1, 0.9, &#39;⇦ skip&#39;, size=12, ha=&#34;left&#34;, va=&#34;top&#34;,
+                                transform=ax.transAxes,
+                                bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+            btn_esc = plt.text(0.5, 0, &#39;&lt;esc&gt; to quit&#39;, size=12, ha=&#34;center&#34;, va=&#34;top&#34;,
+                                transform=ax.transAxes,
+                                bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+            plt.draw()
+            fig.canvas.mpl_connect(&#39;key_press_event&#39;, press)
+            plt.waitforbuttonpress()
+
+            # after button is pressed, remove the buttons
+            btn_skip.remove()
+            btn_keep.remove()
+            btn_esc.remove()
+
+            # keep/skip image according to the pressed key, &#39;escape&#39; to break the loop
+            if key_event.get(&#39;pressed&#39;) == &#39;right&#39;:
+                skip_image = False
+                break
+            elif key_event.get(&#39;pressed&#39;) == &#39;left&#39;:
+                skip_image = True
+                break
+            elif key_event.get(&#39;pressed&#39;) == &#39;escape&#39;:
+                plt.close()
+                raise StopIteration(&#39;User cancelled process.&#39;)
+            else:
+                plt.waitforbuttonpress()
+         
+        # if skip_image was set to True by keypress, go to next iteration (next image)
+        if skip_image:
+            ax.clear()
+            continue
+        
+        # else, go to drawing
+        else:
+            #========================================================================================#
+            # Binary annotations
+            #========================================================================================#
+            if label_type == &#39;binary&#39;:
+                # create two new buttons
+                true_button = plt.text(0, 0.9, &#39;&lt;True&gt;&#39;, size=16, ha=&#34;left&#34;, va=&#34;top&#34;,
+                                       transform=plt.gca().transAxes,
+                                       bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+                false_button = plt.text(1, 0.9, &#39;&lt;False&gt;&#39;, size=16, ha=&#34;right&#34;, va=&#34;top&#34;,
+                                        transform=plt.gca().transAxes,
+                                        bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+                while 1:
+                    true_button.set_visible(True)
+                    false_button.set_visible(True)
+
+                    # update title (instructions)
+                    ax.set_title(&#39;Click on &lt;True&gt; if the object is present in the image,\n&#39; +
+                                 &#34;or on &lt;False&gt; if it isn&#39;t.&#34;, fontsize=14)
+                    plt.draw()
+
+                    # let the user click
+                    pt_input = ginput(n=1, timeout=1e9, show_clicks=False)
+                    pt_input = np.array(pt_input)
+                    if pt_input[0][0] &gt; im_RGB.shape[1]/2: # if click on &lt;False&gt; (right of the image)
+                        binary = False
+                    else: 
+                        binary = True
+
+                    # ask for confirmation
+                    true_button.set_visible(False)
+                    false_button.set_visible(False)
+                    ax.set_title(&#39;{}\nTo confirm, press &lt;enter&gt; on your keyboard.&#39;.format(binary) +\
+                                 &#39; To restart, press &lt;esc&gt;.&#39;, fontsize=14)
+                    plt.draw()
+
+                    key_event = {}
+                    fig.canvas.mpl_connect(&#39;key_press_event&#39;, press)
+                    plt.waitforbuttonpress()
+                    if key_event.get(&#39;pressed&#39;) == &#39;enter&#39;:
+                        # save the label
+                        binary_dict[filenames[i]] = binary
+
+                        # if we are at the end of the images, display final message
+                        if not i+1 &lt; len(filenames):
+                            plt.draw()
+                            plt.title(&#39;All labels saved as &#39; + sitename + &#39;_binary_annotations.csv&#39;, fontsize=14)
+                            ginput(n=1, timeout=3, show_clicks=False)
+                            break
+                        # if there are other images left, display information for the user
+                        else:
+                            plt.draw()
+                            plt.title(&#39;Label saved. Going to next image...&#39;, fontsize=14)
+                            ginput(n=1, timeout=1, show_clicks=False)
+                            break
+
+                    # if &lt;esc&gt;, restart this &#39;while&#39; iteration to get another chance to label
+                    elif key_event.get(&#39;pressed&#39;) == &#39;escape&#39;:
+                        continue
+                    else:
+                        plt.waitforbuttonpress()
+            
+                # finally, go to next picture, or close GUI (if last iteration)
+                if i+1 &lt; len(filenames):
+                    ax.clear()
+                    continue
+                else:
+                    # save labels to disk
+                    if type(source)==dict:
+                        filepath = os.path.join(filepath_data, sitename)
+                    else:
+                        filepath = source
+                    with open(os.path.join(filepath, sitename + &#39;_binary_annotations.csv&#39;),&#39;w&#39;) as f:
+                        w = csv.writer(f)
+                        w.writerows(binary_dict.items())
+                        print(&#39;Binary annotations have been saved in {}.&#39;.format(filepath))
+                    # close interface and return labels dictionary
+                    plt.close()
+                    return binary_dict
+
+            #========================================================================================#
+            # Polygon annotations
+            #========================================================================================#
+            elif label_type == &#39;polygon&#39;:
+                # create two new buttons
+                add_button = plt.text(0, 0.9, &#39;add&#39;, size=16, ha=&#34;left&#34;, va=&#34;top&#34;,
+                                       transform=plt.gca().transAxes,
+                                       bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+                end_button = plt.text(1, 0.9, &#39;end&#39;, size=16, ha=&#34;right&#34;, va=&#34;top&#34;,
+                                       transform=plt.gca().transAxes,
+                                       bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+                
+                # add multiple polygons (until user clicks on &lt;end&gt; button)
+                pts_world_image = []
+                pts_pix_image = []
+                geoms = []
+                while 1:
+                    add_button.set_visible(False)
+                    end_button.set_visible(False)
+                    
+                    # update title (instructions)
+                    ax.set_title(&#39;Click points to capture the polygon shape.\n&#39; +
+                                 &#39;When finished digitizing, press &lt;ENTER&gt;&#39;, fontsize=14)
+                    plt.draw()
+
+                    # let user click on the polygon summits
+                    pts = ginput(n=50000, timeout=1e9, show_clicks=True) # max 50k points per polygon!
+                    pts_pix = np.array(pts)
+                    #if pts_pix.shape[1] == 3:
+                    #    pts_pix = np.delete(pts_pix,2, axis=1)
+
+                    # convert pixel coordinates to world coordinates
+                    pts_world = sat_tools.convert_pix2world(pts_pix[:,[1,0]], georef)
+                    #if pts_world.shape[1] == 3:
+                    #    pts_world = np.delete(pts_world, 2, axis=1)
+
+                    # save as geometry (to create .geojson file later) and as array
+                    geoms.append(geometry.Polygon(pts_world[:-1])) 
+                    pts_world_image.append(pts_world[:-1])
+                    pts_pix_image.append(pts_pix[:-1])
+
+                    # interpolate between points clicked by the user (1m resolution) for visualization
+                    pts_world_interp = np.expand_dims(np.array([np.nan, np.nan]),axis=0)
+                    for k in range(len(pts_world[:-1])):
+                        pt_dist = np.linalg.norm(pts_world[k,:]-pts_world[k+1,:])
+                        xvals = np.arange(0,pt_dist)
+                        yvals = np.zeros(len(xvals))
+                        pt_coords = np.zeros((len(xvals),2))
+                        pt_coords[:,0] = xvals
+                        pt_coords[:,1] = yvals
+                        phi = 0
+                        deltax = pts_world[k+1,0] - pts_world[k,0]
+                        deltay = pts_world[k+1,1] - pts_world[k,1]
+                        phi = np.pi/2 - np.math.atan2(deltax, deltay)
+                        tf = transform.EuclideanTransform(rotation=phi, translation=pts_world[k,:])
+                        pts_world_interp = np.append(pts_world_interp,tf(pt_coords), axis=0)
+                    pts_world_interp = np.delete(pts_world_interp,0,axis=0)
+                    pts_pix_interp = sat_tools.convert_world2pix(pts_world_interp, georef)
+                    ax.plot(pts_pix_interp[:,0], pts_pix_interp[:,1], &#39;r--&#39;)
+                    #ax.plot(pts_pix_interp[0,0], pts_pix_interp[0,1],&#39;ko&#39;)
+                    #ax.plot(pts_pix_interp[-1,0], pts_pix_interp[-1,1],&#39;ko&#39;)
+
+                    # update title and buttons
+                    add_button.set_visible(True)
+                    end_button.set_visible(True)
+                    ax.set_title(&#39;Click on &lt;add&gt; to digitize another polygon in this image, or on &lt;end&gt; to save.&#39;,
+                              fontsize=14)
+                    plt.draw()
+
+                    # let the user click again (&lt;add&gt; or &lt;end&gt;)
+                    pt_input = ginput(n=1, timeout=1e9, show_clicks=False)
+                    pt_input = np.array(pt_input)
+
+                    # if user clicks on &lt;end&gt;, break the loop and go to saving (if &lt;add&gt;, go on to new iteration)
+                    if pt_input[0][0] &gt; im_RGB.shape[1]/2:
+                        add_button.set_visible(False)
+                        end_button.set_visible(False)
+                        if i+1 &lt; len(filenames):
+                            plt.draw()
+                            plt.title(&#39;Polygon(s) saved. Going to next image...&#39;, fontsize=14)
+                            ginput(n=1, timeout=1, show_clicks=False)
+                        else:
+                            plt.draw()
+                            plt.title(&#39;All polygon(s) saved as &#39; + sitename + &#39;_polygon_annotations.pkl\nand &#39; +\
+                                      sitename + &#39;_polygon_annotations.geojson&#39;, fontsize=14)
+                            ginput(n=1, timeout=3, show_clicks=False)
+                        break
+
+            # now we finished getting coordinates for the image, just convert to custom crs
+            pts_world_image = sat_tools.convert_epsg(pts_world_image, image_epsg, output_epsg)
+            # the line above outputs 3D coords, don&#39;t kown why, but whatever, it still works
+
+            # create dataframe with information about polygon geometries in order to write geojson later
+            for k, poly in enumerate(geoms):
+                # store pixel coords, world coords and image name into geodataframe
+                gdf = gpd.GeoDataFrame(geometry=gpd.GeoSeries(poly))
+                gdf.index = [k]
+                gdf.loc[k,&#39;filename&#39;] = filenames[i]
+                pts_json = np.asarray(pts_pix_image[k]).tolist()
+                gdf.loc[k,&#39;pixel_geometry&#39;] = json.dumps(pts_json)
+                if k == 0: # need to initialise gdf at first iteration
+                    gdf_image = gdf
+                else:
+                    gdf_image = gdf_image.append(gdf)
+            # set geodataframe crs to image_epsg and convert to user-defined crs
+            gdf_image.crs = {&#39;init&#39;:&#39;epsg:&#39;+str(image_epsg)}
+            gdf_image = gdf_image.to_crs({&#39;init&#39;: &#39;epsg:&#39;+str(output_epsg)})
+
+            # add coordinates in pixels, coordinates in world crs, geometries and geodataframe to final lists
+            pts_pix_final.extend(pts_pix_image)
+            pts_world_final.extend(pts_world_image)
+            geoms_final.extend(geoms)
+            try:
+                test = len(gdf_final)
+                need_to_initialize_gdf_final = True
+            except:
+                need_to_initialize_gdf_final = False
+            if need_to_initialize_gdf_final:
+                gdf_final = gdf_image
+            else:
+                gdf_final = gdf_final.append(gdf_image)
+
+            # finally, go to next picture, or close GUI (if last iteration)
+            if i+1 &lt; len(filenames):
+                ax.clear()
+                continue
+            else:
+                plt.close()
+
+            # if we arrived here, it means we are in the last iteration (last image)!
+            # save final list of coordinates in world crs as .pkl
+            if type(source)==dict:
+                filepath = os.path.join(filepath_data, sitename)
+            else:
+                filepath = source
+            with open(os.path.join(filepath, sitename + &#39;_polygon_annotations.pkl&#39;), &#39;wb&#39;) as f:
+                pickle.dump(pts_world_final, f)
+
+            # save final geodataframe with all information as .geojson
+            gdf_final.to_file(os.path.join(filepath, sitename + &#39;_polygon_annotations.geojson&#39;),
+                              driver=&#39;GeoJSON&#39;, encoding=&#39;utf-8&#39;)
+
+            print(&#39;Polygon annotations have been saved in {}.&#39;.format(filepath))
+            break
+    
+    # if the last image was skipped, save work
+    if skip_image:
+        plt.close()
+        if type(source)==dict:
+                filepath = os.path.join(filepath_data, sitename)
+        else:
+            filepath = source
+        with open(os.path.join(filepath, sitename + &#39;_polygon_annotations.pkl&#39;), &#39;wb&#39;) as f:
+            pickle.dump(pts_world_final, f)
+        # save final geodataframe with all information as .geojson
+        gdf_final.to_file(os.path.join(filepath, sitename + &#39;_polygon_annotations.geojson&#39;),
+                          driver=&#39;GeoJSON&#39;, encoding=&#39;utf-8&#39;)
+        print(&#39;Polygon annotations have been saved in {}.&#39;.format(filepath))
+
+    # check if a polygon has been digitised
+    if len(pts_world_final) == 0:
+        raise Exception(&#39;No cloud free images are available to draw polygons,&#39;+
+                        &#39;download more images and try again&#39;)
+
+    return pts_world_final
+
+
+###################################################################################################
+# IMAGE SLICER
+###################################################################################################
+
+&#34;&#34;&#34;
+This sub-module contains functions to split images in a selected number of tiles (and join them
+back together). This split doesn&#39;t conserve metadata (in particular georeferenced information).
+To save small georeferenced tiles, use the `tile_size` argument in the sat_dowload functions.
+
+Original author: Sam Dobson, London, 2018
+                 https://github.com/samdobson/image_slicer
+Modifications and additions: Thomas de Mareuil, Total E-LAB, 2020
+&#34;&#34;&#34;
+
+from math import sqrt, ceil, floor
+from PIL import Image
+
+class Tile(object):
+    &#34;&#34;&#34;Represents a single tile.&#34;&#34;&#34;
+
+    def __init__(self, image, number, position, coords, filename=None):
+        self.image = image
+        self.number = number
+        self.position = position
+        self.coords = coords
+        self.filename = filename
+
+    @property
+    def row(self):
+        return self.position[0]
+
+    @property
+    def column(self):
+        return self.position[1]
+
+    @property
+    def basename(self):
+        &#34;&#34;&#34;Strip path and extension. Return base filename.&#34;&#34;&#34;
+        return get_basename(self.filename)
+
+    def generate_filename(self, directory=os.getcwd(), prefix=&#39;tile&#39;,
+                          format=&#39;png&#39;, path=True):
+        &#34;&#34;&#34;Construct and return a filename for this tile.&#34;&#34;&#34;
+        filename = prefix + &#39;_{col:02d}_{row:02d}.{ext}&#39;.format(
+                      col=self.column, row=self.row, ext=format.lower().replace(&#39;jpeg&#39;, &#39;jpg&#39;))
+        if not path:
+            return filename
+        return os.path.join(directory, filename)
+
+    def save(self, filename=None, format=&#39;png&#39;):
+        if not filename:
+            filename = self.generate_filename(format=format)
+        self.image.save(filename, format)
+        self.filename = filename
+
+    def __repr__(self):
+        &#34;&#34;&#34;Show tile number, and if saved to disk, filename.&#34;&#34;&#34;
+        if self.filename:
+            return &#39;&lt;Tile #{} - {}&gt;&#39;.format(self.number,
+                                            os.path.basename(self.filename))
+        return &#39;&lt;Tile #{}&gt;&#39;.format(self.number)
+
+
+def calc_columns_rows(n):
+    &#34;&#34;&#34;
+    Calculate the number of columns and rows required to divide an image
+    into ``n`` parts.
+
+    Return a tuple of integers in the format (num_columns, num_rows)
+    &#34;&#34;&#34;
+    num_columns = int(ceil(sqrt(n)))
+    num_rows = int(ceil(n / float(num_columns)))
+    return (num_columns, num_rows)
+
+
+def get_combined_size(tiles):
+    &#34;&#34;&#34;Calculate combined size of tiles.&#34;&#34;&#34;
+    # TODO: Refactor calculating layout to avoid repetition.
+    columns, rows = calc_columns_rows(len(tiles))
+    tile_size = tiles[0].image.size
+    return (tile_size[0] * columns, tile_size[1] * rows)
+
+
+def join(tiles, width=0, height=0):
+    &#34;&#34;&#34;
+    @param ``tiles`` - Tuple of ``Image`` instances.
+    @param ``width`` - Optional, width of combined image.
+    @param ``height`` - Optional, height of combined image.
+    @return ``Image`` instance.
+    &#34;&#34;&#34;
+    # Don&#39;t calculate size if width and height are provided
+    # this allows an application that knows what the
+    # combined size should be to construct an image when
+    # pieces are missing.
+
+    if width &gt; 0 and height &gt; 0:
+        im = Image.new(&#39;RGB&#39;,(width, height), None)
+    else:
+        im = Image.new(&#39;RGB&#39;, get_combined_size(tiles), None)
+    columns, rows = calc_columns_rows(len(tiles))
+    for tile in tiles:
+        try:
+            im.paste(tile.image, tile.coords)
+        except IOError:
+            #do nothing, blank out the image
+            continue
+    return im
+
+
+def validate_image(image, number_tiles):
+    &#34;&#34;&#34;Basic sanity checks prior to performing a split.&#34;&#34;&#34;
+    TILE_LIMIT = 99 * 99
+
+    try:
+        number_tiles = int(number_tiles)
+    except:
+        raise ValueError(&#39;number_tiles could not be cast to integer.&#39;)
+
+    if number_tiles &gt; TILE_LIMIT or number_tiles &lt; 2:
+        raise ValueError(&#39;Number of tiles must be between 2 and {} (you \
+                          asked for {}).&#39;.format(TILE_LIMIT, number_tiles))
+
+
+def validate_image_col_row(image , col , row):
+    &#34;&#34;&#34;Basic checks for columns and rows values&#34;&#34;&#34;
+    SPLIT_LIMIT = 99
+
+    try:
+        col = int(col)
+        row = int(row)
+    except:
+        raise ValueError(&#39;columns and rows values could not be cast to integer.&#39;)
+
+    if col &lt; 2:
+        raise ValueError(&#39;Number of columns must be between 2 and {} (you \
+                          asked for {}).&#39;.format(SPLIT_LIMIT, col))
+    if row &lt; 2 :
+        raise ValueError(&#39;Number of rows must be between 2 and {} (you \
+                          asked for {}).&#39;.format(SPLIT_LIMIT, row))
+
+
+def slice_image(filename, number_tiles=None, col=None, row=None, max_tile_size=None):
+    &#34;&#34;&#34;
+    Split an image into a specified number of tiles.
+
+    Args:
+       filename (str):  The filename of the image to split.
+       number_tiles (int):  The number of tiles required.
+       col, row (int): Nb of columns required (alternative to number_tiles)
+       max_tile_size (int*int): Max tile dimensions.
+
+    Returns:
+        Tuple of :class:`Tile` instances.
+        Tuple with tile dimensions.
+    &#34;&#34;&#34;
+    im = Image.open(filename)
+    im_w, im_h = im.size
+
+    columns = 0
+    rows = 0
+    if not number_tiles is None:
+        validate_image(im, number_tiles)
+        columns, rows = calc_columns_rows(number_tiles)
+    #    extras = (columns * rows) - number_tiles
+        tile_w, tile_h = int(floor(im_w / columns)), int(floor(im_h / rows))
+    else:
+        validate_image_col_row(im, col, row)
+        columns = col
+        rows = row
+    #    extras = (columns * rows) - number_tiles
+        tile_w, tile_h = int(sqrt(max_tile_size)), int(sqrt(max_tile_size))
+
+    tiles = []
+    number = 1
+    for pos_y in range(0, im_h - rows, tile_h): # -rows for rounding error.
+        for pos_x in range(0, im_w - columns, tile_w): # as above.
+            area = (pos_x, pos_y, pos_x + tile_w, pos_y + tile_h)
+            image = im.crop(area)
+            position = (int(floor(pos_x / tile_w)) + 1,
+                        int(floor(pos_y / tile_h)) + 1)
+            coords = (pos_x, pos_y)
+            tile = Tile(image, number, position, coords)
+            tiles.append(tile)
+            number += 1
+    print(&#39;Splitting the original image in {} tiles&#39;.format(len(tiles)),
+          &#39;of size {}x{}...&#39;.format(tile_w, tile_h))
+
+    return tuple(tiles), (tile_w, tile_h)
+
+
+def save_tiles(tiles, prefix=&#39;&#39;, directory=os.getcwd(), format=&#39;png&#39;):
+    &#34;&#34;&#34;
+    Write image files to disk. Create specified folder(s) if they
+       don&#39;t exist. Return list of :class:`Tile` instance.
+
+    Args:
+       tiles (list):  List, tuple or set of :class:`Tile` objects to save.
+       prefix (str):  Filename prefix of saved tiles.
+       directory (str):  Directory to save tiles
+       format (str): Image format to write.
+
+    Returns:
+        Tuple of :class:`Tile` instances.
+    &#34;&#34;&#34;
+
+    for tile in tiles:
+        tile.save(filename=tile.generate_filename(prefix=prefix,
+                                                  directory=directory,
+                                                  format=format),
+                                                  format=format)
+    return tuple(tiles)
+
+
+def get_image_column_row(filename):
+    &#34;&#34;&#34;Determine column and row position for filename.&#34;&#34;&#34;
+    row, column = os.path.splitext(filename)[0][-5:].split(&#39;_&#39;)
+    return (int(column)-1, int(row)-1)
+
+
+def open_images_in(directory):
+    &#34;&#34;&#34;Open all images in a directory. Return tuple of Tile instances.&#34;&#34;&#34;
+
+    files = [filename for filename in os.listdir(directory)
+                    if &#39;_&#39; in filename and not filename.startswith(&#39;joined&#39;)]
+    tiles = []
+    if len(files) &gt; 0:
+        i = 0
+        for file in files:
+            pos = get_image_column_row(file)
+            im = Image.open(os.path.join(directory, file))
+
+            position_xy=[0,0]
+            count=0
+            for a,b in zip(pos,im.size):
+                position_xy[count] = a*b
+                count = count + 1
+            tiles.append(Tile(image=im, position=pos, number=i+1,
+                                coords=position_xy, filename=file))
+            i = i + 1
+    return tiles
+
+
+&#39;&#39;&#39;
+Helper functions for ``image_slicer``.
+&#39;&#39;&#39;
+import os
+from PIL import Image
+
+
+def get_basename(filename):
+    &#34;&#34;&#34;Strip path and extension. Return basename.&#34;&#34;&#34;
+    return os.path.splitext(os.path.basename(filename))[0]
+
+
+def open_images(directory):
+    &#34;&#34;&#34;Open all images in a directory. Return tuple of Image instances.&#34;&#34;&#34;
+    return [Image.open(os.path.join(directory, file)) for file in os.listdir(directory)]
+
+
+def get_columns_rows(filenames):
+    &#34;&#34;&#34;Derive number of columns and rows from filenames.&#34;&#34;&#34;
+    tiles = []
+    for filename in filenames:
+        row, column = os.path.splitext(filename)[0][-5:].split(&#39;_&#39;)
+        tiles.append((int(row), int(column)))
+    rows = [pos[0] for pos in tiles]; columns = [pos[1] for pos in tiles]
+    num_rows = max(rows); num_columns = max(columns)
+    return (num_columns, num_rows)
+
+
+def split_image(image_path, filepath_out=None, max_tile_size=512*512, square=False,
+                                                nb_tiles=None, inputs=None, show=False):
+    &#34;&#34;&#34;
+    Split an image in a nb of tiles such that all tiles are under 512x512 pixels.
+    
+    Arguments:
+    -----------
+    image_path: str
+        path to original image downloaded through the sat_download module
+    filepath_out: str, optional (default: new folder named /preprocessed_files/split_tiles)
+        path to directory to save split image tiles
+    max_tile_size: int, optional (default: 512*512)
+        maximum size of the final tiles, in pixels
+    square: bool, optional (default: False)
+        forces the tiles to a square shape - if False, keeps the aspect ratio
+        of the original image (and tile surface smaller than default 512*512)
+    nb_tiles: int, optional (default: None, max: 99x99)
+        force the number of tiles (size wil adjust accordingly)
+    inputs: dict, optional (if not, need to pass filepath_out)
+        dict with the sat_download inputs to get default folder path
+    show: bool, optional (default: False)
+        output a visualization of the original image with the split grid on top
+
+    Returns:
+    -----------
+    image tiles: .png images
+        as many tiles of requested size as the original image can fit
+    &#34;&#34;&#34;
+
+    # if no output path was provided, set to default
+    if filepath_out == None:
+        assert inputs != None, (&#39;Please provide a filepath_out or the preprocessing&#39; +
+                                                    &#39; `inputs` dictionary with path inside.&#39;)
+        sitename = inputs[&#39;sitename&#39;]
+        filepath_data = inputs[&#39;filepath&#39;]
+        filepath_out = os.path.join(filepath_data, sitename, &#39;preprocessed_files&#39;, &#39;split_tiles&#39;)
+        if not os.path.exists(filepath_out):
+            os.makedirs(filepath_out)
+
+    # open original image
+    im = Image.open(image_path)
+    im_w, im_h = im.size
+    
+    # compute tiles
+    if nb_tiles != None:
+        tiles, tile_dim = slice_image(image_path, number_tiles=nb_tiles, save=False)
+
+    else:
+        if not square:
+            nb_tiles = (im_w * im_h) // max_tile_size
+            tiles, tile_dim = slice_image(image_path, number_tiles=nb_tiles, save=False)
+        
+        if square:
+            col = int(round(im_w // sqrt(max_tile_size),0))
+            row = int(round(im_h // sqrt(max_tile_size),0))
+            if im_w % sqrt(max_tile_size) != 0 or im_h % sqrt(max_tile_size) != 0:
+                print(&#34;Warning: tile dimensions don&#39;t exactly match with image&#34;,
+                      &#34;- some tiles might have black padding to compensate.&#34;)
+            tiles, tile_dim = slice_image(image_path, col=col, row=row, max_tile_size=max_tile_size)
+    
+    # save tiles
+    save_tiles(tiles, directory=filepath_out, prefix=get_basename(image_path), format=&#39;png&#39;)
+    print(&#39;Tiles successfully saved in {}.&#39;.format(filepath_out))
+
+    # show grid
+    if show:
+        grid_x_ticks = np.arange(0, im_w, tile_dim[0])
+        grid_y_ticks = np.arange(0, im_h, tile_dim[1])
+        fig = plt.figure(figsize = (10,10))
+        ax = fig.add_subplot(1, 1, 1)
+        plt.imshow(im)
+        plt.title(&#39;Split preview&#39;)
+        ax.set_xticks(grid_x_ticks , minor=True)
+        ax.set_yticks(grid_y_ticks , minor=True)
+        ax.grid(which=&#39;minor&#39;, linestyle=&#39;--&#39;, color=&#39;black&#39;, linewidth=2)
+        plt.show()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="totalsat.sat_tools.annotate_images"><code class="name flex">
+<span>def <span class="ident">annotate_images</span></span>(<span>source=None, inputs=None, label_type='polygon', output_epsg=4326, cloud_mask_issue=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Allows the user to manually draw polygons to annotate images stored in metadata
+from download (works only with RGB images) or in any chosen directory (works also
+with grayscale / 1-channel images).</p>
+<h2 id="arguments">Arguments:</h2>
+<p>source: dict or str
+either metadata dict from sat_download, or a chosen folder path
+inputs: dict (optional, only necessary if source=metadata)
+input parameters from sat_download (sitename, filepath, polygon, dates, sat_list)
+label_type: str
+type of annotations - either 'polygon' or 'binary'
+<br>
+cloud_mask_issue: boolean, optional (default: False)
+True if there is an issue with the cloud mask and pixels are erroneously
+being masked on the images
+output_epsg: int, optional (default: 4326)
+output spatial reference system as EPSG code</p>
+<h2 id="returns-either-one-or-the-other-depending-on-label_type">Returns (either one or the other, depending on label_type):</h2>
+<p>pts_world_final: np.array - if label_type == 'polygon'
+world coordinates of the polygons that were manually digitized - also saved as
+.pkl and .geojson files
+binary_dict: dict - if label_type == 'binary'
+dictionary with image names as keys and the corresponding True/False labels as values</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def annotate_images(source=None, inputs=None, 
+                    label_type=&#39;polygon&#39;, output_epsg=4326, 
+                    cloud_mask_issue=False):
+    &#34;&#34;&#34;
+    Allows the user to manually draw polygons to annotate images stored in metadata
+    from download (works only with RGB images) or in any chosen directory (works also
+    with grayscale / 1-channel images).
+
+    Arguments:
+    -----------
+    source: dict or str
+        either metadata dict from sat_download, or a chosen folder path
+    inputs: dict (optional, only necessary if source=metadata)
+        input parameters from sat_download (sitename, filepath, polygon, dates, sat_list)
+    label_type: str
+        type of annotations - either &#39;polygon&#39; or &#39;binary&#39;    
+    cloud_mask_issue: boolean, optional (default: False)
+        True if there is an issue with the cloud mask and pixels are erroneously
+        being masked on the images
+    output_epsg: int, optional (default: 4326)
+        output spatial reference system as EPSG code
+
+    Returns (either one or the other, depending on label_type):
+    -----------
+    pts_world_final: np.array - if label_type == &#39;polygon&#39;
+        world coordinates of the polygons that were manually digitized - also saved as 
+        .pkl and .geojson files
+    binary_dict: dict - if label_type == &#39;binary&#39;
+        dictionary with image names as keys and the corresponding True/False labels as values
+    &#34;&#34;&#34;
+    
+    # determine if the source is metadata or a custom folder
+    if type(source) == dict:
+        
+        # check if annotations already exist in the folder corresponding to metadata
+        sitename = inputs[&#39;sitename&#39;]
+        filepath_data = inputs[&#39;filepath&#39;]
+        filepath = os.path.join(filepath_data, sitename)
+        filename = sitename + &#39;_polygon_annotations.pkl&#39;
+        filename_bin = sitename + &#39;_binary_annotations.csv&#39;
+        if filename in os.listdir(filepath):
+            print(&#39;Annotations already exist and have been loaded.&#39;)
+            with open(os.path.join(filepath, filename), &#39;rb&#39;) as f:
+                polygon_annotations = pickle.load(f)
+            return polygon_annotations
+        if filename_bin in os.listdir(filepath):
+            print(&#39;Annotations already exist and have been loaded.&#39;)
+            binary_dict = pd.read_csv(os.path.join(source, filename_bin),
+                                      header=None, names=[&#39;image_name&#39;,&#39;label&#39;])
+            return binary_dict
+
+        # otherwise get the list of images to digitize (only S2, L8 or L5 images, no L7 because of scan line error)
+        else:
+            metadata = source
+            # first try to use S2 images (10m res)
+            if &#39;S2&#39; in metadata.keys():
+                satname = &#39;S2&#39;
+                filepath = sat_tools.get_filepath(inputs,satname)
+                filenames = metadata[satname][&#39;filenames&#39;]
+            # if no S2 images, try L8 (15m res in the RGB with pansharpening)
+            elif not &#39;S2&#39; in metadata.keys() and &#39;L8&#39; in metadata.keys():
+                satname = &#39;L8&#39;
+                filepath = sat_tools.get_filepath(inputs,satname)
+                filenames = metadata[satname][&#39;filenames&#39;]
+            # if no S2 images and no L8, use L5 images
+            elif not &#39;S2&#39; in metadata.keys() and not &#39;L8&#39; in metadata.keys() and &#39;L5&#39; in metadata.keys():
+                satname = &#39;L5&#39;
+                filepath = sat_tools.get_filepath(inputs,satname)
+                filenames = metadata[satname][&#39;filenames&#39;]
+            else:
+                raise Exception(&#39;You cannot annotate L7 images (because of gaps in the images),&#39; +\
+                                &#39;please add S2, L8 or L5 images to your dataset.&#39;)
+    elif type(source) == str:
+        # check if annotations already exist in source folder, otherwise proceed to drawing
+        filenames = os.listdir(source)
+        filenames = [file for file in filenames if file.endswith(&#39;.tif&#39;)]
+        if len(filenames) == 0:
+            raise Exception(&#39;Please make sure your images are georeferenced (.tif).&#39;)
+        
+        # check if there is already a labels file
+        sitename = os.path.basename(os.path.normpath(source))
+        if label_type == &#39;polygon&#39; and os.path.isfile(os.path.join(source, sitename + &#39;_polygon_annotations.pkl&#39;)):
+            print(&#39;Annotations already exist and have been loaded.&#39;)
+            with open(os.path.join(source, sitename + &#39;_polygon_annotations.pkl&#39;), &#39;rb&#39;) as f:
+                polygon_annotations = pickle.load(f)
+            return polygon_annotations
+        if label_type == &#39;binary&#39; and os.path.isfile(os.path.join(source, sitename + &#39;_binary_annotations.csv&#39;)):
+            print(&#39;Annotations already exist and have been loaded.&#39;)
+            binary_dict = pd.read_csv(os.path.join(source, sitename + &#39;_binary_annotations.csv&#39;),
+                                      header=None, names=[&#39;image_name&#39;,&#39;label&#39;])
+            return binary_dict
+    else:
+        raise Exception(&#39;Please pass a valid source of images - either metadata dict from Sentinel&#39; +\
+                        &#39;or Landsat download, or a folder path.&#39;)
+
+    # create figure
+    fig, ax = plt.subplots(1,1, figsize=[8,8], tight_layout=True)
+    mng = plt.get_current_fig_manager()
+    mng.window.showMaximized()
+
+    # loop through the images
+    pts_pix_final = []
+    pts_world_final = []
+    geoms_final = []
+    gdf_final = []
+    binary_dict = {}
+    for i in range(len(filenames)):
+
+        # if source is metadata, read and preprocess image
+        if type(source) == dict:
+            fn = sat_tools.get_filenames(filenames[i], filepath, satname)
+            im_ms, georef, cloud_mask, im_extra, im_QA, im_nodata =\
+                            sat_preprocess.preprocess_single(fn, satname, cloud_mask_issue)
+            im_RGB = sat_preprocess.rescale_image_intensity(im_ms[:,:,[2,1,0]], cloud_mask, 99.9)
+            image_epsg = metadata[satname][&#39;epsg&#39;][i]
+
+        # if source is folder, read the image and get georef
+        else:
+            im_RGB = plt.imread(os.path.join(source, filenames[i]))
+            try:
+                im = gdal.Open(os.path.join(source, filenames[i]), gdal.GA_ReadOnly)
+                georef = np.array(im.GetGeoTransform())
+                image_epsg = int(gdal.Info(im, format=&#39;json&#39;)[&#39;coordinateSystem&#39;][&#39;wkt&#39;].rsplit(&#39;&#34;EPSG&#34;,&#34;&#39;, 1)[-1].split(&#39;&#34;&#39;)[0])
+            except:
+                raise Exception(&#39;Please use only georeferenced images - so that polygons can be&#39; +\
+                                &#39;converted to world coordinates&#39;)
+            if len(im_RGB.shape) &gt;= 3: # RGB image
+                im_RGB = im_RGB[...,[0,1,2]]
+            else: # grayscale image (same name though)
+                im_RGB = im_RGB[...,0]
+
+        # plot the image on a figure
+        ax.axis(&#39;off&#39;)
+        ax.imshow(im_RGB)
+
+        # decide if the image if good enough to label it
+        ax.set_title(&#39;Image {}/{}\n&#39;.format(i+1,len(filenames)) +
+                     &#39;Press &lt;right arrow&gt; on your keyboard if the image is clear enough to label it.\n&#39; +
+                     &#39;If the image is too cloudy press &lt;left arrow&gt; to get another image&#39;, fontsize=14)
+        # set a key event (skip_image) to accept/reject the detections (see https://stackoverflow.com/a/15033071)
+        # this variable needs to be immutable so we can access it after the keypress event
+        skip_image = False
+        key_event = {}
+        def press(event):
+            # store what key was pressed in the dictionary
+            key_event[&#39;pressed&#39;] = event.key
+        # Let the user press a key, right arrow to keep the image, left arrow to skip it -
+        # the loop runs until a key is pressed, which triggers a &#39;break&#39;.
+        # To break the loop the user can also press &#39;escape&#39;.
+        while True:
+            btn_keep = plt.text(1.1, 0.9, &#39;keep ⇨&#39;, size=12, ha=&#34;right&#34;, va=&#34;top&#34;,
+                                transform=ax.transAxes,
+                                bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+            btn_skip = plt.text(-0.1, 0.9, &#39;⇦ skip&#39;, size=12, ha=&#34;left&#34;, va=&#34;top&#34;,
+                                transform=ax.transAxes,
+                                bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+            btn_esc = plt.text(0.5, 0, &#39;&lt;esc&gt; to quit&#39;, size=12, ha=&#34;center&#34;, va=&#34;top&#34;,
+                                transform=ax.transAxes,
+                                bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+            plt.draw()
+            fig.canvas.mpl_connect(&#39;key_press_event&#39;, press)
+            plt.waitforbuttonpress()
+
+            # after button is pressed, remove the buttons
+            btn_skip.remove()
+            btn_keep.remove()
+            btn_esc.remove()
+
+            # keep/skip image according to the pressed key, &#39;escape&#39; to break the loop
+            if key_event.get(&#39;pressed&#39;) == &#39;right&#39;:
+                skip_image = False
+                break
+            elif key_event.get(&#39;pressed&#39;) == &#39;left&#39;:
+                skip_image = True
+                break
+            elif key_event.get(&#39;pressed&#39;) == &#39;escape&#39;:
+                plt.close()
+                raise StopIteration(&#39;User cancelled process.&#39;)
+            else:
+                plt.waitforbuttonpress()
+         
+        # if skip_image was set to True by keypress, go to next iteration (next image)
+        if skip_image:
+            ax.clear()
+            continue
+        
+        # else, go to drawing
+        else:
+            #========================================================================================#
+            # Binary annotations
+            #========================================================================================#
+            if label_type == &#39;binary&#39;:
+                # create two new buttons
+                true_button = plt.text(0, 0.9, &#39;&lt;True&gt;&#39;, size=16, ha=&#34;left&#34;, va=&#34;top&#34;,
+                                       transform=plt.gca().transAxes,
+                                       bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+                false_button = plt.text(1, 0.9, &#39;&lt;False&gt;&#39;, size=16, ha=&#34;right&#34;, va=&#34;top&#34;,
+                                        transform=plt.gca().transAxes,
+                                        bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+                while 1:
+                    true_button.set_visible(True)
+                    false_button.set_visible(True)
+
+                    # update title (instructions)
+                    ax.set_title(&#39;Click on &lt;True&gt; if the object is present in the image,\n&#39; +
+                                 &#34;or on &lt;False&gt; if it isn&#39;t.&#34;, fontsize=14)
+                    plt.draw()
+
+                    # let the user click
+                    pt_input = ginput(n=1, timeout=1e9, show_clicks=False)
+                    pt_input = np.array(pt_input)
+                    if pt_input[0][0] &gt; im_RGB.shape[1]/2: # if click on &lt;False&gt; (right of the image)
+                        binary = False
+                    else: 
+                        binary = True
+
+                    # ask for confirmation
+                    true_button.set_visible(False)
+                    false_button.set_visible(False)
+                    ax.set_title(&#39;{}\nTo confirm, press &lt;enter&gt; on your keyboard.&#39;.format(binary) +\
+                                 &#39; To restart, press &lt;esc&gt;.&#39;, fontsize=14)
+                    plt.draw()
+
+                    key_event = {}
+                    fig.canvas.mpl_connect(&#39;key_press_event&#39;, press)
+                    plt.waitforbuttonpress()
+                    if key_event.get(&#39;pressed&#39;) == &#39;enter&#39;:
+                        # save the label
+                        binary_dict[filenames[i]] = binary
+
+                        # if we are at the end of the images, display final message
+                        if not i+1 &lt; len(filenames):
+                            plt.draw()
+                            plt.title(&#39;All labels saved as &#39; + sitename + &#39;_binary_annotations.csv&#39;, fontsize=14)
+                            ginput(n=1, timeout=3, show_clicks=False)
+                            break
+                        # if there are other images left, display information for the user
+                        else:
+                            plt.draw()
+                            plt.title(&#39;Label saved. Going to next image...&#39;, fontsize=14)
+                            ginput(n=1, timeout=1, show_clicks=False)
+                            break
+
+                    # if &lt;esc&gt;, restart this &#39;while&#39; iteration to get another chance to label
+                    elif key_event.get(&#39;pressed&#39;) == &#39;escape&#39;:
+                        continue
+                    else:
+                        plt.waitforbuttonpress()
+            
+                # finally, go to next picture, or close GUI (if last iteration)
+                if i+1 &lt; len(filenames):
+                    ax.clear()
+                    continue
+                else:
+                    # save labels to disk
+                    if type(source)==dict:
+                        filepath = os.path.join(filepath_data, sitename)
+                    else:
+                        filepath = source
+                    with open(os.path.join(filepath, sitename + &#39;_binary_annotations.csv&#39;),&#39;w&#39;) as f:
+                        w = csv.writer(f)
+                        w.writerows(binary_dict.items())
+                        print(&#39;Binary annotations have been saved in {}.&#39;.format(filepath))
+                    # close interface and return labels dictionary
+                    plt.close()
+                    return binary_dict
+
+            #========================================================================================#
+            # Polygon annotations
+            #========================================================================================#
+            elif label_type == &#39;polygon&#39;:
+                # create two new buttons
+                add_button = plt.text(0, 0.9, &#39;add&#39;, size=16, ha=&#34;left&#34;, va=&#34;top&#34;,
+                                       transform=plt.gca().transAxes,
+                                       bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+                end_button = plt.text(1, 0.9, &#39;end&#39;, size=16, ha=&#34;right&#34;, va=&#34;top&#34;,
+                                       transform=plt.gca().transAxes,
+                                       bbox=dict(boxstyle=&#34;square&#34;, ec=&#39;k&#39;,fc=&#39;w&#39;))
+                
+                # add multiple polygons (until user clicks on &lt;end&gt; button)
+                pts_world_image = []
+                pts_pix_image = []
+                geoms = []
+                while 1:
+                    add_button.set_visible(False)
+                    end_button.set_visible(False)
+                    
+                    # update title (instructions)
+                    ax.set_title(&#39;Click points to capture the polygon shape.\n&#39; +
+                                 &#39;When finished digitizing, press &lt;ENTER&gt;&#39;, fontsize=14)
+                    plt.draw()
+
+                    # let user click on the polygon summits
+                    pts = ginput(n=50000, timeout=1e9, show_clicks=True) # max 50k points per polygon!
+                    pts_pix = np.array(pts)
+                    #if pts_pix.shape[1] == 3:
+                    #    pts_pix = np.delete(pts_pix,2, axis=1)
+
+                    # convert pixel coordinates to world coordinates
+                    pts_world = sat_tools.convert_pix2world(pts_pix[:,[1,0]], georef)
+                    #if pts_world.shape[1] == 3:
+                    #    pts_world = np.delete(pts_world, 2, axis=1)
+
+                    # save as geometry (to create .geojson file later) and as array
+                    geoms.append(geometry.Polygon(pts_world[:-1])) 
+                    pts_world_image.append(pts_world[:-1])
+                    pts_pix_image.append(pts_pix[:-1])
+
+                    # interpolate between points clicked by the user (1m resolution) for visualization
+                    pts_world_interp = np.expand_dims(np.array([np.nan, np.nan]),axis=0)
+                    for k in range(len(pts_world[:-1])):
+                        pt_dist = np.linalg.norm(pts_world[k,:]-pts_world[k+1,:])
+                        xvals = np.arange(0,pt_dist)
+                        yvals = np.zeros(len(xvals))
+                        pt_coords = np.zeros((len(xvals),2))
+                        pt_coords[:,0] = xvals
+                        pt_coords[:,1] = yvals
+                        phi = 0
+                        deltax = pts_world[k+1,0] - pts_world[k,0]
+                        deltay = pts_world[k+1,1] - pts_world[k,1]
+                        phi = np.pi/2 - np.math.atan2(deltax, deltay)
+                        tf = transform.EuclideanTransform(rotation=phi, translation=pts_world[k,:])
+                        pts_world_interp = np.append(pts_world_interp,tf(pt_coords), axis=0)
+                    pts_world_interp = np.delete(pts_world_interp,0,axis=0)
+                    pts_pix_interp = sat_tools.convert_world2pix(pts_world_interp, georef)
+                    ax.plot(pts_pix_interp[:,0], pts_pix_interp[:,1], &#39;r--&#39;)
+                    #ax.plot(pts_pix_interp[0,0], pts_pix_interp[0,1],&#39;ko&#39;)
+                    #ax.plot(pts_pix_interp[-1,0], pts_pix_interp[-1,1],&#39;ko&#39;)
+
+                    # update title and buttons
+                    add_button.set_visible(True)
+                    end_button.set_visible(True)
+                    ax.set_title(&#39;Click on &lt;add&gt; to digitize another polygon in this image, or on &lt;end&gt; to save.&#39;,
+                              fontsize=14)
+                    plt.draw()
+
+                    # let the user click again (&lt;add&gt; or &lt;end&gt;)
+                    pt_input = ginput(n=1, timeout=1e9, show_clicks=False)
+                    pt_input = np.array(pt_input)
+
+                    # if user clicks on &lt;end&gt;, break the loop and go to saving (if &lt;add&gt;, go on to new iteration)
+                    if pt_input[0][0] &gt; im_RGB.shape[1]/2:
+                        add_button.set_visible(False)
+                        end_button.set_visible(False)
+                        if i+1 &lt; len(filenames):
+                            plt.draw()
+                            plt.title(&#39;Polygon(s) saved. Going to next image...&#39;, fontsize=14)
+                            ginput(n=1, timeout=1, show_clicks=False)
+                        else:
+                            plt.draw()
+                            plt.title(&#39;All polygon(s) saved as &#39; + sitename + &#39;_polygon_annotations.pkl\nand &#39; +\
+                                      sitename + &#39;_polygon_annotations.geojson&#39;, fontsize=14)
+                            ginput(n=1, timeout=3, show_clicks=False)
+                        break
+
+            # now we finished getting coordinates for the image, just convert to custom crs
+            pts_world_image = sat_tools.convert_epsg(pts_world_image, image_epsg, output_epsg)
+            # the line above outputs 3D coords, don&#39;t kown why, but whatever, it still works
+
+            # create dataframe with information about polygon geometries in order to write geojson later
+            for k, poly in enumerate(geoms):
+                # store pixel coords, world coords and image name into geodataframe
+                gdf = gpd.GeoDataFrame(geometry=gpd.GeoSeries(poly))
+                gdf.index = [k]
+                gdf.loc[k,&#39;filename&#39;] = filenames[i]
+                pts_json = np.asarray(pts_pix_image[k]).tolist()
+                gdf.loc[k,&#39;pixel_geometry&#39;] = json.dumps(pts_json)
+                if k == 0: # need to initialise gdf at first iteration
+                    gdf_image = gdf
+                else:
+                    gdf_image = gdf_image.append(gdf)
+            # set geodataframe crs to image_epsg and convert to user-defined crs
+            gdf_image.crs = {&#39;init&#39;:&#39;epsg:&#39;+str(image_epsg)}
+            gdf_image = gdf_image.to_crs({&#39;init&#39;: &#39;epsg:&#39;+str(output_epsg)})
+
+            # add coordinates in pixels, coordinates in world crs, geometries and geodataframe to final lists
+            pts_pix_final.extend(pts_pix_image)
+            pts_world_final.extend(pts_world_image)
+            geoms_final.extend(geoms)
+            try:
+                test = len(gdf_final)
+                need_to_initialize_gdf_final = True
+            except:
+                need_to_initialize_gdf_final = False
+            if need_to_initialize_gdf_final:
+                gdf_final = gdf_image
+            else:
+                gdf_final = gdf_final.append(gdf_image)
+
+            # finally, go to next picture, or close GUI (if last iteration)
+            if i+1 &lt; len(filenames):
+                ax.clear()
+                continue
+            else:
+                plt.close()
+
+            # if we arrived here, it means we are in the last iteration (last image)!
+            # save final list of coordinates in world crs as .pkl
+            if type(source)==dict:
+                filepath = os.path.join(filepath_data, sitename)
+            else:
+                filepath = source
+            with open(os.path.join(filepath, sitename + &#39;_polygon_annotations.pkl&#39;), &#39;wb&#39;) as f:
+                pickle.dump(pts_world_final, f)
+
+            # save final geodataframe with all information as .geojson
+            gdf_final.to_file(os.path.join(filepath, sitename + &#39;_polygon_annotations.geojson&#39;),
+                              driver=&#39;GeoJSON&#39;, encoding=&#39;utf-8&#39;)
+
+            print(&#39;Polygon annotations have been saved in {}.&#39;.format(filepath))
+            break
+    
+    # if the last image was skipped, save work
+    if skip_image:
+        plt.close()
+        if type(source)==dict:
+                filepath = os.path.join(filepath_data, sitename)
+        else:
+            filepath = source
+        with open(os.path.join(filepath, sitename + &#39;_polygon_annotations.pkl&#39;), &#39;wb&#39;) as f:
+            pickle.dump(pts_world_final, f)
+        # save final geodataframe with all information as .geojson
+        gdf_final.to_file(os.path.join(filepath, sitename + &#39;_polygon_annotations.geojson&#39;),
+                          driver=&#39;GeoJSON&#39;, encoding=&#39;utf-8&#39;)
+        print(&#39;Polygon annotations have been saved in {}.&#39;.format(filepath))
+
+    # check if a polygon has been digitised
+    if len(pts_world_final) == 0:
+        raise Exception(&#39;No cloud free images are available to draw polygons,&#39;+
+                        &#39;download more images and try again&#39;)
+
+    return pts_world_final</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.bbox_from_point"><code class="name flex">
+<span>def <span class="ident">bbox_from_point</span></span>(<span>point, radius)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes a square bounding box with chosen radius around point coordinates.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>point: tuple
+point coordinates in format: (lon,lat)
+radius: int
+radius (in km) of bounding box around center coordinates</p>
+<h2 id="returns">Returns:</h2>
+<p>bbox: list
+list of coordinates (lon, lat) of the 4 bounding box summits</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bbox_from_point(point, radius):
+    &#34;&#34;&#34;
+    Computes a square bounding box with chosen radius around point coordinates.
+
+    Arguments:
+    -----------
+    point: tuple
+        point coordinates in format: (lon,lat)
+    radius: int
+        radius (in km) of bounding box around center coordinates
+    
+    Returns:
+    -----------
+    bbox: list
+        list of coordinates (lon, lat) of the 4 bounding box summits
+    &#34;&#34;&#34;
+
+    # We use the approximations: 1 decimal degree of latitude = 111.321 km
+    #                            1 decimal degree of longitude = cos(latitude in DD * pi/180) * 111.321 km
+    # where 111.321 km is the length of a DD of longitude at the equator and pi/180 converts DDs to radians.
+    x_min = round(point[0], 3) - \
+            round(radius / (math.cos(round(point[1],3) * math.pi/180) * 111.321), 3)
+    x_max = round(point[0], 3) + \
+            round(radius / (math.cos(round(point[1],3) * math.pi/180) * 111.321), 3)
+    y_min = round(point[1], 3) - round(radius/111.321, 3)
+    y_max = round(point[1], 3) + round(radius/111.321, 3)
+    
+    return [[x_min, y_max],[x_max, y_max],[x_max, y_min],[x_min, y_min]]</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.calc_columns_rows"><code class="name flex">
+<span>def <span class="ident">calc_columns_rows</span></span>(<span>n)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate the number of columns and rows required to divide an image
+into <code>n</code> parts.</p>
+<p>Return a tuple of integers in the format (num_columns, num_rows)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calc_columns_rows(n):
+    &#34;&#34;&#34;
+    Calculate the number of columns and rows required to divide an image
+    into ``n`` parts.
+
+    Return a tuple of integers in the format (num_columns, num_rows)
+    &#34;&#34;&#34;
+    num_columns = int(ceil(sqrt(n)))
+    num_rows = int(ceil(n / float(num_columns)))
+    return (num_columns, num_rows)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.convert_epsg"><code class="name flex">
+<span>def <span class="ident">convert_epsg</span></span>(<span>points, epsg_in, epsg_out)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts from one spatial reference to another using the epsg codes.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>points: np.array or list of np.ndarray
+array with 2 columns (rows first and columns second)
+epsg_in: int
+epsg code of the spatial reference in which the input is
+epsg_out: int
+epsg code of the spatial reference in which the output will be
+</p>
+<h2 id="returns">Returns:</h2>
+<p>points_converted: np.array or list of np.array
+converted coordinates from epsg_in to epsg_out</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert_epsg(points, epsg_in, epsg_out):
+    &#34;&#34;&#34;
+    Converts from one spatial reference to another using the epsg codes.
+
+    Arguments:
+    -----------
+    points: np.array or list of np.ndarray
+        array with 2 columns (rows first and columns second)
+    epsg_in: int
+        epsg code of the spatial reference in which the input is
+    epsg_out: int
+        epsg code of the spatial reference in which the output will be            
+                
+    Returns:    
+    -----------
+    points_converted: np.array or list of np.array 
+        converted coordinates from epsg_in to epsg_out
+        
+    &#34;&#34;&#34;
+    
+    # define input and output spatial references
+    inSpatialRef = osr.SpatialReference()
+    inSpatialRef.ImportFromEPSG(epsg_in)
+    outSpatialRef = osr.SpatialReference()
+    outSpatialRef.ImportFromEPSG(epsg_out)
+    # create a coordinates transform
+    coordTransform = osr.CoordinateTransformation(inSpatialRef, outSpatialRef)
+    # if list of arrays
+    if type(points) is list:
+        points_converted = []
+        # iterate over the list
+        for i, arr in enumerate(points): 
+            points_converted.append(np.array(coordTransform.TransformPoints(arr)))
+    # if single array
+    elif type(points) is np.ndarray:
+        points_converted = np.array(coordTransform.TransformPoint(points))
+        # note: I removed the &#39;s&#39; in &#39;TransformPoints&#39; - might need to add it back if bug
+    else:
+        raise Exception(&#39;invalid input type&#39;)
+
+    return points_converted</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.convert_pix2world"><code class="name flex">
+<span>def <span class="ident">convert_pix2world</span></span>(<span>points, georef)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts pixel coordinates (pixel row and column) to world projected
+coordinates performing an affine transformation.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>points: np.array or list of np.array
+array with 2 columns (row first and column second)
+georef: np.array
+vector of 6 elements [Xtr, Xscale, Xshear, Ytr, Yshear, Yscale]</p>
+<h2 id="returns">Returns:</h2>
+<p>points_converted: np.array or list of np.array
+converted coordinates, first columns with X and second column with Y</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert_pix2world(points, georef):
+    &#34;&#34;&#34;
+    Converts pixel coordinates (pixel row and column) to world projected 
+    coordinates performing an affine transformation.
+
+    Arguments:
+    -----------
+    points: np.array or list of np.array
+        array with 2 columns (row first and column second)
+    georef: np.array
+        vector of 6 elements [Xtr, Xscale, Xshear, Ytr, Yshear, Yscale]
+                
+    Returns:    
+    -----------
+    points_converted: np.array or list of np.array 
+        converted coordinates, first columns with X and second column with Y
+        
+    &#34;&#34;&#34;
+    
+    # make affine transformation matrix
+    aff_mat = np.array([[georef[1], georef[2], georef[0]],
+                       [georef[4], georef[5], georef[3]],
+                       [0, 0, 1]])
+    # create affine transformation
+    tform = transform.AffineTransform(aff_mat)
+
+    # if list of arrays
+    if type(points) is list:
+        points_converted = []
+        # iterate over the list
+        for i, arr in enumerate(points): 
+            tmp = arr[:,[1,0]]
+            points_converted.append(tform(tmp))
+          
+    # if single array
+    elif type(points) is np.ndarray:
+        tmp = points[:,[1,0]]
+        points_converted = tform(tmp)
+        
+    else:
+        raise Exception(&#39;invalid input type&#39;)
+        
+    return points_converted</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.convert_world2pix"><code class="name flex">
+<span>def <span class="ident">convert_world2pix</span></span>(<span>points, georef)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts world projected coordinates (X,Y) to image coordinates
+(pixel row and column) performing an affine transformation.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>points: np.array or list of np.array
+array with 2 columns (X,Y)
+georef: np.array
+vector of 6 elements [Xtr, Xscale, Xshear, Ytr, Yshear, Yscale]</p>
+<h2 id="returns">Returns:</h2>
+<p>points_converted: np.array or list of np.array
+converted coordinates (pixel row and column)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert_world2pix(points, georef):
+    &#34;&#34;&#34;
+    Converts world projected coordinates (X,Y) to image coordinates 
+    (pixel row and column) performing an affine transformation.
+
+    Arguments:
+    -----------
+    points: np.array or list of np.array
+        array with 2 columns (X,Y)
+    georef: np.array
+        vector of 6 elements [Xtr, Xscale, Xshear, Ytr, Yshear, Yscale]
+                
+    Returns:    
+    -----------
+    points_converted: np.array or list of np.array 
+        converted coordinates (pixel row and column)
+    
+    &#34;&#34;&#34;
+    
+    # make affine transformation matrix
+    aff_mat = np.array([[georef[1], georef[2], georef[0]],
+                       [georef[4], georef[5], georef[3]],
+                       [0, 0, 1]])
+    # create affine transformation
+    tform = transform.AffineTransform(aff_mat)
+    
+    # if list of arrays
+    if type(points) is list:
+        points_converted = []
+        # iterate over the list
+        for i, arr in enumerate(points): 
+            points_converted.append(tform.inverse(points))
+            
+    # if single array    
+    elif type(points) is np.ndarray:
+        points_converted = tform.inverse(points)
+        
+    else:
+        print(&#39;invalid input type&#39;)
+        raise
+        
+    return points_converted</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.create_gif"><code class="name flex">
+<span>def <span class="ident">create_gif</span></span>(<span>input_folder, extension, output_path, duration=200, sort='numerical')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a gif from images stored in a specified folder.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>input_folder: str
+path to the folder with images to convert to gif
+extension: str
+extension of the images ('.tif', '.jpg', '.png', including the point)
+output_path: str
+path and full name of the gif to create (ex: Desktop/mycreation.gif)
+duration: int, optional (default: 200)
+duration of the gif loop, in ms/image
+sort: str, optional (default: 'numerical')
+logic for sorting filenames - either
+'alphabetical' or 'numerical',
+if image names include a numeric information (this method makes use of
+the natsort library, <a href="https://github.com/SethMMorton/natsort,">https://github.com/SethMMorton/natsort,</a> to sort
+in real numbers order instead of alphanumerical in order to avoid
+incoherence such as '1,10,2,3&hellip;')</p>
+<h2 id="returns">Returns:</h2>
+<p>Saves a gif file at the specified output path.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_gif(input_folder, extension, output_path, duration=200, sort=&#39;numerical&#39;):
+    &#34;&#34;&#34;
+    Creates a gif from images stored in a specified folder.
+    
+    Arguments:
+    -----------
+    input_folder: str
+        path to the folder with images to convert to gif
+    extension: str
+        extension of the images (&#39;.tif&#39;, &#39;.jpg&#39;, &#39;.png&#39;, including the point)
+    output_path: str
+        path and full name of the gif to create (ex: Desktop/mycreation.gif)
+    duration: int, optional (default: 200)
+        duration of the gif loop, in ms/image
+    sort: str, optional (default: &#39;numerical&#39;)
+        logic for sorting filenames - either  &#39;alphabetical&#39; or &#39;numerical&#39;, 
+        if image names include a numeric information (this method makes use of 
+        the natsort library, https://github.com/SethMMorton/natsort, to sort 
+        in real numbers order instead of alphanumerical in order to avoid
+        incoherence such as &#39;1,10,2,3...&#39;)
+
+    Returns:    
+    -----------
+    Saves a gif file at the specified output path.
+    &#34;&#34;&#34;
+    
+    # load and sort images
+    if len(extension) &lt; 4: # add point to extension if it has been forgotten
+        extension = &#39;.&#39; + extension
+    filenames = glob.glob(os.path.join(input_folder, &#39;*&#39;) + extension)
+    if sort == &#39;numerical&#39;:
+        filenames = realsorted(filenames)
+    elif sort == &#39;alphabetical&#39;:
+        filenames.sort()
+    else:
+        raise Exception(&#34;Available sorting logics are &#39;numerical&#39; and &#39;alphabetical&#39;.&#34;)
+
+    # store them into a list of PIL images
+    frames = []
+    for i in filenames:
+        new_frame = Image.open(i)
+        frames.append(new_frame)
+
+    # Save into a GIF file that loops forever
+    frames[0].save(output_path,
+                   format=&#39;GIF&#39;,
+                   append_images=frames[1:],
+                   save_all=True,
+                   duration=duration, loop=0)
+    print(&#39;GIF saved at &#39; + output_path)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.find_path_row"><code class="name flex">
+<span>def <span class="ident">find_path_row</span></span>(<span>point)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Finds the Landsat WRS2 path and row number that best corresponds to any (lat,lon) point.
+Differs from other implementations where the list of overlapping rows is returned. Here,
+we return only the path/row combination whose center is closest to the point.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>point: tuple
+point coordinates in format: (lon, lat)</p>
+<h2 id="returns">Returns:</h2>
+<p>path, row: int, int
+closest WRS2 path/row combination</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_path_row(point):
+    &#34;&#34;&#34;
+    Finds the Landsat WRS2 path and row number that best corresponds to any (lat,lon) point.
+    Differs from other implementations where the list of overlapping rows is returned. Here,
+    we return only the path/row combination whose center is closest to the point.
+
+    Arguments:
+    -----------
+    point: tuple
+        point coordinates in format: (lon, lat)
+
+    Returns:
+    -----------
+    path, row: int, int
+        closest WRS2 path/row combination
+    &#34;&#34;&#34;
+
+    # open the path and row list from online resource
+    url = &#34;https://prd-wret.s3-us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/WRS2_descending_0.zip&#34;
+    open_url = urllib.request.urlopen(url)
+    
+    # extract it in temporary file
+    with zipfile.ZipFile(io.BytesIO(open_url.read())) as zip_file:
+        tempdir = tempfile.mkdtemp()
+        zip_file.extractall(tempdir)
+        # data = ogr.Open(os.path.join(tempdir, &#39;WRS2_descending.shp&#39;))
+        # layer = data.GetLayer(0)
+        table = gpd.read_file(os.path.join(tempdir, &#39;WRS2_descending.shp&#39;))
+
+    # clean up after ourselves
+    for file in os.listdir(tempdir):
+        os.unlink(os.path.join(tempdir, file))
+    os.rmdir(tempdir)
+    
+    # compute center of each path/row
+    table[&#39;centroid&#39;] = table[&#39;geometry&#39;].centroid
+    table = table[[&#39;PATH&#39;,&#39;ROW&#39;,&#39;centroid&#39;]]
+    table[&#39;centroid&#39;] = table[&#39;centroid&#39;].apply(lambda x: x.coords[0][::-1])
+    
+    # get the closest path/row from point
+    closest = min(list(table[&#39;centroid&#39;]), key=lambda x: geopy.distance.distance(point[::-1], x).km)
+    path = int(table[table[&#39;centroid&#39;] == closest][&#39;PATH&#39;])
+    row = int(table[table[&#39;centroid&#39;] == closest][&#39;ROW&#39;])
+    
+    return path, row</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.get_address"><code class="name flex">
+<span>def <span class="ident">get_address</span></span>(<span>coordinates, parsing='full_address_df')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get address (city, postcode, etc.) from geographic coordinates, using the
+geopy package.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>coordinates: tuple
+(lat, lon) coordinates
+parsing: str or list of str, optional (default: 'full_address_df')
+chosen part of the adress to output - by default, the function will output the
+whole address as a dataframe. Other possibilities are 'full_address_str' and
+one or several keys among: ['country', 'state', 'county', 'postcode', city',<br>
+'road', 'house_number']. Available keys depend on OSM information for the
+specified location, and if the chosen keys aren't available the function will
+fill the blank with a NaN.</p>
+<h2 id="returns">Returns:</h2>
+<p>address: str or pd.DataFrame
+result of the parsing specified by user (by default, full address as a dataframe)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_address(coordinates, parsing=&#39;full_address_df&#39;):
+    &#34;&#34;&#34;
+    Get address (city, postcode, etc.) from geographic coordinates, using the 
+    geopy package.
+
+    Arguments:
+    -----------
+    coordinates: tuple
+        (lat, lon) coordinates
+    parsing: str or list of str, optional (default: &#39;full_address_df&#39;)
+        chosen part of the adress to output - by default, the function will output the 
+        whole address as a dataframe. Other possibilities are &#39;full_address_str&#39; and 
+        one or several keys among: [&#39;country&#39;, &#39;state&#39;, &#39;county&#39;, &#39;postcode&#39;, city&#39;,  
+        &#39;road&#39;, &#39;house_number&#39;]. Available keys depend on OSM information for the 
+        specified location, and if the chosen keys aren&#39;t available the function will 
+        fill the blank with a NaN.
+
+    Returns:    
+    -----------
+    address: str or pd.DataFrame
+        result of the parsing specified by user (by default, full address as a dataframe)
+    &#34;&#34;&#34;
+    
+    # Nominatim keys, for reference
+    # all_keys = [&#39;country&#39;, &#39;state&#39;, &#39;county&#39;, &#39;municipality&#39;, &#39;postcode&#39;, &#39;town&#39;, &#39;village&#39;, &#39;city&#39;, 
+    #             &#39;city_district&#39;, &#39;hamlet&#39;, &#39;isolated_dwelling&#39;, &#39;croft&#39;, &#39;quarter&#39;, &#39;district&#39;, &#39;borough&#39;,
+    #             &#39;neighbourhood&#39;, &#39;allotments&#39;, &#39;subdivision&#39;, &#39;suburb&#39;, &#39;road&#39;, &#39;house_number&#39;, &#39;house_name&#39;]
+
+    # query address
+    locator = geopy.geocoders.Nominatim(user_agent=&#34;me&#34;, timeout=10)
+    location = locator.reverse(coordinates, zoom=18) # zoom determines the precision of the address
+
+    # default parsing
+    if parsing == &#39;full_address_df&#39;:
+        parsed_address = location.raw[&#39;address&#39;]
+        df_address = pd.DataFrame(parsed_address, columns=list(parsed_address.keys()), index=[0])
+        df_address[&#39;lat&#39;] = coordinates[0]
+        df_address[&#39;lon&#39;] = coordinates[1]
+        return df_address
+
+    # user-defined parsing
+    elif parsing == &#39;full_address_str&#39;:
+        full_address_str = location.address
+        # postcode = [x.strip() for x in full_address.split(&#39;,&#39;)][-2] # example code to parse from string
+        return full_address_str
+    
+    else:
+        parsed_address = location.raw[&#39;address&#39;]
+        user_parsing = {}
+        if type(parsing) == str:
+            parsing = [parsing]
+        for el in parsing:
+            try:
+                res = parsed_address[el]
+            # Below, we deal with the case when the specified parsing key isn&#39;t in the raw address.
+            # We go through the alternative keys for &#39;city&#39; or &#39;house_number&#39;, and if it still yields
+            # no result, we set the result to None. I guess there are more sythetic ways to do this - 
+            # but it works well or our use case.
+            except:
+                if el == &#39;city&#39;:
+                    alternative_el = &#39;town&#39;
+                    try:
+                        res = parsed_address[alternative_el]
+                    except:
+                        alternative_el = &#39;village&#39;
+                        try:
+                            res = parsed_address[alternative_el]
+                        except:
+                            res = None
+                elif el == &#39;house_number&#39;:
+                    alternative_el = &#39;house_name&#39;
+                    try:
+                        res = parsed_address[alternative_el]
+                    except:
+                        res = None
+                else:
+                    res = None
+            user_parsing[el] = res
+        
+        if len(user_parsing) == 1:
+            return user_parsing[parsing[0]]
+        else:
+            df_address = pd.DataFrame(user_parsing, columns=list(user_parsing.keys()), index=[0])
+            df_address[&#39;lat&#39;] = coordinates[0]
+            df_address[&#39;lon&#39;] = coordinates[1]
+            return df_address</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.get_basename"><code class="name flex">
+<span>def <span class="ident">get_basename</span></span>(<span>filename)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Strip path and extension. Return basename.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_basename(filename):
+    &#34;&#34;&#34;Strip path and extension. Return basename.&#34;&#34;&#34;
+    return os.path.splitext(os.path.basename(filename))[0]</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.get_columns_rows"><code class="name flex">
+<span>def <span class="ident">get_columns_rows</span></span>(<span>filenames)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Derive number of columns and rows from filenames.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_columns_rows(filenames):
+    &#34;&#34;&#34;Derive number of columns and rows from filenames.&#34;&#34;&#34;
+    tiles = []
+    for filename in filenames:
+        row, column = os.path.splitext(filename)[0][-5:].split(&#39;_&#39;)
+        tiles.append((int(row), int(column)))
+    rows = [pos[0] for pos in tiles]; columns = [pos[1] for pos in tiles]
+    num_rows = max(rows); num_columns = max(columns)
+    return (num_columns, num_rows)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.get_combined_size"><code class="name flex">
+<span>def <span class="ident">get_combined_size</span></span>(<span>tiles)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate combined size of tiles.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_combined_size(tiles):
+    &#34;&#34;&#34;Calculate combined size of tiles.&#34;&#34;&#34;
+    # TODO: Refactor calculating layout to avoid repetition.
+    columns, rows = calc_columns_rows(len(tiles))
+    tile_size = tiles[0].image.size
+    return (tile_size[0] * columns, tile_size[1] * rows)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.get_filenames"><code class="name flex">
+<span>def <span class="ident">get_filenames</span></span>(<span>filename, filepath, satname)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates filepath + filename for all the bands belonging to the same image.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>filename: str
+name of the downloaded satellite image as found in the metadata
+filepath: str or list of str
+contains the filepath(s) to the folder(s) containing the satellite images
+satname: str
+short name of the satellite mission
+</p>
+<h2 id="returns">Returns:</h2>
+<p>fn: str or list of str
+contains the filepath + filenames to access the satellite image</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_filenames(filename, filepath, satname):
+    &#34;&#34;&#34;
+    Creates filepath + filename for all the bands belonging to the same image.
+
+    Arguments:
+    -----------
+    filename: str
+        name of the downloaded satellite image as found in the metadata
+    filepath: str or list of str
+        contains the filepath(s) to the folder(s) containing the satellite images
+    satname: str
+        short name of the satellite mission       
+        
+    Returns:    
+    -----------
+    fn: str or list of str
+        contains the filepath + filenames to access the satellite image
+  
+    &#34;&#34;&#34;     
+    
+    if satname == &#39;L5&#39;:
+        fn = os.path.join(filepath, filename)
+    if satname == &#39;L7&#39; or satname == &#39;L8&#39;:
+        filename_ms = filename.replace(&#39;pan&#39;,&#39;ms&#39;)
+        fn = [os.path.join(filepath[0], filename),
+              os.path.join(filepath[1], filename_ms)]
+    if satname == &#39;S2&#39;:
+        filename20 = filename.replace(&#39;10m&#39;,&#39;20m&#39;)
+        filename60 = filename.replace(&#39;10m&#39;,&#39;60m&#39;)
+        fn = [os.path.join(filepath[0], filename),
+              os.path.join(filepath[1], filename20),
+              os.path.join(filepath[2], filename60)]
+        
+    return fn</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.get_filepath"><code class="name flex">
+<span>def <span class="ident">get_filepath</span></span>(<span>inputs, satname)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create filepath to the different folders containing the satellite images.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>inputs: dict with the following keys
+'sitename': str
+name of the site
+'polygon': list
+polygon containing the lon/lat coordinates to be extracted,
+longitudes in the first column and latitudes in the second column,
+there are 5 pairs of lat/lon with the fifth point equal to the first point:
+<code>polygon = [[[151.3, -33.7],[151.4, -33.7],[151.4, -33.8],[151.3, -33.8],
+[151.3, -33.7]]]</code>
+'dates': list of str
+list that contains 2 strings with the initial and final dates in
+format 'yyyy-mm-dd':
+<code>dates = ['1987-01-01', '2018-01-01']</code>
+'sat_list': list of str
+list that contains the names of the satellite missions to include:
+<code>sat_list = ['L5', 'L7', 'L8', 'S2']</code>
+'filepath_data': str
+filepath to the directory where the images are downloaded
+satname: str
+short name of the satellite mission ('L5','L7','L8','S2')</p>
+<h2 id="returns">Returns:</h2>
+<p>filepath: str or list of str
+contains the filepath(s) to the folder(s) containing the satellite images</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_filepath(inputs,satname):
+    &#34;&#34;&#34;
+    Create filepath to the different folders containing the satellite images.
+
+    Arguments:
+    -----------
+    inputs: dict with the following keys
+        &#39;sitename&#39;: str
+            name of the site
+        &#39;polygon&#39;: list
+            polygon containing the lon/lat coordinates to be extracted,
+            longitudes in the first column and latitudes in the second column,
+            there are 5 pairs of lat/lon with the fifth point equal to the first point:
+            ```
+            polygon = [[[151.3, -33.7],[151.4, -33.7],[151.4, -33.8],[151.3, -33.8],
+            [151.3, -33.7]]]
+            ```
+        &#39;dates&#39;: list of str
+            list that contains 2 strings with the initial and final dates in 
+            format &#39;yyyy-mm-dd&#39;:
+            ```
+            dates = [&#39;1987-01-01&#39;, &#39;2018-01-01&#39;]
+            ```
+        &#39;sat_list&#39;: list of str
+            list that contains the names of the satellite missions to include: 
+            ```
+            sat_list = [&#39;L5&#39;, &#39;L7&#39;, &#39;L8&#39;, &#39;S2&#39;]
+            ```
+        &#39;filepath_data&#39;: str
+            filepath to the directory where the images are downloaded
+    satname: str
+        short name of the satellite mission (&#39;L5&#39;,&#39;L7&#39;,&#39;L8&#39;,&#39;S2&#39;)
+                
+    Returns:    
+    -----------
+    filepath: str or list of str
+        contains the filepath(s) to the folder(s) containing the satellite images
+    
+    &#34;&#34;&#34;     
+    
+    sitename = inputs[&#39;sitename&#39;]
+    filepath_data = inputs[&#39;filepath&#39;]
+    # access the images
+    if satname == &#39;L5&#39;:
+        # access downloaded Landsat 5 images
+        filepath = os.path.join(filepath_data, sitename, satname, &#39;30m&#39;)
+    elif satname == &#39;L7&#39;:
+        # access downloaded Landsat 7 images
+        filepath_pan = os.path.join(filepath_data, sitename, &#39;L7&#39;, &#39;pan&#39;)
+        filepath_ms = os.path.join(filepath_data, sitename, &#39;L7&#39;, &#39;ms&#39;)
+        filepath = [filepath_pan, filepath_ms]
+    elif satname == &#39;L8&#39;:
+        # access downloaded Landsat 8 images
+        filepath_pan = os.path.join(filepath_data, sitename, &#39;L8&#39;, &#39;pan&#39;)
+        filepath_ms = os.path.join(filepath_data, sitename, &#39;L8&#39;, &#39;ms&#39;)
+        filepath = [filepath_pan, filepath_ms]
+    elif satname == &#39;S2&#39;:
+        # access downloaded Sentinel 2 images
+        filepath10 = os.path.join(filepath_data, sitename, satname, &#39;10m&#39;)
+        filepath20 = os.path.join(filepath_data, sitename, satname, &#39;20m&#39;)
+        filepath60 = os.path.join(filepath_data, sitename, satname, &#39;60m&#39;)
+        filepath = [filepath10, filepath20, filepath60]
+            
+    return filepath</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.get_image_centroid"><code class="name flex">
+<span>def <span class="ident">get_image_centroid</span></span>(<span>image_path)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get (lat, lon) coordinates of the center of a georeferenced image (.tif), in epsg:4326.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>image_path: str
+path to TIF image file</p>
+<h2 id="returns">Returns:</h2>
+<p>centroid: tuple
+(lat, lon) centroid coordinates, in epsg:4326, with 6 decimals</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_image_centroid(image_path):
+    &#34;&#34;&#34;
+    Get (lat, lon) coordinates of the center of a georeferenced image (.tif), in epsg:4326.
+
+    Arguments:
+    -----------
+    image_path: str
+        path to TIF image file
+
+    Returns:    
+    -----------
+    centroid: tuple
+        (lat, lon) centroid coordinates, in epsg:4326, with 6 decimals
+    &#34;&#34;&#34;
+    
+    # read image
+    try:
+        ds = gdal.Open(image_path)
+    except:
+        raise Exception(&#39;Please provide the path to a georeferenced image.&#39;)
+    
+    # compute centroid coordinates
+    width = ds.RasterXSize
+    height = ds.RasterYSize
+    gt = ds.GetGeoTransform()
+    minx = gt[0]
+    miny = gt[3] + width*gt[4] + height*gt[5] 
+    maxx = gt[0] + width*gt[1] + height*gt[2]
+    maxy = gt[3]
+    centroid = (np.mean([minx,maxx]), np.mean([miny,maxy]))
+
+    # reproject to epsg:4326
+    epsg_in = int(osr.SpatialReference(wkt=ds.GetProjection()).GetAttrValue(&#39;AUTHORITY&#39;,1))
+    inProj = pyproj.Proj(&#39;epsg:&#39;+str(epsg_in))
+    outProj = pyproj.Proj(&#39;epsg:4326&#39;)
+    lat, lon = pyproj.transform(inProj, outProj, centroid[0], centroid[1])
+    
+    return (round(lat,6), round(lon,6))</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.get_image_column_row"><code class="name flex">
+<span>def <span class="ident">get_image_column_row</span></span>(<span>filename)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determine column and row position for filename.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_image_column_row(filename):
+    &#34;&#34;&#34;Determine column and row position for filename.&#34;&#34;&#34;
+    row, column = os.path.splitext(filename)[0][-5:].split(&#39;_&#39;)
+    return (int(column)-1, int(row)-1)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.image_std"><code class="name flex">
+<span>def <span class="ident">image_std</span></span>(<span>image, radius)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates the standard deviation of an image, using a moving window of
+specified radius. Uses astropy's convolution library.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>image: np.array
+2D array containing the pixel intensities of a single-band image
+radius: int
+radius defining the moving window used to calculate the standard deviation.
+For example, radius = 1 will produce a 3x3 moving window.</p>
+<h2 id="returns">Returns:</h2>
+<p>win_std: np.array
+2D array containing the standard deviation of the image</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def image_std(image, radius):
+    &#34;&#34;&#34;
+    Calculates the standard deviation of an image, using a moving window of 
+    specified radius. Uses astropy&#39;s convolution library.
+    
+    Arguments:
+    -----------
+    image: np.array
+        2D array containing the pixel intensities of a single-band image
+    radius: int
+        radius defining the moving window used to calculate the standard deviation. 
+        For example, radius = 1 will produce a 3x3 moving window.
+        
+    Returns:    
+    -----------
+    win_std: np.array
+        2D array containing the standard deviation of the image
+        
+    &#34;&#34;&#34;  
+    
+    # convert to float
+    image = image.astype(float)
+    # first pad the image
+    image_padded = np.pad(image, radius, &#39;reflect&#39;)
+    # window size
+    win_rows, win_cols = radius*2 + 1, radius*2 + 1
+    # calculate std with uniform filters
+    win_mean = convolve(image_padded, np.ones((win_rows,win_cols)), boundary=&#39;extend&#39;,
+                        normalize_kernel=True, nan_treatment=&#39;interpolate&#39;, preserve_nan=True)
+    win_sqr_mean = convolve(image_padded**2, np.ones((win_rows,win_cols)), boundary=&#39;extend&#39;,
+                        normalize_kernel=True, nan_treatment=&#39;interpolate&#39;, preserve_nan=True)
+    win_var = win_sqr_mean - win_mean**2
+    win_std = np.sqrt(win_var)
+    # remove padding
+    win_std = win_std[radius:-radius, radius:-radius]
+
+    return win_std</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.join"><code class="name flex">
+<span>def <span class="ident">join</span></span>(<span>tiles, width=0, height=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>@param <code>tiles</code> - Tuple of <code>Image</code> instances.
+@param <code>width</code> - Optional, width of combined image.
+@param <code>height</code> - Optional, height of combined image.
+@return <code>Image</code> instance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def join(tiles, width=0, height=0):
+    &#34;&#34;&#34;
+    @param ``tiles`` - Tuple of ``Image`` instances.
+    @param ``width`` - Optional, width of combined image.
+    @param ``height`` - Optional, height of combined image.
+    @return ``Image`` instance.
+    &#34;&#34;&#34;
+    # Don&#39;t calculate size if width and height are provided
+    # this allows an application that knows what the
+    # combined size should be to construct an image when
+    # pieces are missing.
+
+    if width &gt; 0 and height &gt; 0:
+        im = Image.new(&#39;RGB&#39;,(width, height), None)
+    else:
+        im = Image.new(&#39;RGB&#39;, get_combined_size(tiles), None)
+    columns, rows = calc_columns_rows(len(tiles))
+    for tile in tiles:
+        try:
+            im.paste(tile.image, tile.coords)
+        except IOError:
+            #do nothing, blank out the image
+            continue
+    return im</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.mask_raster"><code class="name flex">
+<span>def <span class="ident">mask_raster</span></span>(<span>fn, mask)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Masks a .tif raster using GDAL.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>fn: str
+filepath + filename of the .tif raster
+mask: np.array
+array of boolean where True indicates the pixels that are to be masked</p>
+<h2 id="returns">Returns:</h2>
+<p>Overwrites the .tif file directly</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mask_raster(fn, mask):
+    &#34;&#34;&#34;
+    Masks a .tif raster using GDAL.
+    
+    Arguments:
+    -----------
+    fn: str
+        filepath + filename of the .tif raster
+    mask: np.array
+        array of boolean where True indicates the pixels that are to be masked
+        
+    Returns:    
+    -----------
+    Overwrites the .tif file directly
+        
+    &#34;&#34;&#34; 
+    
+    # open raster
+    raster = gdal.Open(fn, gdal.GA_Update)
+    # mask raster
+    for i in range(raster.RasterCount):
+        out_band = raster.GetRasterBand(i+1)
+        out_data = out_band.ReadAsArray()
+        out_band.SetNoDataValue(0)
+        no_data_value = out_band.GetNoDataValue()
+        out_data[mask] = no_data_value
+        out_band.WriteArray(out_data)
+    # close dataset and flush cache
+    raster = None</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.merge_output"><code class="name flex">
+<span>def <span class="ident">merge_output</span></span>(<span>output)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to merge the output dictionary, which has one key per satellite mission
+into a dictionnary containing all the shorelines and dates ordered chronologically.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>output: dict
+contains the extracted shorelines and corresponding dates, organised by
+satellite mission</p>
+<h2 id="returns">Returns:</h2>
+<p>output_all: dict
+contains the extracted shorelines in a single list sorted by date</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def merge_output(output):
+    &#34;&#34;&#34;
+    Function to merge the output dictionary, which has one key per satellite mission
+    into a dictionnary containing all the shorelines and dates ordered chronologically.
+    
+    Arguments:
+    -----------
+    output: dict
+        contains the extracted shorelines and corresponding dates, organised by 
+        satellite mission
+    
+    Returns:    
+    -----------
+    output_all: dict
+        contains the extracted shorelines in a single list sorted by date
+    
+    &#34;&#34;&#34;     
+    
+    # initialize output dict
+    output_all = dict([])
+    satnames = list(output.keys())
+    for key in output[satnames[0]].keys():
+        output_all[key] = []
+    # create extra key for the satellite name
+    output_all[&#39;satname&#39;] = []
+    # fill the output dict
+    for satname in list(output.keys()):
+        for key in output[satnames[0]].keys():
+            output_all[key] = output_all[key] + output[satname][key]
+        output_all[&#39;satname&#39;] = output_all[&#39;satname&#39;] + [_ for _ in np.tile(satname,
+                  len(output[satname][&#39;dates&#39;]))]
+    # sort chronologically
+    idx_sorted = sorted(range(len(output_all[&#39;dates&#39;])), key=output_all[&#39;dates&#39;].__getitem__)
+    for key in output_all.keys():
+        output_all[key] = [output_all[key][i] for i in idx_sorted]
+
+    return output_all</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.nd_index"><code class="name flex">
+<span>def <span class="ident">nd_index</span></span>(<span>im1, im2, cloud_mask)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes normalised difference index on 2 images (2D), given a cloud mask (2D).</p>
+<h2 id="arguments">Arguments:</h2>
+<p>im1: np.array
+first image (2D) with which to calculate the ND index
+im2: np.array
+second image (2D) with which to calculate the ND index
+cloud_mask: np.array
+2D cloud mask with True where cloud pixels are</p>
+<h2 id="returns">Returns:</h2>
+<p>im_nd: np.array
+Image (2D) containing the ND index</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def nd_index(im1, im2, cloud_mask):
+    &#34;&#34;&#34;
+    Computes normalised difference index on 2 images (2D), given a cloud mask (2D).
+
+    Arguments:
+    -----------
+    im1: np.array
+        first image (2D) with which to calculate the ND index
+    im2: np.array
+        second image (2D) with which to calculate the ND index
+    cloud_mask: np.array
+        2D cloud mask with True where cloud pixels are
+
+    Returns:    
+    -----------
+    im_nd: np.array
+        Image (2D) containing the ND index
+    &#34;&#34;&#34;
+
+    # reshape the cloud mask
+    vec_mask = cloud_mask.reshape(im1.shape[0] * im1.shape[1])
+    # initialise with NaNs
+    vec_nd = np.ones(len(vec_mask)) * np.nan
+    # reshape the two images
+    vec1 = im1.reshape(im1.shape[0] * im1.shape[1])
+    vec2 = im2.reshape(im2.shape[0] * im2.shape[1])
+    # compute the normalised difference index
+    temp = np.divide(vec1[~vec_mask] - vec2[~vec_mask],
+                     vec1[~vec_mask] + vec2[~vec_mask])
+    vec_nd[~vec_mask] = temp
+    # reshape into image
+    im_nd = vec_nd.reshape(im1.shape[0], im1.shape[1])
+
+    return im_nd</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.open_images"><code class="name flex">
+<span>def <span class="ident">open_images</span></span>(<span>directory)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Open all images in a directory. Return tuple of Image instances.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def open_images(directory):
+    &#34;&#34;&#34;Open all images in a directory. Return tuple of Image instances.&#34;&#34;&#34;
+    return [Image.open(os.path.join(directory, file)) for file in os.listdir(directory)]</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.open_images_in"><code class="name flex">
+<span>def <span class="ident">open_images_in</span></span>(<span>directory)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Open all images in a directory. Return tuple of Tile instances.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def open_images_in(directory):
+    &#34;&#34;&#34;Open all images in a directory. Return tuple of Tile instances.&#34;&#34;&#34;
+
+    files = [filename for filename in os.listdir(directory)
+                    if &#39;_&#39; in filename and not filename.startswith(&#39;joined&#39;)]
+    tiles = []
+    if len(files) &gt; 0:
+        i = 0
+        for file in files:
+            pos = get_image_column_row(file)
+            im = Image.open(os.path.join(directory, file))
+
+            position_xy=[0,0]
+            count=0
+            for a,b in zip(pos,im.size):
+                position_xy[count] = a*b
+                count = count + 1
+            tiles.append(Tile(image=im, position=pos, number=i+1,
+                                coords=position_xy, filename=file))
+            i = i + 1
+    return tiles</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.output_to_gdf"><code class="name flex">
+<span>def <span class="ident">output_to_gdf</span></span>(<span>output)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves the mapped shorelines as a gpd.GeoDataFrame
+</p>
+<h2 id="arguments">Arguments:</h2>
+<p>output: dict
+contains the coordinates of the mapped shorelines + attributes
+</p>
+<h2 id="returns">Returns:</h2>
+<p>gdf_all: gpd.GeoDataFrame
+contains the shorelines + attirbutes</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def output_to_gdf(output):
+    &#34;&#34;&#34;
+    Saves the mapped shorelines as a gpd.GeoDataFrame    
+
+    Arguments:
+    -----------
+    output: dict
+        contains the coordinates of the mapped shorelines + attributes          
+                
+    Returns:    
+    -----------
+    gdf_all: gpd.GeoDataFrame
+        contains the shorelines + attirbutes
+  
+    &#34;&#34;&#34;    
+     
+    # loop through the mapped shorelines
+    counter = 0
+    for i in range(len(output[&#39;shorelines&#39;])):
+        # skip if there shoreline is empty 
+        if len(output[&#39;shorelines&#39;][i]) == 0:
+            continue
+        else:
+            # save the geometry + attributes
+            geom = geometry.LineString(output[&#39;shorelines&#39;][i])
+            gdf = gpd.GeoDataFrame(geometry=gpd.GeoSeries(geom))
+            gdf.index = [i]
+            gdf.loc[i,&#39;date&#39;] = output[&#39;dates&#39;][i].strftime(&#39;%Y-%m-%d %H:%M:%S&#39;)
+            gdf.loc[i,&#39;satname&#39;] = output[&#39;satname&#39;][i]
+            gdf.loc[i,&#39;geoaccuracy&#39;] = output[&#39;geoaccuracy&#39;][i]
+            gdf.loc[i,&#39;cloud_cover&#39;] = output[&#39;cloud_cover&#39;][i]
+            # store into geodataframe
+            if counter == 0:
+                gdf_all = gdf
+            else:
+                gdf_all = gdf_all.append(gdf)
+            counter = counter + 1
+            
+    return gdf_all</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.plot_geometries"><code class="name flex">
+<span>def <span class="ident">plot_geometries</span></span>(<span>geometries, init_crs=4326)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plots a geodataframe in an interactive folium map, for visualization.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>geometries: list or geodataframe
+either a polygon (as a list of lon,lat coordinates), a list of polygons or a gdf
+init_crs: int, optional (default: 4326)
+geometries crs, if not WSG84</p>
+<h2 id="returns">Returns:</h2>
+<pre><code>folium map with geometries as map overlay
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_geometries(geometries, init_crs=4326):
+    &#34;&#34;&#34;
+    Plots a geodataframe in an interactive folium map, for visualization.
+
+    Arguments:
+    -----------
+    geometries: list or geodataframe
+        either a polygon (as a list of lon,lat coordinates), a list of polygons or a gdf
+    init_crs: int, optional (default: 4326)
+        geometries crs, if not WSG84
+
+    Returns:
+    -----------
+        folium map with geometries as map overlay
+    &#34;&#34;&#34;
+
+    # if the geometries are not a gdf (i.e. a polygon or list of polygons)
+    if str(type(geometries)) != &#34;&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;&#34;:
+        try:
+            is_unique = geometries.shape
+            polygons_shp = geometry.Polygon(geometries)
+            polygons_gdf = gpd.GeoDataFrame(index=[0], crs={&#39;init&#39;:&#39;epsg:&#39;+str(init_crs)}, geometry=[polygons_shp])
+            map_lat = geometries[0][1]
+            map_lon = geometries[0][0]
+        except:
+            polygons_shp = [geometry.Polygon(poly) for poly in geometries]
+            polygons_gdf = gpd.GeoDataFrame(crs={&#39;init&#39;:&#39;epsg:&#39;+str(init_crs)}, geometry=polygons_shp)
+            map_lat = geometries[0][0][1]
+            map_lon = geometries[0][0][0]
+        polygons_gdf = polygons_gdf.to_crs(epsg=4326)
+
+    # if the geomatries are stored in a geodataframe, just convert to epsg:4326
+    else:
+        polygons_gdf = geometries.to_crs(epsg=4326)
+        map_lat = list(list(polygons_gdf[&#39;geometry&#39;])[0].exterior.coords)[0][1]
+        map_lon = list(list(polygons_gdf[&#39;geometry&#39;])[0].exterior.coords)[0][0]
+
+    # Plot polygon labels on an interactive map
+    m = folium.Map([map_lat, map_lon], zoom_start=12)
+    folium.GeoJson(polygons_gdf, name=&#39;polygon labels&#39;).add_to(m)
+
+    # Add satellite layer
+    tile = folium.TileLayer(
+        tiles = &#39;https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}&#39;,
+        attr = &#39;Esri&#39;,
+        name = &#39;Esri Satellite&#39;,
+        overlay = False,
+        control = True
+       ).add_to(m)
+
+    # Add layer control and lat/lng popups
+    folium.LatLngPopup().add_to(m)
+    folium.LayerControl().add_to(m)
+    
+    display(m)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.polygon_from_kml"><code class="name flex">
+<span>def <span class="ident">polygon_from_kml</span></span>(<span>fn)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Extracts coordinates from a .kml file.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>fn: str
+filepath + filename of the kml file to be read
+</p>
+<h2 id="returns">Returns:</h2>
+<p>polygon: list
+coordinates extracted from the .kml file</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def polygon_from_kml(fn):
+    &#34;&#34;&#34;
+    Extracts coordinates from a .kml file.
+
+    Arguments:
+    -----------
+    fn: str
+        filepath + filename of the kml file to be read          
+                
+    Returns:    
+    -----------
+    polygon: list
+        coordinates extracted from the .kml file
+        
+    &#34;&#34;&#34;    
+    
+    # read .kml file
+    with open(fn) as kmlFile:
+        doc = kmlFile.read() 
+    # parse to find coordinates field
+    str1 = &#39;&lt;coordinates&gt;&#39;
+    str2 = &#39;&lt;/coordinates&gt;&#39;
+    subdoc = doc[doc.find(str1)+len(str1):doc.find(str2)]
+    coordlist = subdoc.split(&#39;\n&#39;)
+    # read coordinates
+    polygon = []
+    for i in range(1,len(coordlist)-1):
+        polygon.append([float(coordlist[i].split(&#39;,&#39;)[0]), float(coordlist[i].split(&#39;,&#39;)[1])])
+        
+    return [polygon]</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.save_tiles"><code class="name flex">
+<span>def <span class="ident">save_tiles</span></span>(<span>tiles, prefix='', directory='/Users/Thomas/emp-demeter/demeter', format='png')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write image files to disk. Create specified folder(s) if they
+don't exist. Return list of :class:<code><a title="totalsat.sat_tools.Tile" href="#totalsat.sat_tools.Tile">Tile</a></code> instance.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>tiles</code></strong> :&ensp;<code>list</code></dt>
+<dd>List, tuple or set of :class:<code><a title="totalsat.sat_tools.Tile" href="#totalsat.sat_tools.Tile">Tile</a></code> objects to save.</dd>
+<dt><strong><code>prefix</code></strong> :&ensp;<code>str</code></dt>
+<dd>Filename prefix of saved tiles.</dd>
+<dt><strong><code>directory</code></strong> :&ensp;<code>str</code></dt>
+<dd>Directory to save tiles</dd>
+<dt><strong><code>format</code></strong> :&ensp;<code>str</code></dt>
+<dd>Image format to write.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Tuple of :class:<code><a title="totalsat.sat_tools.Tile" href="#totalsat.sat_tools.Tile">Tile</a></code> instances.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_tiles(tiles, prefix=&#39;&#39;, directory=os.getcwd(), format=&#39;png&#39;):
+    &#34;&#34;&#34;
+    Write image files to disk. Create specified folder(s) if they
+       don&#39;t exist. Return list of :class:`Tile` instance.
+
+    Args:
+       tiles (list):  List, tuple or set of :class:`Tile` objects to save.
+       prefix (str):  Filename prefix of saved tiles.
+       directory (str):  Directory to save tiles
+       format (str): Image format to write.
+
+    Returns:
+        Tuple of :class:`Tile` instances.
+    &#34;&#34;&#34;
+
+    for tile in tiles:
+        tile.save(filename=tile.generate_filename(prefix=prefix,
+                                                  directory=directory,
+                                                  format=format),
+                                                  format=format)
+    return tuple(tiles)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.slice_image"><code class="name flex">
+<span>def <span class="ident">slice_image</span></span>(<span>filename, number_tiles=None, col=None, row=None, max_tile_size=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Split an image into a specified number of tiles.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filename</code></strong> :&ensp;<code>str</code></dt>
+<dd>The filename of the image to split.</dd>
+<dt><strong><code>number_tiles</code></strong> :&ensp;<code>int</code></dt>
+<dd>The number of tiles required.</dd>
+</dl>
+<p>col, row (int): Nb of columns required (alternative to number_tiles)
+max_tile_size (int*int): Max tile dimensions.</p>
+<h2 id="returns">Returns</h2>
+<p>Tuple of :class:<code><a title="totalsat.sat_tools.Tile" href="#totalsat.sat_tools.Tile">Tile</a></code> instances.
+Tuple with tile dimensions.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def slice_image(filename, number_tiles=None, col=None, row=None, max_tile_size=None):
+    &#34;&#34;&#34;
+    Split an image into a specified number of tiles.
+
+    Args:
+       filename (str):  The filename of the image to split.
+       number_tiles (int):  The number of tiles required.
+       col, row (int): Nb of columns required (alternative to number_tiles)
+       max_tile_size (int*int): Max tile dimensions.
+
+    Returns:
+        Tuple of :class:`Tile` instances.
+        Tuple with tile dimensions.
+    &#34;&#34;&#34;
+    im = Image.open(filename)
+    im_w, im_h = im.size
+
+    columns = 0
+    rows = 0
+    if not number_tiles is None:
+        validate_image(im, number_tiles)
+        columns, rows = calc_columns_rows(number_tiles)
+    #    extras = (columns * rows) - number_tiles
+        tile_w, tile_h = int(floor(im_w / columns)), int(floor(im_h / rows))
+    else:
+        validate_image_col_row(im, col, row)
+        columns = col
+        rows = row
+    #    extras = (columns * rows) - number_tiles
+        tile_w, tile_h = int(sqrt(max_tile_size)), int(sqrt(max_tile_size))
+
+    tiles = []
+    number = 1
+    for pos_y in range(0, im_h - rows, tile_h): # -rows for rounding error.
+        for pos_x in range(0, im_w - columns, tile_w): # as above.
+            area = (pos_x, pos_y, pos_x + tile_w, pos_y + tile_h)
+            image = im.crop(area)
+            position = (int(floor(pos_x / tile_w)) + 1,
+                        int(floor(pos_y / tile_h)) + 1)
+            coords = (pos_x, pos_y)
+            tile = Tile(image, number, position, coords)
+            tiles.append(tile)
+            number += 1
+    print(&#39;Splitting the original image in {} tiles&#39;.format(len(tiles)),
+          &#39;of size {}x{}...&#39;.format(tile_w, tile_h))
+
+    return tuple(tiles), (tile_w, tile_h)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.split_area"><code class="name flex">
+<span>def <span class="ident">split_area</span></span>(<span>bbox, pixel_width, max_size)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Splits a square polygon in smaller squares.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>bbox: list
+list of coordinates (lon, lat) of the 4 bounding box summits - must be in
+the order: [[x_min, y_max],[x_max, y_max],[x_max, y_min],[x_min, y_min]]
+pixel_width: int
+width of the bbox, in pixels
+max_size: int
+maximum authorized pixel width</p>
+<h2 id="returns">Returns:</h2>
+<p>small_boxes: list
+list of smaller boxes (with coordinates in the same format as the original)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def split_area(bbox, pixel_width, max_size):
+    &#34;&#34;&#34;
+    Splits a square polygon in smaller squares.
+
+    Arguments:
+    -----------
+    bbox: list
+        list of coordinates (lon, lat) of the 4 bounding box summits - must be in
+        the order: [[x_min, y_max],[x_max, y_max],[x_max, y_min],[x_min, y_min]]
+    pixel_width: int
+        width of the bbox, in pixels
+    max_size: int
+        maximum authorized pixel width
+
+    Returns:
+    -----------
+    small_boxes: list
+        list of smaller boxes (with coordinates in the same format as the original)
+    &#34;&#34;&#34;    
+    
+    # get coordinates of the original bbox     
+    x_min = bbox[0][0]
+    y_max = bbox[0][1]
+    x_max = bbox[2][0]
+    y_min = bbox[2][1]
+
+    # compute size of each small box
+    small_boxes = []
+    nb_breaks = int(pixel_width // max_size)
+    x_step = (x_max - x_min) / (nb_breaks+1)
+    y_step = (y_max - y_min) / (nb_breaks+1)
+
+    # compute coordinates of each small box
+    for i in range(nb_breaks+1):
+        x_min_i = x_min + i*x_step
+        x_max_i = x_max - (nb_breaks-i)*x_step
+        for j in range(nb_breaks+1):
+            y_min_i = y_min + j*y_step
+            y_max_i = y_max - (nb_breaks-j)*y_step
+            box_i = [[x_min_i, y_max_i],[x_max_i, y_max_i],[x_max_i, y_min_i],[x_min_i, y_min_i]]
+            small_boxes.append(box_i)
+    
+    return small_boxes</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.split_image"><code class="name flex">
+<span>def <span class="ident">split_image</span></span>(<span>image_path, filepath_out=None, max_tile_size=262144, square=False, nb_tiles=None, inputs=None, show=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Split an image in a nb of tiles such that all tiles are under 512x512 pixels.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>image_path: str
+path to original image downloaded through the sat_download module
+filepath_out: str, optional (default: new folder named /preprocessed_files/split_tiles)
+path to directory to save split image tiles
+max_tile_size: int, optional (default: 512<em>512)
+maximum size of the final tiles, in pixels
+square: bool, optional (default: False)
+forces the tiles to a square shape - if False, keeps the aspect ratio
+of the original image (and tile surface smaller than default 512</em>512)
+nb_tiles: int, optional (default: None, max: 99x99)
+force the number of tiles (size wil adjust accordingly)
+inputs: dict, optional (if not, need to pass filepath_out)
+dict with the sat_download inputs to get default folder path
+show: bool, optional (default: False)
+output a visualization of the original image with the split grid on top</p>
+<h2 id="returns">Returns:</h2>
+<p>image tiles: .png images
+as many tiles of requested size as the original image can fit</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def split_image(image_path, filepath_out=None, max_tile_size=512*512, square=False,
+                                                nb_tiles=None, inputs=None, show=False):
+    &#34;&#34;&#34;
+    Split an image in a nb of tiles such that all tiles are under 512x512 pixels.
+    
+    Arguments:
+    -----------
+    image_path: str
+        path to original image downloaded through the sat_download module
+    filepath_out: str, optional (default: new folder named /preprocessed_files/split_tiles)
+        path to directory to save split image tiles
+    max_tile_size: int, optional (default: 512*512)
+        maximum size of the final tiles, in pixels
+    square: bool, optional (default: False)
+        forces the tiles to a square shape - if False, keeps the aspect ratio
+        of the original image (and tile surface smaller than default 512*512)
+    nb_tiles: int, optional (default: None, max: 99x99)
+        force the number of tiles (size wil adjust accordingly)
+    inputs: dict, optional (if not, need to pass filepath_out)
+        dict with the sat_download inputs to get default folder path
+    show: bool, optional (default: False)
+        output a visualization of the original image with the split grid on top
+
+    Returns:
+    -----------
+    image tiles: .png images
+        as many tiles of requested size as the original image can fit
+    &#34;&#34;&#34;
+
+    # if no output path was provided, set to default
+    if filepath_out == None:
+        assert inputs != None, (&#39;Please provide a filepath_out or the preprocessing&#39; +
+                                                    &#39; `inputs` dictionary with path inside.&#39;)
+        sitename = inputs[&#39;sitename&#39;]
+        filepath_data = inputs[&#39;filepath&#39;]
+        filepath_out = os.path.join(filepath_data, sitename, &#39;preprocessed_files&#39;, &#39;split_tiles&#39;)
+        if not os.path.exists(filepath_out):
+            os.makedirs(filepath_out)
+
+    # open original image
+    im = Image.open(image_path)
+    im_w, im_h = im.size
+    
+    # compute tiles
+    if nb_tiles != None:
+        tiles, tile_dim = slice_image(image_path, number_tiles=nb_tiles, save=False)
+
+    else:
+        if not square:
+            nb_tiles = (im_w * im_h) // max_tile_size
+            tiles, tile_dim = slice_image(image_path, number_tiles=nb_tiles, save=False)
+        
+        if square:
+            col = int(round(im_w // sqrt(max_tile_size),0))
+            row = int(round(im_h // sqrt(max_tile_size),0))
+            if im_w % sqrt(max_tile_size) != 0 or im_h % sqrt(max_tile_size) != 0:
+                print(&#34;Warning: tile dimensions don&#39;t exactly match with image&#34;,
+                      &#34;- some tiles might have black padding to compensate.&#34;)
+            tiles, tile_dim = slice_image(image_path, col=col, row=row, max_tile_size=max_tile_size)
+    
+    # save tiles
+    save_tiles(tiles, directory=filepath_out, prefix=get_basename(image_path), format=&#39;png&#39;)
+    print(&#39;Tiles successfully saved in {}.&#39;.format(filepath_out))
+
+    # show grid
+    if show:
+        grid_x_ticks = np.arange(0, im_w, tile_dim[0])
+        grid_y_ticks = np.arange(0, im_h, tile_dim[1])
+        fig = plt.figure(figsize = (10,10))
+        ax = fig.add_subplot(1, 1, 1)
+        plt.imshow(im)
+        plt.title(&#39;Split preview&#39;)
+        ax.set_xticks(grid_x_ticks , minor=True)
+        ax.set_yticks(grid_y_ticks , minor=True)
+        ax.grid(which=&#39;minor&#39;, linestyle=&#39;--&#39;, color=&#39;black&#39;, linewidth=2)
+        plt.show()</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.transects_from_geojson"><code class="name flex">
+<span>def <span class="ident">transects_from_geojson</span></span>(<span>filename)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads transect coordinates from a .geojson file.</p>
+<h2 id="arguments">Arguments:</h2>
+<p>filename: str
+contains the path and filename of the geojson file to be loaded</p>
+<h2 id="returns">Returns:</h2>
+<p>transects: dict
+contains the X and Y coordinates of each transect</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def transects_from_geojson(filename):
+    &#34;&#34;&#34;
+    Reads transect coordinates from a .geojson file.
+    
+    Arguments:
+    -----------
+    filename: str
+        contains the path and filename of the geojson file to be loaded
+        
+    Returns:    
+    -----------
+    transects: dict
+        contains the X and Y coordinates of each transect
+        
+    &#34;&#34;&#34;  
+    
+    gdf = gpd.read_file(filename)
+    transects = dict([])
+    for i in gdf.index:
+        transects[gdf.loc[i,&#39;name&#39;]] = np.array(gdf.loc[i,&#39;geometry&#39;].coords)
+        
+    print(&#39;%d transects have been loaded&#39; % len(transects.keys()))
+
+    return transects</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.transects_to_gdf"><code class="name flex">
+<span>def <span class="ident">transects_to_gdf</span></span>(<span>transects)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves the shore-normal transects as a gpd.GeoDataFrame
+</p>
+<h2 id="arguments">Arguments:</h2>
+<p>transects: dict
+contains the coordinates of the transects
+</p>
+<h2 id="returns">Returns:</h2>
+<p>gdf_all: gpd.GeoDataFrame</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def transects_to_gdf(transects):
+    &#34;&#34;&#34;
+    Saves the shore-normal transects as a gpd.GeoDataFrame    
+
+    Arguments:
+    -----------
+    transects: dict
+        contains the coordinates of the transects          
+                
+    Returns:    
+    -----------
+    gdf_all: gpd.GeoDataFrame
+
+        
+    &#34;&#34;&#34;  
+       
+    # loop through the mapped shorelines
+    for i,key in enumerate(list(transects.keys())):
+        # save the geometry + attributes
+        geom = geometry.LineString(transects[key])
+        gdf = gpd.GeoDataFrame(geometry=gpd.GeoSeries(geom))
+        gdf.index = [i]
+        gdf.loc[i,&#39;name&#39;] = key
+        # store into geodataframe
+        if i == 0:
+            gdf_all = gdf
+        else:
+            gdf_all = gdf_all.append(gdf)
+            
+    return gdf_all</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.validate_image"><code class="name flex">
+<span>def <span class="ident">validate_image</span></span>(<span>image, number_tiles)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Basic sanity checks prior to performing a split.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_image(image, number_tiles):
+    &#34;&#34;&#34;Basic sanity checks prior to performing a split.&#34;&#34;&#34;
+    TILE_LIMIT = 99 * 99
+
+    try:
+        number_tiles = int(number_tiles)
+    except:
+        raise ValueError(&#39;number_tiles could not be cast to integer.&#39;)
+
+    if number_tiles &gt; TILE_LIMIT or number_tiles &lt; 2:
+        raise ValueError(&#39;Number of tiles must be between 2 and {} (you \
+                          asked for {}).&#39;.format(TILE_LIMIT, number_tiles))</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.validate_image_col_row"><code class="name flex">
+<span>def <span class="ident">validate_image_col_row</span></span>(<span>image, col, row)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Basic checks for columns and rows values</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_image_col_row(image , col , row):
+    &#34;&#34;&#34;Basic checks for columns and rows values&#34;&#34;&#34;
+    SPLIT_LIMIT = 99
+
+    try:
+        col = int(col)
+        row = int(row)
+    except:
+        raise ValueError(&#39;columns and rows values could not be cast to integer.&#39;)
+
+    if col &lt; 2:
+        raise ValueError(&#39;Number of columns must be between 2 and {} (you \
+                          asked for {}).&#39;.format(SPLIT_LIMIT, col))
+    if row &lt; 2 :
+        raise ValueError(&#39;Number of rows must be between 2 and {} (you \
+                          asked for {}).&#39;.format(SPLIT_LIMIT, row))</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="totalsat.sat_tools.Tile"><code class="flex name class">
+<span>class <span class="ident">Tile</span></span>
+<span>(</span><span>image, number, position, coords, filename=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represents a single tile.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Tile(object):
+    &#34;&#34;&#34;Represents a single tile.&#34;&#34;&#34;
+
+    def __init__(self, image, number, position, coords, filename=None):
+        self.image = image
+        self.number = number
+        self.position = position
+        self.coords = coords
+        self.filename = filename
+
+    @property
+    def row(self):
+        return self.position[0]
+
+    @property
+    def column(self):
+        return self.position[1]
+
+    @property
+    def basename(self):
+        &#34;&#34;&#34;Strip path and extension. Return base filename.&#34;&#34;&#34;
+        return get_basename(self.filename)
+
+    def generate_filename(self, directory=os.getcwd(), prefix=&#39;tile&#39;,
+                          format=&#39;png&#39;, path=True):
+        &#34;&#34;&#34;Construct and return a filename for this tile.&#34;&#34;&#34;
+        filename = prefix + &#39;_{col:02d}_{row:02d}.{ext}&#39;.format(
+                      col=self.column, row=self.row, ext=format.lower().replace(&#39;jpeg&#39;, &#39;jpg&#39;))
+        if not path:
+            return filename
+        return os.path.join(directory, filename)
+
+    def save(self, filename=None, format=&#39;png&#39;):
+        if not filename:
+            filename = self.generate_filename(format=format)
+        self.image.save(filename, format)
+        self.filename = filename
+
+    def __repr__(self):
+        &#34;&#34;&#34;Show tile number, and if saved to disk, filename.&#34;&#34;&#34;
+        if self.filename:
+            return &#39;&lt;Tile #{} - {}&gt;&#39;.format(self.number,
+                                            os.path.basename(self.filename))
+        return &#39;&lt;Tile #{}&gt;&#39;.format(self.number)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="totalsat.sat_tools.Tile.basename"><code class="name">var <span class="ident">basename</span></code></dt>
+<dd>
+<div class="desc"><p>Strip path and extension. Return base filename.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def basename(self):
+    &#34;&#34;&#34;Strip path and extension. Return base filename.&#34;&#34;&#34;
+    return get_basename(self.filename)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.Tile.column"><code class="name">var <span class="ident">column</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def column(self):
+    return self.position[1]</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.Tile.row"><code class="name">var <span class="ident">row</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def row(self):
+    return self.position[0]</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="totalsat.sat_tools.Tile.generate_filename"><code class="name flex">
+<span>def <span class="ident">generate_filename</span></span>(<span>self, directory='/Users/Thomas/emp-demeter/demeter', prefix='tile', format='png', path=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Construct and return a filename for this tile.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_filename(self, directory=os.getcwd(), prefix=&#39;tile&#39;,
+                      format=&#39;png&#39;, path=True):
+    &#34;&#34;&#34;Construct and return a filename for this tile.&#34;&#34;&#34;
+    filename = prefix + &#39;_{col:02d}_{row:02d}.{ext}&#39;.format(
+                  col=self.column, row=self.row, ext=format.lower().replace(&#39;jpeg&#39;, &#39;jpg&#39;))
+    if not path:
+        return filename
+    return os.path.join(directory, filename)</code></pre>
+</details>
+</dd>
+<dt id="totalsat.sat_tools.Tile.save"><code class="name flex">
+<span>def <span class="ident">save</span></span>(<span>self, filename=None, format='png')</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save(self, filename=None, format=&#39;png&#39;):
+    if not filename:
+        filename = self.generate_filename(format=format)
+    self.image.save(filename, format)
+    self.filename = filename</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="totalsat" href="index.html">totalsat</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="totalsat.sat_tools.annotate_images" href="#totalsat.sat_tools.annotate_images">annotate_images</a></code></li>
+<li><code><a title="totalsat.sat_tools.bbox_from_point" href="#totalsat.sat_tools.bbox_from_point">bbox_from_point</a></code></li>
+<li><code><a title="totalsat.sat_tools.calc_columns_rows" href="#totalsat.sat_tools.calc_columns_rows">calc_columns_rows</a></code></li>
+<li><code><a title="totalsat.sat_tools.convert_epsg" href="#totalsat.sat_tools.convert_epsg">convert_epsg</a></code></li>
+<li><code><a title="totalsat.sat_tools.convert_pix2world" href="#totalsat.sat_tools.convert_pix2world">convert_pix2world</a></code></li>
+<li><code><a title="totalsat.sat_tools.convert_world2pix" href="#totalsat.sat_tools.convert_world2pix">convert_world2pix</a></code></li>
+<li><code><a title="totalsat.sat_tools.create_gif" href="#totalsat.sat_tools.create_gif">create_gif</a></code></li>
+<li><code><a title="totalsat.sat_tools.find_path_row" href="#totalsat.sat_tools.find_path_row">find_path_row</a></code></li>
+<li><code><a title="totalsat.sat_tools.get_address" href="#totalsat.sat_tools.get_address">get_address</a></code></li>
+<li><code><a title="totalsat.sat_tools.get_basename" href="#totalsat.sat_tools.get_basename">get_basename</a></code></li>
+<li><code><a title="totalsat.sat_tools.get_columns_rows" href="#totalsat.sat_tools.get_columns_rows">get_columns_rows</a></code></li>
+<li><code><a title="totalsat.sat_tools.get_combined_size" href="#totalsat.sat_tools.get_combined_size">get_combined_size</a></code></li>
+<li><code><a title="totalsat.sat_tools.get_filenames" href="#totalsat.sat_tools.get_filenames">get_filenames</a></code></li>
+<li><code><a title="totalsat.sat_tools.get_filepath" href="#totalsat.sat_tools.get_filepath">get_filepath</a></code></li>
+<li><code><a title="totalsat.sat_tools.get_image_centroid" href="#totalsat.sat_tools.get_image_centroid">get_image_centroid</a></code></li>
+<li><code><a title="totalsat.sat_tools.get_image_column_row" href="#totalsat.sat_tools.get_image_column_row">get_image_column_row</a></code></li>
+<li><code><a title="totalsat.sat_tools.image_std" href="#totalsat.sat_tools.image_std">image_std</a></code></li>
+<li><code><a title="totalsat.sat_tools.join" href="#totalsat.sat_tools.join">join</a></code></li>
+<li><code><a title="totalsat.sat_tools.mask_raster" href="#totalsat.sat_tools.mask_raster">mask_raster</a></code></li>
+<li><code><a title="totalsat.sat_tools.merge_output" href="#totalsat.sat_tools.merge_output">merge_output</a></code></li>
+<li><code><a title="totalsat.sat_tools.nd_index" href="#totalsat.sat_tools.nd_index">nd_index</a></code></li>
+<li><code><a title="totalsat.sat_tools.open_images" href="#totalsat.sat_tools.open_images">open_images</a></code></li>
+<li><code><a title="totalsat.sat_tools.open_images_in" href="#totalsat.sat_tools.open_images_in">open_images_in</a></code></li>
+<li><code><a title="totalsat.sat_tools.output_to_gdf" href="#totalsat.sat_tools.output_to_gdf">output_to_gdf</a></code></li>
+<li><code><a title="totalsat.sat_tools.plot_geometries" href="#totalsat.sat_tools.plot_geometries">plot_geometries</a></code></li>
+<li><code><a title="totalsat.sat_tools.polygon_from_kml" href="#totalsat.sat_tools.polygon_from_kml">polygon_from_kml</a></code></li>
+<li><code><a title="totalsat.sat_tools.save_tiles" href="#totalsat.sat_tools.save_tiles">save_tiles</a></code></li>
+<li><code><a title="totalsat.sat_tools.slice_image" href="#totalsat.sat_tools.slice_image">slice_image</a></code></li>
+<li><code><a title="totalsat.sat_tools.split_area" href="#totalsat.sat_tools.split_area">split_area</a></code></li>
+<li><code><a title="totalsat.sat_tools.split_image" href="#totalsat.sat_tools.split_image">split_image</a></code></li>
+<li><code><a title="totalsat.sat_tools.transects_from_geojson" href="#totalsat.sat_tools.transects_from_geojson">transects_from_geojson</a></code></li>
+<li><code><a title="totalsat.sat_tools.transects_to_gdf" href="#totalsat.sat_tools.transects_to_gdf">transects_to_gdf</a></code></li>
+<li><code><a title="totalsat.sat_tools.validate_image" href="#totalsat.sat_tools.validate_image">validate_image</a></code></li>
+<li><code><a title="totalsat.sat_tools.validate_image_col_row" href="#totalsat.sat_tools.validate_image_col_row">validate_image_col_row</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="totalsat.sat_tools.Tile" href="#totalsat.sat_tools.Tile">Tile</a></code></h4>
+<ul class="">
+<li><code><a title="totalsat.sat_tools.Tile.basename" href="#totalsat.sat_tools.Tile.basename">basename</a></code></li>
+<li><code><a title="totalsat.sat_tools.Tile.column" href="#totalsat.sat_tools.Tile.column">column</a></code></li>
+<li><code><a title="totalsat.sat_tools.Tile.generate_filename" href="#totalsat.sat_tools.Tile.generate_filename">generate_filename</a></code></li>
+<li><code><a title="totalsat.sat_tools.Tile.row" href="#totalsat.sat_tools.Tile.row">row</a></code></li>
+<li><code><a title="totalsat.sat_tools.Tile.save" href="#totalsat.sat_tools.Tile.save">save</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.3</a>.</p>
+</footer>
+</body>
+</html>
