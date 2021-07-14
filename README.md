@@ -8,9 +8,9 @@ The package is built on top of **GDAL, Google Earth Engine and the [coastsat](ht
 
 ### Quick start
 
-For of all, make sure you create a new environment using `conda env create -f environment.yml -n totalsat`. You can then take a look at the demo notebook (`totalsat_demo.html`, and `.ipynb` version in the `demo_files` folder) to get started !
+First of all, make sure you create a new environment using `conda env create -f environment.yml -n totalsat`. You can then take a look at the demo notebook (`totalsat_demo.html`, and `.ipynb` version in the `demo_files` folder) to get started!
 
-For the record, you'll also find below a few examples of what you can do with `totalsat`. The full set of examples with code are in the demo notebook, and all functions accross the 3 modules (`sat_download`, `sat_preprocess` and `sat_tools`) are documented in the `documentation` folder.
+You'll also find below a few examples of what you can do with `totalsat`. The full set of examples with code are in the demo notebook, and all functions accross the 3 modules (`sat_download`, `sat_preprocess` and `sat_tools`) are documented in the `documentation` folder.
 
 * `sat_download` module
 
